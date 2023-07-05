@@ -6,35 +6,28 @@ Pod Members: **Avery, Brian, Emeka**
 
 Insert your groups problem statement and target audience.
 
-Students have to use multiple resources in different locations to build their courses schedules.
+It takes students a long time to craft optimal schedules every semester. How can the process of creating optimal schedules for students be streamlined to reduce the time and resources required each semester?
 
 Students
 
 ## User Roles
 
-Registered User
-Non-Registered User
+"Student": a user who is seeking to build thier schedule
 
 ## User Personas
-
-First-Year Students
-First-Gen Students
+Carmen, a first-year student and first-generation college student, is currently enrolled in a university in Cleveland, Ohio. She aspires to study computer science and has participated in high school hackathons that fueled her passion for the field. Carmen understands the importance of academic success and wants to optimize her course schedules each semester. By streamlining the process of creating optimal schedules, Carmen aims to reduce the time and resources required, allowing her to focus on her studies, extracurricular activities, and achieve her goals as a student.
 
 ## User Stories
 
 Include at least 5 user stories.
 
-1. **As a Student, I want to central platform with all resources, so that I spend less time crafting my schedule**
-2. **As a Student, I want to export the crafted schedule to my native calender app, so that I have a central calendar with all my time commitments**
-3. **As a Student I want to share my schedulee, so that i can eaisly plan meetings with others**
-4. **As a First-Gen Student, I want an intuitive platform, so that course scheduling is less intimidating**
-5. **As a First-Year Student, I want to guidance in crafting an optimal schedule, so that [why]**
 
-Given I'm a registered user, when I input my projected courses, I want to be presented with opitimized, confilict-free schedules
-Given I'm a registered user, when I favorite a schedule, I want it to be stored in a favorites list
-Given I'm a registered user, when I input my projected courses, I want to be presented with opitimized, confilict-free schedules
-Given I'm a registered user, when I input my projected courses, I want to be presented with opitimized, confilict-free schedules
-Given I'm a registered user, when I input my projected courses, I want to be presented with opitimized, confilict-free schedules
+1. **As a student, I want a centralized platform with all the necessary resources, so that I can save time and effort in crafting my schedule.**
+2. **As a student, I want the ability to export my crafted schedule to my native calendar app, ensuring that I have a comprehensive calendar with all my time commitments in one place.**
+3. **As a student, I want to easily share my schedule with others, enabling me to plan meetings and coordinate with classmates and colleagues more efficiently.**
+4. **As a first-generation student, I desire an intuitive platform that simplifies the course scheduling process, reducing the complexity and intimidation often associated with it.**
+5. **As a first-year student, I seek guidance in crafting an optimal schedule, allowing me to make informed choices and optimize my academic experience for success in my specific program of study.**
+
 
 
 ## Wireframe (Bonus)
