@@ -1,18 +1,29 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const filename = "./umd.static.db.json"
-const db = require(filename);
+const filename = "./umd.static.db.json";
+const { daysOfWeek } = require("./utilities");
+require("colors");
 
 /** Updated as observed
- * UMD Website outline:
+ * UMD Website structure:
  * Course Name: [course prefix][course number]
  * Credits: number || [number - number]
  * Days: [M][Tu][W][Th][F] one or more, no space
  * Instructors: instructor || [instructor, ..., instructor] || Instructor: TBA
  *
+ *
  * The most essential fields in both the labs and sections are the days, start time and end time
  * if any of this info is missing, we remove the course
  */
+
+// umd representation of the days of the week
+const umdDaysOfWeek = {
+  M: daysOfWeek.Monday,
+  Tu: daysOfWeek.Tuesday,
+  W: daysOfWeek.Wednesday,
+  Th: daysOfWeek.Thursday,
+  F: daysOfWeek.Friday,
+};
 
 /**
  * given the container for all sections, the function extracts the sections info and
@@ -27,16 +38,29 @@ const db = require(filename);
  * @param {int} child used to locate labs (if course is blended then labs are the third row )
  * @returns {[section]} An array of all sections
  */
-const getSections = (sectionContainers, child) => {
+const getSections = (sectionContainers, child, umdDaysOfWeek) => {
   /**
    * this method extracts the lab information from the lab container
    * @param {Element} labContainer the element containing the lab info
    * @param {String} labId the lab id
    * @return {Lab}
    */
+
+  /**
+   * 
+   * @param {String} daysText represents the days of the week text
+   * @param {Object} umdDaysOfWeek mapsumd representation to our standard representation
+   * @returns {Array} the days for the section or lab
+   */
+  const getDays = (daysText, umdDaysOfWeek) => {
+    return daysText ? Object.keys(umdDaysOfWeek)
+      .map((day) => (daysText.indexOf(day) >= 0 ? umdDaysOfWeek[day] : null))
+      .filter((day) => day): [];
+  };
+
   const getLab = (labContainer, labId) => ({
     lab_id: labId,
-    lab_days: labContainer.querySelector(".section-days")?.innerText,
+    lab_days: getDays(labContainer.querySelector(".section-days")?.innerText, umdDaysOfWeek),
     lab_start_time: labContainer.querySelector(".class-start-time")?.innerText,
     lab_end_time: labContainer.querySelector(".class-end-time")?.innerText,
     lab_type: labContainer.querySelector(".class-type")?.innerText,
@@ -73,7 +97,7 @@ const getSections = (sectionContainers, child) => {
         section_instructor: Array.from(
           sectionHTML.querySelectorAll(".section-instructor")
         ).map((instructorDiv) => instructorDiv.innerText),
-        section_days: sectionHTML.querySelector(".section-days")?.innerText,
+        section_days: getDays(sectionHTML.querySelector(".section-days")?.innerText, umdDaysOfWeek),
         section_start_time: start_time,
         section_end_time: end_time,
         labs: hasLab
@@ -100,14 +124,6 @@ const clean = (courses) => {
   return courses.filter((course) => {
     // make sure labs are flattened and have essential fields
 
-    course.sections.forEach((section) => {
-      section.labs = section.labs
-        ?.flat()
-        .filter(
-          (lab) => lab && lab.lab_days && lab.lab_start_time && lab.lab_end_time
-        );
-    });
-
     // make sure the sections are flattened and that each setion has the essential fields
     course.sections = course.sections
       .flat()
@@ -118,6 +134,14 @@ const clean = (courses) => {
           section.section_start_time &&
           section.section_end_time
       );
+
+    course.sections.forEach((section) => {
+      section.labs = section.labs
+        ?.flat()
+        .filter(
+          (lab) => lab && lab.lab_days && lab.lab_start_time && lab.lab_end_time
+        );
+    });
 
     return course && course.sections.length && Object.keys(course).length >= 5;
   });
@@ -173,30 +197,44 @@ const extract = async (url) => {
       result.sections = await courseContainer.$$eval(
         ".section.delivery-f2f",
         getSections,
-        2
+        2,
+        umdDaysOfWeek
       );
       result.sections.push(
         await courseContainer.$$eval(
           ".section.delivery-blended",
           getSections,
-          3
+          3,
+          umdDaysOfWeek
         )
       );
       return result;
     })
   );
   await browser.close();
-  // return courses.filter((course) => course && course.sections.flat().length);
-  return {courses: clean(courses)};
+  return { courses: clean(courses) };
 };
 // const url = "https://app.testudo.umd.edu/soc/202308/CMSC";
 // const url = "https://app.testudo.umd.edu/soc/202308/DATA";
 // const url = "https://app.testudo.umd.edu/soc/202308/HLSC";
-// const url = "https://app.testudo.umd.edu/soc/202308/COMM"
-const url = "https://app.testudo.umd.edu/soc/202308/CHIN";
-extract(url).then((res) =>{
-  fs.writeFile(filename, )
-}
-);
-// const result = (async() => await extract(url))()
-// console.log(result)
+// const url = "https://app.testudo.umd.edu/soc/202308/COMM";
+// const url = "https://app.testudo.umd.edu/soc/202308/CHIN";
+// const url = "https://app.testudo.umd.edu/soc/202308/BIOM";
+const url = "https://app.testudo.umd.edu/soc/202308/BIOL";
+extract(url).then((res) => {
+  if (fs.existsSync(filename)) {
+    const db = require(filename);
+    db.courses.push(...res.courses);
+    db.allCourseCount = db.courses.length
+    fs.writeFile(filename, JSON.stringify(db, null, 2), (error) => {
+      if (error) console.error(error.message.red);
+      console.log("new courses added successfully".green);
+    });
+  } else {
+    res.allCourseCount = res.courses.length
+    fs.writeFile(filename, JSON.stringify(res, null, 2), (error) => {
+      if (error) console.error(error.message.red);
+      console.log("new courses added successfully".green);
+    });
+  }
+});
