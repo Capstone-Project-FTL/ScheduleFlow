@@ -1,0 +1,3 @@
+# Scraper Adapter
+
+## Data Format
