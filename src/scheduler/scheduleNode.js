@@ -22,7 +22,7 @@ class ScheduleNode{
     }
 
     toString(){
-        return `${this.coursePrefix} ${this.courseId} ${this.days} (${this.startTime} - ${this.endTime})`
+        return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${this.courseId} ${this.days} (${this.startTime} - ${this.endTime})`
     }
 }
 

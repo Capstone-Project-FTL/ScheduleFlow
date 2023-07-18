@@ -1,5 +1,6 @@
 const allCourses = require("../scraper/umd.static.db.json").courses;
 const ScheduleNode = require("./scheduleNode");
+require("colors")
 
 const courses = [allCourses[0], allCourses[15], allCourses[105]];
 // sort courses based on number of number of sections
@@ -33,11 +34,36 @@ function convertTo24Hour(timeStr) {
 }
 
 function generateSchedules(courses) {
-  //   return generateSubSchedules(courses, 0, courses.length - 1);
-  return generateSubSchedules(courses, 1, 1);
+  return generateSubSchedules(courses, 0, courses.length - 1);
+  // return generateSubSchedules(courses, 0, 0);
+}
+
+function hasConflict(schedule){
+  console.log(schedule)
+}
+
+function merge(scheduleA, scheduleB) {
+  // console.log(scheduleA.map(s => s.map( e => e.toString())))
+  // console.log(scheduleB.map(s => s.map( e => e.toString())))
+  if (
+    scheduleA.length === 0 ||
+    scheduleB.length === 0
+  )
+    return [];
+    const mergedSchedules = []
+  for(let anASchedule of scheduleA){
+    for(let aBSchedule of scheduleB){
+      // console.log(anASchedule.toString().blue)
+      // console.log(aBSchedule.toString())
+      const newSchedule = [...anASchedule, ...aBSchedule]
+      if(!hasConflict(newSchedule)) mergedSchedules.push(newSchedule)
+    }
+  }
+  return mergedSchedules
 }
 
 function generateSubSchedules(courses, left, right) {
+  if (left > right) return [[]];
   if (left === right) {
     const currCourse = courses[left];
     return currCourse.sections.flatMap((section, sectionIdx) =>
@@ -68,18 +94,24 @@ function generateSubSchedules(courses, left, right) {
             )
           )
         : cartesianProduct([
-            new ScheduleNode(
-              section.section_days,
-              convertTo24Hour(section.section_start_time),
-              convertTo24Hour(section.section_end_time),
-              currCourse.course_prefix,
-              currCourse.course_id,
-              sectionIdx,
-              false
-            ),
+            [
+              new ScheduleNode(
+                section.section_days,
+                convertTo24Hour(section.section_start_time),
+                convertTo24Hour(section.section_end_time),
+                currCourse.course_prefix,
+                currCourse.course_id,
+                sectionIdx,
+                false
+              ),
+            ],
           ])
     );
   }
+  let mid = left + Math.floor((right - left) / 2);
+  const subScheduleA = generateSubSchedules(courses, left, mid);
+  const subScheduleB = generateSubSchedules(courses, mid + 1, right);
+  return merge(subScheduleA, subScheduleB);
 }
 
 console.log(generateSchedules(courses));
