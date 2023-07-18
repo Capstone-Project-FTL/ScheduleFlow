@@ -1,5 +1,6 @@
 const allCourses = require("../scraper/umd.static.db.json").courses;
 const ScheduleNode = require("./scheduleNode");
+const { daysOfWeek } = require("../scraper/utilities");x
 require("colors")
 
 const courses = [allCourses[0], allCourses[15], allCourses[105]];
@@ -39,7 +40,10 @@ function generateSchedules(courses) {
 }
 
 function hasConflict(schedule){
-  console.log(schedule)
+  const days = 
+  // console.log(schedule)
+  // console.log("\n")
+  // return true
 }
 
 function merge(scheduleA, scheduleB) {
