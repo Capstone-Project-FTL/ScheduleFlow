@@ -7,7 +7,7 @@
 class ScheduleNode{
     /**
      * 
-     * @param {Set<string>} days - the days for the node
+     * @param {string[]} days - the days for the node
      * @param {string} startTime - the start time in 24 hour format
      * @param {string} endTime - the end time in 24 hour format
      * @param {string} coursePrefix - course prefix

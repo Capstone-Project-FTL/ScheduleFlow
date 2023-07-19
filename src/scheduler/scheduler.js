@@ -1,5 +1,5 @@
 /**
- * @typedef {[ScheduleNode]} schedule
+ * @typedef {ScheduleNode[]} schedule
  */
 
 const allCourses = require("../scraper/umd.static.db.json").courses;
@@ -30,9 +30,10 @@ courses.sort((course1, course2) => {
  * @param  {...ScheduleNode} scheduleNodes - an array of schedule nodes
  * @returns {Array} the cartesian product of its arguments flattened
  * @example
- * // returns [ [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 4 ] ]
+ * // returns [[1,3],[1,4],[2,3],[2,4]]
  * cartesian([1, 2], [3, 4])
  */
+
 // special thanks to rsp for the one liner https://stackoverflow.com/a/43053803
 // i don't understand what is going on, but hey, it works
 const cartesianProduct = (...scheduleNodes) =>
@@ -56,26 +57,8 @@ function convertTo24Hour(timeStr) {
 }
 
 /**
- * finds all the possible schedules without conflict
- * @param {allCourses} courses - an array of courses to be scheduled
- * @returns {[schedule]} an array of conflict free schedule
- */
-function generateSchedules(courses) {
-  // remove duplicate courses O(n) time and space
-  const courseSet = new Set();
-  courses = courses.filter((course) => {
-    const courseUniqueId = course.course_prefix + course.course_id;
-    if (courseSet.has(courseUniqueId)) return false;
-    courseSet.add(courseUniqueId);
-    return true;
-  });
-  return generateSubSchedules(courses, 0, courses.length - 1);
-  // return generateSubSchedules(courses, 0, 0);
-}
-
-/**
  * compares the start and end times of the nodes.
- * if two nodes hav ethe same start time, they are compared using thier end time
+ * if two nodes have the same start time, they are compared using thier end time
  * @param {ScheduleNode} node1 - node for comparison
  * @param {ScheduleNode} node2 - node for comparison
  * @returns {number} -1 if the first node starts or ends before the second,
@@ -87,7 +70,7 @@ function compareFunction(node1, node2) {
   const start2 = node2.startTime;
   if (start1 < start2) return -1;
   if (start1 > start2) return 1;
-  // the starttimes are equal, move to e nd times
+  // the starttimes are equal, move to end times
   const end1 = node1.endTime;
   const end2 = node2.endTime;
   if (end1 < end2) return -1;
@@ -101,7 +84,6 @@ function compareFunction(node1, node2) {
  * @returns {boolean} true if there is a time conflict in the schedule
  */
 function hasConflict(schedule) {
-  // console.log(schedule)
   const days = Object.values(daysOfWeek);
   for (let day of days) {
     const dailySchedule = schedule.filter((scheduleNode) =>
@@ -116,26 +98,20 @@ function hasConflict(schedule) {
     )
       return true;
   }
-  // console.log(schedule)
-  // console.log("\n")
   return false;
 }
 
 /**
  * combines each subschedule into on elarger schedule
- * @param {schedule} scheduleA - first schedule to merge
- * @param {schedule} scheduleB - second schedule to merge
- * @returns {[schedule]} a ne wschedule where each subschedule has been merged
+ * @param {schedule[]} scheduleA - first schedule to merge
+ * @param {schedule[]} scheduleB - second schedule to merge
+ * @returns {schedule[]} a ne wschedule where each subschedule has been merged
  */
 function merge(scheduleA, scheduleB) {
-  // console.log(scheduleA.map(s => s.map( e => e.toString())))
-  // console.log(scheduleB.map(s => s.map( e => e.toString())))
   if (scheduleA.length === 0 || scheduleB.length === 0) return [];
   const mergedSchedules = [];
   for (let anASchedule of scheduleA) {
     for (let aBSchedule of scheduleB) {
-      // console.log(anASchedule.toString().blue)
-      // console.log(aBSchedule.toString())
       const newSchedule = [...anASchedule, ...aBSchedule];
       if (!hasConflict(newSchedule)) {
         mergedSchedules.push(newSchedule);
@@ -150,7 +126,7 @@ function merge(scheduleA, scheduleB) {
  * @param {allCourses} courses - a list of courses for which to generate schedules
  * @param {number} left - the location of the left index in courses
  * @param {number} right - the location of the right index in courses
- * @returns {[schedule]} an array of conflict free schedules
+ * @returns {schedule[]} an array of conflict free schedules
  */
 function generateSubSchedules(courses, left, right) {
   if (left > right) return [[]];
@@ -203,6 +179,25 @@ function generateSubSchedules(courses, left, right) {
   const subScheduleB = generateSubSchedules(courses, mid + 1, right);
   return merge(subScheduleA, subScheduleB);
 }
+
+/**
+ * finds all the possible schedules without conflict
+ * @param {allCourses} courses - an array of courses to be scheduled
+ * @returns {schedule[]} an array of conflict free schedule
+ */
+function generateSchedules(courses) {
+  // remove duplicate courses O(n) time and space
+  const courseSet = new Set();
+  courses = courses.filter((course) => {
+    const courseUniqueId = course.course_prefix + course.course_id;
+    if (courseSet.has(courseUniqueId)) return false;
+    courseSet.add(courseUniqueId);
+    return true;
+  });
+  return generateSubSchedules(courses, 0, courses.length - 1);
+  // return generateSubSchedules(courses, 0, 0);
+}
+
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
 // const start = performance.now()
