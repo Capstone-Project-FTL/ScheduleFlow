@@ -12,7 +12,7 @@ class ScheduleNode{
      * @returns {ScheduleNode}
      */
     constructor(days, startTime, endTime, coursePrefix, courseId, nodeIndex, isLab = false){
-        this.days = days
+        this.days = new Set(days)
         this.startTime = startTime
         this.endTime = endTime
         this.coursePrefix = coursePrefix
@@ -22,7 +22,7 @@ class ScheduleNode{
     }
 
     toString(){
-        return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${this.courseId} ${this.days} (${this.startTime} - ${this.endTime})`
+        return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${this.courseId} ${Array.from(this.days).toString()} (${this.startTime} - ${this.endTime})`
     }
 }
 

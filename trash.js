@@ -43,6 +43,10 @@
 
 // // console.log(convertTo24Hour("12:59 pm"));
 
-a = []
-if(a.length) console.log("o")
-else console.log("hel")
+// a = []
+// if(a.length) console.log("o")
+// else console.log("hel")
+
+
+
+console.log(_.isEqual("12:59", "12:00"))
