@@ -1,26 +1,46 @@
+/**
+ * @typedef {[ScheduleNode]} schedule
+ */
+
 const allCourses = require("../scraper/umd.static.db.json").courses;
 const ScheduleNode = require("./scheduleNode");
 const { daysOfWeek } = require("../scraper/utilities");
 require("colors");
 
-const courses = [allCourses[0], allCourses[50], allCourses[100], allCourses[150], allCourses[106]];
+// for demo purposes
+const courses = [
+  allCourses[0],
+  allCourses[50],
+  allCourses[85],
+  allCourses[150],
+  allCourses[186],
+];
 
-// sort courses based on number of number of sections
-// this would help to remove unneccesary computations
+/**
+ * Sorting the courses based on length of schedules reduces unnecessary computations
+ * by generating schedules in small chuncks, if a subschedule has a conflict,
+ * there will be no need generating subsequent larger subschedules
+ */
 courses.sort((course1, course2) => {
   return course1.sections.length - course2.sections.length;
 });
 
-// special thanks to rsp for the one liner
-// https://stackoverflow.com/a/43053803
+/**
+ * @type {ScheduleNode} - represents each node during scheduling
+ * @param  {...ScheduleNode} scheduleNodes - an array of schedule nodes
+ * @returns {Array} the cartesian product of its arguments flattened
+ * @example
+ * // returns [ [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 4 ] ]
+ * cartesian([1, 2], [3, 4])
+ */
+// special thanks to rsp for the one liner https://stackoverflow.com/a/43053803
 // i don't understand what is going on, but hey, it works
 const cartesianProduct = (...scheduleNodes) =>
   scheduleNodes.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())));
 
 /**
- *
- * @param {String} timeStr the string representation for a given time
- * @returns a 24 hour format for the time
+ * @param {string} timeStr the string representation for a given time
+ * @returns {string} a 24 hour format for the time
  */
 function convertTo24Hour(timeStr) {
   var hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
@@ -35,6 +55,11 @@ function convertTo24Hour(timeStr) {
   return sHours + ":" + sMinutes;
 }
 
+/**
+ * finds all the possible schedules without conflict
+ * @param {allCourses} courses - an array of courses to be scheduled
+ * @returns {[schedule]} an array of conflict free schedule
+ */
 function generateSchedules(courses) {
   // remove duplicate courses O(n) time and space
   const courseSet = new Set();
@@ -48,6 +73,15 @@ function generateSchedules(courses) {
   // return generateSubSchedules(courses, 0, 0);
 }
 
+/**
+ * compares the start and end times of the nodes.
+ * if two nodes hav ethe same start time, they are compared using thier end time
+ * @param {ScheduleNode} node1 - node for comparison
+ * @param {ScheduleNode} node2 - node for comparison
+ * @returns {number} -1 if the first node starts or ends before the second,
+    1 if the first node starts or ends before the second,
+    0 otherwise
+ */
 function compareFunction(node1, node2) {
   const start1 = node1.startTime;
   const start2 = node2.startTime;
@@ -61,8 +95,11 @@ function compareFunction(node1, node2) {
   return 0;
 }
 
-// fucntion overlap
-
+/**
+ *
+ * @param {schedule} schedule - the schedule to evaluate
+ * @returns {boolean} true if there is a time conflict in the schedule
+ */
 function hasConflict(schedule) {
   // console.log(schedule)
   const days = Object.values(daysOfWeek);
@@ -84,6 +121,12 @@ function hasConflict(schedule) {
   return false;
 }
 
+/**
+ * combines each subschedule into on elarger schedule
+ * @param {schedule} scheduleA - first schedule to merge
+ * @param {schedule} scheduleB - second schedule to merge
+ * @returns {[schedule]} a ne wschedule where each subschedule has been merged
+ */
 function merge(scheduleA, scheduleB) {
   // console.log(scheduleA.map(s => s.map( e => e.toString())))
   // console.log(scheduleB.map(s => s.map( e => e.toString())))
@@ -102,6 +145,13 @@ function merge(scheduleA, scheduleB) {
   return mergedSchedules;
 }
 
+/**
+ *
+ * @param {allCourses} courses - a list of courses for which to generate schedules
+ * @param {number} left - the location of the left index in courses
+ * @param {number} right - the location of the right index in courses
+ * @returns {[schedule]} an array of conflict free schedules
+ */
 function generateSubSchedules(courses, left, right) {
   if (left > right) return [[]];
   if (left === right) {
@@ -154,6 +204,26 @@ function generateSubSchedules(courses, left, right) {
   return merge(subScheduleA, subScheduleB);
 }
 
-generateSchedules(courses).forEach(res => {res.map( node => console.log(node.toString())) + console.log("\n")})
-// console.log(generateSchedules(courses).map((s) => s.toString()));
-console.log(generateSchedules(courses).length);
+// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
+// const start = performance.now()
+// const schedules = generateSchedules(courses)
+// const end = performance.now()
+// console.log(`Time taken: ${end - start}`.red)
+
+// // for prettier logs
+// schedules.forEach((res) => {
+//   res.map((node) => console.log(node.toString())) + console.log("\n");
+// });
+
+// // console.log(generateSchedules(courses).map((s) => s.toString()));
+// console.log(generateSchedules(courses).length);
+
+module.exports = {
+  cartesianProduct,
+  convertTo24Hour,
+  generateSchedules,
+  compareFunction,
+  hasConflict,
+  merge,
+  generateSubSchedules,
+};
