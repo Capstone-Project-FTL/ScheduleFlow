@@ -1,853 +1,6 @@
 {
   "courses": [
     {
-      "course_prefix": "DATA",
-      "course_id": "100",
-      "title": "Elementary Statistics and Probability",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "01",
-          "section_instructor": [
-            "Matthew Griffin"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "11:00am",
-          "section_end_time": "11:50am",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "12:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "23",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "24",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "3:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "41",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            }
-          ]
-        },
-        {
-          "section_id": "02",
-          "section_instructor": [
-            "Matthew Griffin"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "12:00pm",
-          "section_end_time": "12:50pm",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "3:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "12:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "23",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "24",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "3:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "41",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            }
-          ]
-        },
-        {
-          "section_id": "03",
-          "section_instructor": [
-            "Archana Khurana"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "2:00pm",
-          "section_end_time": "2:50pm",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "12:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "12:15pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "9:30am",
-              "lab_end_time": "10:45am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "33",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "12:30pm",
-              "lab_end_time": "1:45pm",
-              "lab_type": "Discussion"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "200",
-      "title": "Knowledge in Society: Science, Data and Ethics",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "0101",
-          "section_instructor": [
-            "Fardina Alam"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "11:00am",
-          "section_end_time": "11:50am",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "250",
-      "title": "Discrete Mathematics",
-      "credits": "4",
-      "sections": [
-        {
-          "section_id": "01",
-          "section_instructor": [
-            "Todd Rowland"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "10:00am",
-          "section_end_time": "10:50am",
-          "labs": [
-            {
-              "lab_id": "01",
-              "lab_days": [
-                "Fri"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "320",
-      "title": "Introduction to Data Science",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "0101",
-          "section_instructor": [
-            "Maksym Morawski"
-          ],
-          "section_days": [
-            "Tue",
-            "Thu"
-          ],
-          "section_start_time": "3:30pm",
-          "section_end_time": "4:45pm",
-          "labs": []
-        },
-        {
-          "section_id": "0201",
-          "section_instructor": [
-            "John Dickerson"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed"
-          ],
-          "section_start_time": "3:30pm",
-          "section_end_time": "4:45pm",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "350",
-      "title": "Data Visualization and Presentation",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "0101",
-          "section_instructor": [
-            "Vincent Lyzinski"
-          ],
-          "section_days": [
-            "Tue",
-            "Thu"
-          ],
-          "section_start_time": "11:00am",
-          "section_end_time": "12:15pm",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "400",
-      "title": "Applied Probability and Statistics I",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "01",
-          "section_instructor": [
-            "Jonathan Fernandes"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "12:00pm",
-          "section_end_time": "12:50pm",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "1:00pm",
-              "lab_end_time": "1:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "1:00pm",
-              "lab_end_time": "1:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "13",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "1:00pm",
-              "lab_end_time": "1:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "2:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "2:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "23",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "2:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "3:00pm",
-              "lab_end_time": "3:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "32",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "3:00pm",
-              "lab_end_time": "3:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "33",
-              "lab_days": [
-                "Tue"
-              ],
-              "lab_start_time": "3:00pm",
-              "lab_end_time": "3:50pm",
-              "lab_type": "Discussion"
-            }
-          ]
-        },
-        {
-          "section_id": "02",
-          "section_instructor": [
-            "Dmitry Dolgopyat"
-          ],
-          "section_days": [
-            "Tue",
-            "Thu"
-          ],
-          "section_start_time": "9:30am",
-          "section_end_time": "10:45am",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "13",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "23",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "11:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "32",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "11:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "33",
-              "lab_days": [
-                "Mon"
-              ],
-              "lab_start_time": "11:00am",
-              "lab_end_time": "11:50am",
-              "lab_type": "Discussion"
-            }
-          ]
-        },
-        {
-          "section_id": "03",
-          "section_instructor": [
-            "Mestiyage Gunatilleka"
-          ],
-          "section_days": [
-            "Tue",
-            "Thu"
-          ],
-          "section_start_time": "2:00pm",
-          "section_end_time": "3:15pm",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "8:00am",
-              "lab_end_time": "8:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "8:00am",
-              "lab_end_time": "8:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "13",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "8:00am",
-              "lab_end_time": "8:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "21",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "22",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "23",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "9:00am",
-              "lab_end_time": "9:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "31",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "32",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "33",
-              "lab_days": [
-                "Wed"
-              ],
-              "lab_start_time": "10:00am",
-              "lab_end_time": "10:50am",
-              "lab_type": "Discussion"
-            }
-          ]
-        },
-        {
-          "section_id": "04",
-          "section_instructor": [
-            "Hatice Sahinoglu"
-          ],
-          "section_days": [
-            "Mon",
-            "Wed",
-            "Fri"
-          ],
-          "section_start_time": "12:00pm",
-          "section_end_time": "12:50pm",
-          "labs": [
-            {
-              "lab_id": "11",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "1:00pm",
-              "lab_end_time": "1:50pm",
-              "lab_type": "Discussion"
-            },
-            {
-              "lab_id": "12",
-              "lab_days": [
-                "Thu"
-              ],
-              "lab_start_time": "2:00pm",
-              "lab_end_time": "2:50pm",
-              "lab_type": "Discussion"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "601",
-      "title": "Probability and Statistics",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "PCS1",
-          "section_instructor": [
-            "Leonid Koralov"
-          ],
-          "section_days": [
-            "Wed"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        },
-        {
-          "section_id": "PCS2",
-          "section_instructor": [
-            "Sandra Cerrai"
-          ],
-          "section_days": [
-            "Wed"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        },
-        {
-          "section_id": "PCS3",
-          "section_instructor": [
-            "Jonathan Fernandes"
-          ],
-          "section_days": [
-            "Wed"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "602",
-      "title": "Principles of Data Science",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "PCS1",
-          "section_instructor": [
-            "Arefeh Nasri",
-            "Mohammad Hajiaghayi"
-          ],
-          "section_days": [
-            "Tue"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        },
-        {
-          "section_id": "PCS2",
-          "section_instructor": [
-            "Arefeh Nasri",
-            "Mohammad Hajiaghayi"
-          ],
-          "section_days": [
-            "Thu"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "603",
-      "title": "Principles of Machine Learning",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "PCS1",
-          "section_instructor": [
-            "Babak Azimi-Sadjadi"
-          ],
-          "section_days": [
-            "Thu"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        },
-        {
-          "section_id": "PCS2",
-          "section_instructor": [
-            "Alejandra Mercado"
-          ],
-          "section_days": [
-            "Fri"
-          ],
-          "section_start_time": "9:00am",
-          "section_end_time": "11:45am",
-          "labs": []
-        },
-        {
-          "section_id": "PCS3",
-          "section_instructor": [
-            "Babak Azimi-Sadjadi"
-          ],
-          "section_days": [],
-          "section_start_time": "9:00am",
-          "section_end_time": "11:45am",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "607",
-      "title": "Communication in Data Science and Analytics",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "PCS1",
-          "section_instructor": [
-            "Vincent Lyzinski"
-          ],
-          "section_days": [
-            "Wed"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        }
-      ]
-    },
-    {
-      "course_prefix": "DATA",
-      "course_id": "650",
-      "title": "Cloud Computing",
-      "credits": "3",
-      "sections": [
-        {
-          "section_id": "PCS1",
-          "section_instructor": [
-            "Zoltan Safar"
-          ],
-          "section_days": [
-            "Tue"
-          ],
-          "section_start_time": "6:00pm",
-          "section_end_time": "8:45pm",
-          "labs": []
-        }
-      ]
-    },
-    {
       "course_prefix": "CMSC",
       "course_id": "100",
       "title": "Bits and Bytes of Computer and Information Sciences",
@@ -2287,6 +1440,16 @@
               ],
               "lab_start_time": "8:00am",
               "lab_end_time": "8:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "02",
+              "lab_days": [
+                "Mon",
+                "Wed"
+              ],
+              "lab_start_time": "12:00pm",
+              "lab_end_time": "12:50pm",
               "lab_type": "Discussion"
             },
             {
@@ -4580,6 +3743,853 @@
       ]
     },
     {
+      "course_prefix": "DATA",
+      "course_id": "100",
+      "title": "Elementary Statistics and Probability",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "01",
+          "section_instructor": [
+            "Matthew Griffin"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "11:00am",
+          "section_end_time": "11:50am",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "12:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "23",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "24",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "3:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "41",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            }
+          ]
+        },
+        {
+          "section_id": "02",
+          "section_instructor": [
+            "Matthew Griffin"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "12:00pm",
+          "section_end_time": "12:50pm",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "3:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "12:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "23",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "24",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "3:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "41",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            }
+          ]
+        },
+        {
+          "section_id": "03",
+          "section_instructor": [
+            "Archana Khurana"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "2:00pm",
+          "section_end_time": "2:50pm",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "12:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "12:15pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "9:30am",
+              "lab_end_time": "10:45am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "33",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "12:30pm",
+              "lab_end_time": "1:45pm",
+              "lab_type": "Discussion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "200",
+      "title": "Knowledge in Society: Science, Data and Ethics",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "0101",
+          "section_instructor": [
+            "Fardina Alam"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "11:00am",
+          "section_end_time": "11:50am",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "250",
+      "title": "Discrete Mathematics",
+      "credits": "4",
+      "sections": [
+        {
+          "section_id": "01",
+          "section_instructor": [
+            "Todd Rowland"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "10:00am",
+          "section_end_time": "10:50am",
+          "labs": [
+            {
+              "lab_id": "01",
+              "lab_days": [
+                "Fri"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "320",
+      "title": "Introduction to Data Science",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "0101",
+          "section_instructor": [
+            "Maksym Morawski"
+          ],
+          "section_days": [
+            "Tue",
+            "Thu"
+          ],
+          "section_start_time": "3:30pm",
+          "section_end_time": "4:45pm",
+          "labs": []
+        },
+        {
+          "section_id": "0201",
+          "section_instructor": [
+            "John Dickerson"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed"
+          ],
+          "section_start_time": "3:30pm",
+          "section_end_time": "4:45pm",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "350",
+      "title": "Data Visualization and Presentation",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "0101",
+          "section_instructor": [
+            "Vincent Lyzinski"
+          ],
+          "section_days": [
+            "Tue",
+            "Thu"
+          ],
+          "section_start_time": "11:00am",
+          "section_end_time": "12:15pm",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "400",
+      "title": "Applied Probability and Statistics I",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "01",
+          "section_instructor": [
+            "Jonathan Fernandes"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "12:00pm",
+          "section_end_time": "12:50pm",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "1:00pm",
+              "lab_end_time": "1:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "1:00pm",
+              "lab_end_time": "1:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "13",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "1:00pm",
+              "lab_end_time": "1:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "2:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "2:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "23",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "2:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "3:00pm",
+              "lab_end_time": "3:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "32",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "3:00pm",
+              "lab_end_time": "3:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "33",
+              "lab_days": [
+                "Tue"
+              ],
+              "lab_start_time": "3:00pm",
+              "lab_end_time": "3:50pm",
+              "lab_type": "Discussion"
+            }
+          ]
+        },
+        {
+          "section_id": "02",
+          "section_instructor": [
+            "Dmitry Dolgopyat"
+          ],
+          "section_days": [
+            "Tue",
+            "Thu"
+          ],
+          "section_start_time": "9:30am",
+          "section_end_time": "10:45am",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "13",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "23",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "11:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "32",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "11:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "33",
+              "lab_days": [
+                "Mon"
+              ],
+              "lab_start_time": "11:00am",
+              "lab_end_time": "11:50am",
+              "lab_type": "Discussion"
+            }
+          ]
+        },
+        {
+          "section_id": "03",
+          "section_instructor": [
+            "Mestiyage Gunatilleka"
+          ],
+          "section_days": [
+            "Tue",
+            "Thu"
+          ],
+          "section_start_time": "2:00pm",
+          "section_end_time": "3:15pm",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "8:00am",
+              "lab_end_time": "8:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "8:00am",
+              "lab_end_time": "8:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "13",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "8:00am",
+              "lab_end_time": "8:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "21",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "22",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "23",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "9:00am",
+              "lab_end_time": "9:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "31",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "32",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "33",
+              "lab_days": [
+                "Wed"
+              ],
+              "lab_start_time": "10:00am",
+              "lab_end_time": "10:50am",
+              "lab_type": "Discussion"
+            }
+          ]
+        },
+        {
+          "section_id": "04",
+          "section_instructor": [
+            "Hatice Sahinoglu"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "12:00pm",
+          "section_end_time": "12:50pm",
+          "labs": [
+            {
+              "lab_id": "11",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "1:00pm",
+              "lab_end_time": "1:50pm",
+              "lab_type": "Discussion"
+            },
+            {
+              "lab_id": "12",
+              "lab_days": [
+                "Thu"
+              ],
+              "lab_start_time": "2:00pm",
+              "lab_end_time": "2:50pm",
+              "lab_type": "Discussion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "601",
+      "title": "Probability and Statistics",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "PCS1",
+          "section_instructor": [
+            "Leonid Koralov"
+          ],
+          "section_days": [
+            "Wed"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        },
+        {
+          "section_id": "PCS2",
+          "section_instructor": [
+            "Sandra Cerrai"
+          ],
+          "section_days": [
+            "Wed"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        },
+        {
+          "section_id": "PCS3",
+          "section_instructor": [
+            "Jonathan Fernandes"
+          ],
+          "section_days": [
+            "Wed"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "602",
+      "title": "Principles of Data Science",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "PCS1",
+          "section_instructor": [
+            "Arefeh Nasri",
+            "Mohammad Hajiaghayi"
+          ],
+          "section_days": [
+            "Tue"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        },
+        {
+          "section_id": "PCS2",
+          "section_instructor": [
+            "Arefeh Nasri",
+            "Mohammad Hajiaghayi"
+          ],
+          "section_days": [
+            "Thu"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "603",
+      "title": "Principles of Machine Learning",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "PCS1",
+          "section_instructor": [
+            "Babak Azimi-Sadjadi"
+          ],
+          "section_days": [
+            "Thu"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        },
+        {
+          "section_id": "PCS2",
+          "section_instructor": [
+            "Alejandra Mercado"
+          ],
+          "section_days": [
+            "Fri"
+          ],
+          "section_start_time": "9:00am",
+          "section_end_time": "11:45am",
+          "labs": []
+        },
+        {
+          "section_id": "PCS3",
+          "section_instructor": [
+            "Babak Azimi-Sadjadi"
+          ],
+          "section_days": [],
+          "section_start_time": "9:00am",
+          "section_end_time": "11:45am",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "607",
+      "title": "Communication in Data Science and Analytics",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "PCS1",
+          "section_instructor": [
+            "Vincent Lyzinski"
+          ],
+          "section_days": [
+            "Wed"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        }
+      ]
+    },
+    {
+      "course_prefix": "DATA",
+      "course_id": "650",
+      "title": "Cloud Computing",
+      "credits": "3",
+      "sections": [
+        {
+          "section_id": "PCS1",
+          "section_instructor": [
+            "Zoltan Safar"
+          ],
+          "section_days": [
+            "Tue"
+          ],
+          "section_start_time": "6:00pm",
+          "section_end_time": "8:45pm",
+          "labs": []
+        }
+      ]
+    },
+    {
       "course_prefix": "HLSC",
       "course_id": "100",
       "title": "Students in the University: Integrated Life Sciences",
@@ -4794,6 +4804,20 @@
           "section_id": "0501",
           "section_instructor": [
             "Stephan Garnier"
+          ],
+          "section_days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "section_start_time": "8:00am",
+          "section_end_time": "8:50am",
+          "labs": []
+        },
+        {
+          "section_id": "0601",
+          "section_instructor": [
+            "Instructor: TBA"
           ],
           "section_days": [
             "Mon",
