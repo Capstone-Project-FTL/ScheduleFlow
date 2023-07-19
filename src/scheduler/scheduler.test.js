@@ -215,4 +215,17 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
 })
 
 describe("merge combines two schedules correctly", () => {
+  // merge takes two array of schedules and schedules are an array 
+  test("merge returns empty schedule array if either schdeule array is empty", () => {
+    expect(merge([], [new ScheduleNode([daysOfWeek.Monday], "09:00", "09:50", "CMSC", "100", 0)]))
+    .toHaveLength(0)
+    expect(merge([new ScheduleNode([daysOfWeek.Monday], "09:00", "09:50", "CMSC", "100", 0)], []))
+    .toHaveLength(0)
+  })
+
+  test("merge returns empty schedule if both are empty", () => {
+    expect(merge([], [])).toEqual([])
+  })
+
+  
 })

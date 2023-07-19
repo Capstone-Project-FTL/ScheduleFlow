@@ -9,10 +9,11 @@ require("colors");
 
 // for demo purposes
 const courses = [
-  allCourses[0],
-  allCourses[50],
-  // allCourses[55],
-  allCourses[150],
+  // allCourses[4],
+  allCourses[90],
+  // allCourses[90],
+  allCourses[55],
+  // allCourses[150],
   allCourses[186],
 ];
 
@@ -30,8 +31,7 @@ courses.sort((course1, course2) => {
  * @param  {...ScheduleNode} scheduleNodes - an array of schedule nodes
  * @returns {Array} the cartesian product of its arguments flattened
  * @example
- * // returns [[1,3],[1,4],[2,3],[2,4]]
- * cartesian([1, 2], [3, 4])
+ * cartesian([1, 2], [3, 4]) = [[1,3],[1,4],[2,3],[2,4]]
  */
 
 // special thanks to rsp for the one liner https://stackoverflow.com/a/43053803
@@ -195,7 +195,6 @@ function generateSchedules(courses) {
     return true;
   });
   return generateSubSchedules(courses, 0, courses.length - 1);
-  // return generateSubSchedules(courses, 0, 0);
 }
 
 
@@ -203,14 +202,13 @@ function generateSchedules(courses) {
 const start = performance.now()
 const schedules = generateSchedules(courses)
 const end = performance.now()
-console.log(`Time taken: ${end - start}`.red)
 
 // for prettier logs
-schedules.forEach((res) => {
-  res.map((node) => console.log(node.toString())) + console.log("\n");
-});
+// schedules.forEach((res) => {
+//   res.map((node) => console.log(node.toString())) + console.log("\n");
+// });
 
-// // console.log(generateSchedules(courses).map((s) => s.toString()));
+console.log(`Time taken: ${(end - start).toFixed(2)} ms`.red)
 console.log(generateSchedules(courses).length);
 
 module.exports = {
