@@ -11,7 +11,7 @@ require("colors");
 const courses = [
   allCourses[0],
   allCourses[50],
-  allCourses[85],
+  // allCourses[55],
   allCourses[150],
   allCourses[186],
 ];
@@ -200,18 +200,18 @@ function generateSchedules(courses) {
 
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-// const start = performance.now()
-// const schedules = generateSchedules(courses)
-// const end = performance.now()
-// console.log(`Time taken: ${end - start}`.red)
+const start = performance.now()
+const schedules = generateSchedules(courses)
+const end = performance.now()
+console.log(`Time taken: ${end - start}`.red)
 
-// // for prettier logs
-// schedules.forEach((res) => {
-//   res.map((node) => console.log(node.toString())) + console.log("\n");
-// });
+// for prettier logs
+schedules.forEach((res) => {
+  res.map((node) => console.log(node.toString())) + console.log("\n");
+});
 
 // // console.log(generateSchedules(courses).map((s) => s.toString()));
-// console.log(generateSchedules(courses).length);
+console.log(generateSchedules(courses).length);
 
 module.exports = {
   cartesianProduct,
