@@ -148,7 +148,7 @@ const clean = (courses) => {
 };
 
 /**
- *
+ * @typedef courses 
  * @param {String} url the url to scrape
  * @returns {[courses]} an array of FACE TO FACE courses which have at least one section
  */
