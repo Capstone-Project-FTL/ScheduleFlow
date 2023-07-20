@@ -48,4 +48,5 @@ const cartesian = (...scheduleNode) =>
 
 
 
-// console.log(_.isEqual("12:59", "12:00"))
+console.log(// console.log(_.isEqual("12:59", "12:00"))
+cartesian([[1]]))
