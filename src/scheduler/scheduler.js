@@ -102,7 +102,7 @@ function hasConflict(schedule) {
 }
 
 /**
- * combines each subschedule into on elarger schedule
+ * combines each subschedule into one larger schedule
  * @param {schedule[]} scheduleA - first schedule to merge
  * @param {schedule[]} scheduleB - second schedule to merge
  * @returns {schedule[]} a ne wschedule where each subschedule has been merged
@@ -199,17 +199,17 @@ function generateSchedules(courses) {
 
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-const start = performance.now()
-const schedules = generateSchedules(courses)
-const end = performance.now()
+// const start = performance.now()
+// const schedules = generateSchedules(courses)
+// const end = performance.now()
 
 // for prettier logs
 // schedules.forEach((res) => {
 //   res.map((node) => console.log(node.toString())) + console.log("\n");
 // });
 
-console.log(`Time taken: ${(end - start).toFixed(2)} ms`.red)
-console.log(generateSchedules(courses).length);
+// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.red)
+// console.log(generateSchedules(courses).length);
 
 module.exports = {
   cartesianProduct,
