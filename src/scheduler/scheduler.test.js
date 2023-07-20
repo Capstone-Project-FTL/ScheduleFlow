@@ -243,184 +243,316 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
   });
 });
 
-describe("merge combines two schedules correctly" + " A SCHEDULE IS AN ARRAY OF NODES".yellow, () => {
-  // merge takes two array of schedules and schedules are an array
-  const nodes = [];
-  const length = 7;
-  const init = (node, days, startTime, endTime, isLab = false) => {
-    node.days = new Set(days);
-    node.startTime = startTime;
-    node.endTime = endTime;
-    this.isLab = isLab;
-  };
+describe(
+  "merge combines two schedules correctly" +
+    " A SCHEDULE IS AN ARRAY OF NODES".yellow,
+  () => {
+    // merge takes two array of schedules and schedules are an array
+    const nodes = [];
+    const length = 7;
+    const init = (node, days, startTime, endTime, isLab = false) => {
+      node.days = new Set(days);
+      node.startTime = startTime;
+      node.endTime = endTime;
+      this.isLab = isLab;
+    };
 
-  beforeAll(() => {
-    for (let i = 0; i < length; i++) {
-      nodes.push(new ScheduleNode([], "", "", "", "", 0));
-    }
-    init(
-      nodes[0],
-      [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
-    );
-    init(nodes[1], [daysOfWeek.Tuesday, daysOfWeek.Thursday], "14:00", "15:00");
-    init(nodes[2], [daysOfWeek.Wednesday], "16:00", "17:00");
-    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Thursday], "07:00", "09:00");
-    init(nodes[4], [daysOfWeek.Thursday], "14:00", "15:00");
-    init(
-      nodes[5],
-      [daysOfWeek.Thursday, daysOfWeek.Friday],
-      "07:00",
-      "08:50",
-      true
-    );
-    init(
-      nodes[6],
-      [daysOfWeek.Thursday, daysOfWeek.Wednesday, daysOfWeek.Thursday],
-      "00:00",
-      "23:59",
-      true
-    );
-  });
+    beforeAll(() => {
+      for (let i = 0; i < length; i++) {
+        nodes.push(new ScheduleNode([], "", "", "", "", 0));
+      }
+      init(
+        nodes[0],
+        [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
+        "14:00",
+        "15:00"
+      );
+      init(
+        nodes[1],
+        [daysOfWeek.Tuesday, daysOfWeek.Thursday],
+        "14:00",
+        "15:00"
+      );
+      init(nodes[2], [daysOfWeek.Wednesday], "16:00", "17:00");
+      init(
+        nodes[3],
+        [daysOfWeek.Monday, daysOfWeek.Thursday],
+        "07:00",
+        "09:00"
+      );
+      init(nodes[4], [daysOfWeek.Thursday], "14:00", "15:00");
+      init(
+        nodes[5],
+        [daysOfWeek.Thursday, daysOfWeek.Friday],
+        "07:00",
+        "08:50",
+        true
+      );
+      init(
+        nodes[6],
+        [daysOfWeek.Thursday, daysOfWeek.Wednesday, daysOfWeek.Thursday],
+        "00:00",
+        "23:59",
+        true
+      );
+    });
 
-  test("merge returns empty schedule array if either schdeule array is empty", () => {
-    expect(
-      merge(
-        [],
+    test("merge returns empty schedule array if either schdeule array is empty", () => {
+      expect(
+        merge(
+          [],
+          [
+            new ScheduleNode(
+              [daysOfWeek.Monday],
+              "09:00",
+              "09:50",
+              "CMSC",
+              "100",
+              0
+            ),
+          ]
+        )
+      ).toHaveLength(0);
+      expect(
+        merge(
+          [
+            new ScheduleNode(
+              [daysOfWeek.Monday],
+              "09:00",
+              "09:50",
+              "CMSC",
+              "100",
+              0
+            ),
+          ],
+          []
+        )
+      ).toHaveLength(0);
+    });
+
+    test("merge returns empty schedule if both are empty", () => {
+      expect(merge([], [])).toEqual([]);
+    });
+
+    test("merge returns correct value for one schedule arguments (one to one) conflict free", () => {
+      const mergedResult = merge([[nodes[1]]], [[nodes[2]]]);
+      expect(mergedResult).toHaveLength(1);
+      expect(Array.isArray(mergedResult[0])).toBe(true);
+    });
+
+    test("merge returns correct value for multiple schedule arguments (many to many) conflict free", () => {
+      const mergedResult = merge(
+        [[nodes[1]], [nodes[0]]],
+        [[nodes[2]], [nodes[3]]]
+      );
+      expect(mergedResult).toHaveLength(4);
+      mergedResult.forEach((schedule) => {
+        expect(schedule).toHaveLength(2);
+      });
+    });
+
+    test("merge returns correct value for multiple schedule arguments (many to one) conflict free", () => {
+      const mergedResult = merge([[nodes[1], nodes[0]]], [[nodes[3]]]);
+      expect(mergedResult).toHaveLength(1);
+      mergedResult.forEach((schedule) => {
+        expect(schedule).toHaveLength(3);
+      });
+    });
+
+    test("merge returns empty array when there is conflict between all schedules", () => {
+      const mergedResults = merge(
         [
-          new ScheduleNode(
-            [daysOfWeek.Monday],
-            "09:00",
-            "09:50",
-            "CMSC",
-            "100",
-            0
-          ),
-        ]
-      )
-    ).toHaveLength(0);
-    expect(
-      merge(
-        [
-          new ScheduleNode(
-            [daysOfWeek.Monday],
-            "09:00",
-            "09:50",
-            "CMSC",
-            "100",
-            0
-          ),
+          [nodes[0], nodes[1]],
+          [nodes[2], nodes[3]],
         ],
-        []
-      )
-    ).toHaveLength(0);
-  });
-
-  test("merge returns empty schedule if both are empty", () => {
-    expect(merge([], [])).toEqual([]);
-  });
-
-  test("merge returns correct value for one schedule arguments (one to one) conflict free", () => {
-    const mergedResult = merge([[nodes[1]]], [[nodes[2]]]);
-    expect(mergedResult).toHaveLength(1);
-    expect(Array.isArray(mergedResult[0])).toBe(true);
-  });
-
-  test("merge returns correct value for multiple schedule arguments (many to many) conflict free", () => {
-    const mergedResult = merge(
-      [[nodes[1]], [nodes[0]]],
-      [[nodes[2]], [nodes[3]]]
-    );
-    expect(mergedResult).toHaveLength(4);
-    mergedResult.forEach((schedule) => {
-      expect(schedule).toHaveLength(2);
+        [
+          [nodes[4], nodes[6]],
+          [nodes[5], nodes[6]],
+        ]
+      );
+      expect(mergedResults).toHaveLength(0);
     });
-  });
 
-  test("merge returns correct value for multiple schedule arguments (many to one) conflict free", () => {
-    const mergedResult = merge([[nodes[1], nodes[0]]], [[nodes[3]]]);
-    expect(mergedResult).toHaveLength(1);
-    mergedResult.forEach((schedule) => {
-      expect(schedule).toHaveLength(3);
+    test("merge returns empty array when there is conflict between some schedules", () => {
+      const mergedResults = merge(
+        [
+          [nodes[0], nodes[2]],
+          [nodes[0], nodes[1]],
+        ],
+        [
+          [nodes[3], nodes[6]],
+          [nodes[3], nodes[4]],
+        ]
+      );
+      expect(mergedResults.length).toBeGreaterThan(0);
     });
-  });
 
-  test("merge returns empty array when there is conflict between all schedules", () => {
-    const mergedResults = merge(
-      [
-        [nodes[0], nodes[1]],
-        [nodes[2], nodes[3]],
-      ],
-      [
-        [nodes[4], nodes[6]],
-        [nodes[5], nodes[6]],
-      ]
-    );
-    expect(mergedResults).toHaveLength(0)
-  });
-
-  test("merge returns empty array when there is conflict between some schedules", () => {
-    const mergedResults = merge(
-      [
-        [nodes[0], nodes[2]],
-        [nodes[0], nodes[1]],
-      ],
-      [
-        [nodes[3], nodes[6]],
-        [nodes[3], nodes[4]],
-      ]
-    );
-    expect(mergedResults.length).toBeGreaterThan(0)
-  });
-
-  test("merge returns conflict free schedules", () => {
-    const mergedResults = merge(
-      [
-        [nodes[0], nodes[1]],
-        [nodes[5]],
-      ],
-      [
-        [nodes[3], nodes[2]],
-      ]
-    );
-    expect(mergedResults.length).toBeGreaterThan(0)
-    mergedResults.forEach(schedule => {
-      // check that the schedule does not have conflicts
-      /**
+    test("merge returns conflict free schedules", () => {
+      const mergedResults = merge(
+        [[nodes[0], nodes[1]], [nodes[5]]],
+        [[nodes[3], nodes[2]]]
+      );
+      expect(mergedResults.length).toBeGreaterThan(0);
+      mergedResults.forEach((schedule) => {
+        // check that the schedule does not have conflicts
+        /**
        * Algorithm used in testing:
          loop through every schedule. compare each node in a schedule with every other node
          if there is any overlap then the merge has failed
        */
-      let nonConflicting = true
-      for(let node1 of schedule){
-        for(let node2 of schedule){
-          if(node1 === node2) continue
-          const commonDays = new Set([...node1.days].filter(day => node2.days.has(day)))
-          if(commonDays.keys().length === 0) continue
-          nonConflicting =( node2.endTime < node1.startTime) || (node2.startTime > node1.endTime)
+        let nonConflicting = true;
+        for (let node1 of schedule) {
+          for (let node2 of schedule) {
+            if (node1 === node2) continue;
+            const commonDays = new Set(
+              [...node1.days].filter((day) => node2.days.has(day))
+            );
+            if (commonDays.keys().length === 0) continue;
+            nonConflicting =
+              node2.endTime < node1.startTime ||
+              node2.startTime > node1.endTime;
+          }
         }
-      }
-      expect(nonConflicting).toBe(true)
-    })
-  });
+        expect(nonConflicting).toBe(true);
+      });
+    });
 
-  test("merge catches slip (when the arguments themselves have conflicts)", () => {
-    expect(merge([[nodes[1], nodes[4]]], [[nodes[0]]])).toEqual([]);
-  });
+    test("merge catches slip (when the arguments themselves have conflicts)", () => {
+      expect(merge([[nodes[1], nodes[4]]], [[nodes[0]]])).toEqual([]);
+    });
 
-  test("merge of two empty schedules should give an empty schedule", () => {
-    expect(merge([[]], [[]])).toHaveLength(1)
-    expect(merge([[]], [[]])[0]).toHaveLength(0)
-  })
+    test("merge of two empty schedules should give an empty schedule", () => {
+      expect(merge([[]], [[]])).toHaveLength(1);
+      expect(merge([[]], [[]])[0]).toHaveLength(0);
+    });
 
-  test("merge with a full schedule and an empty schedule gives the full schedule", () => {
-    const schedule = [nodes[0], nodes[1], nodes[2], nodes[3]]
-    expect(merge([[]], [schedule])).toEqual([schedule])
-  })
-});
-
+    test("merge with a full schedule and an empty schedule gives the full schedule", () => {
+      const schedule = [nodes[0], nodes[1], nodes[2], nodes[3]];
+      expect(merge([[]], [schedule])).toEqual([schedule]);
+    });
+  }
+);
 
 describe("generateSubSchedules works correctly", () => {
-  test("")
-})
+  let bio, compsci, comm, data;
+  beforeAll(() => {
+    bio = {
+      course_prefix: "BIOL",
+      course_id: "721",
+      title: "Mathematical Population Biology",
+      credits: "3",
+      sections: [
+        {
+          section_id: "0101",
+          section_instructor: ["Abba Gumel"],
+          section_days: ["Tue", "Thu"],
+          section_start_time: "9:30am",
+          section_end_time: "10:45am",
+          labs: [],
+        },
+      ],
+    };
+
+    compsci = {
+      course_prefix: "CMSC",
+      course_id: "106",
+      title: "Introduction to C Programming",
+      credits: "4",
+      sections: [
+        {
+          section_id: "01",
+          section_instructor: ["Maksym Morawski"],
+          section_days: ["Tue", "Thu"],
+          section_start_time: "12:30pm",
+          section_end_time: "1:45pm",
+          labs: [
+            {
+              lab_id: "01",
+              lab_days: ["Tue", "Thu"],
+              lab_start_time: "5:00pm",
+              lab_end_time: "5:50pm",
+              lab_type: "Discussion",
+            },
+          ],
+        },
+      ],
+    };
+
+    comm = {
+      course_prefix: "COMM",
+      course_id: "107B",
+      title: "Oral Communication: Principles and Practices",
+      credits: "3",
+      sections: [
+        {
+          section_id: "0101",
+          section_instructor: ["Melissa Lucas"],
+          section_days: ["Tue", "Thu"],
+          section_start_time: "12:30pm",
+          section_end_time: "1:45pm",
+          labs: [],
+        },
+        {
+          section_id: "0201",
+          section_instructor: ["Christine Schaaf"],
+          section_days: ["Tue", "Thu"],
+          section_start_time: "12:30pm",
+          section_end_time: "1:45pm",
+          labs: [],
+        },
+      ],
+    };
+
+    data = {
+      course_prefix: "DATA",
+      course_id: "200",
+      title: "Knowledge in Society: Science, Data and Ethics",
+      credits: "3",
+      sections: [
+        {
+          section_id: "0101",
+          section_instructor: ["Fardina Alam"],
+          section_days: ["Mon", "Wed", "Fri"],
+          section_start_time: "11:00am",
+          section_end_time: "11:50am",
+          labs: [],
+        },
+      ],
+    };
+  });
+  test("generateSubSchedules returns empty [schedule] if left pointer > right", () => {
+    expect(generateSubSchedules([bio, compsci, comm], 5, 3)).toEqual([[]]);
+  });
+
+  test("generateSubSchedules generates all combinations of a section and its lab if left = right: section has labs", () => {
+    const schedule = generateSubSchedules([compsci], 0, 0);
+    expect(schedule).toHaveLength(
+      compsci.sections.reduce(
+        (perm, section) => perm + Math.max(1, section.labs.length),
+        0
+      )
+    );
+  });
+
+  test("generateSubSchedules generates all combinations of a section and its lab if left = right: section has labs", () => {
+    const algorithm = {
+      cartesianProduct,
+      convertTo24Hour,
+      compareFunction,
+      hasConflict,
+      merge,
+      generateSubSchedules,
+      generateSchedules,
+    };
+    const spyGenSub = jest
+      .spyOn(algorithm, "generateSubSchedules")
+    const schedule = algorithm.generateSubSchedules([comm, bio, data], 0, 2);
+    // expect(schedule).toHaveLength(
+    //   compsci.sections.reduce(
+    //     (perm, section) => perm + Math.max(1, section.labs.length),
+    //     0
+    //   )
+    // );
+  expect(spyGenSub).toHaveBeenCalledTimes(4)
+  });
+});
