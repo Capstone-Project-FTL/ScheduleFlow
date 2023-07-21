@@ -9,9 +9,9 @@ require("colors");
 
 // for demo purposes
 const courses = [
-  allCourses[0],
-  allCourses[50],
-  allCourses[85],
+  allCourses[4],
+  allCourses[90],
+  allCourses[55],
   allCourses[150],
   allCourses[186],
 ];
@@ -30,10 +30,8 @@ courses.sort((course1, course2) => {
  * @param  {...ScheduleNode} scheduleNodes - an array of schedule nodes
  * @returns {Array} the cartesian product of its arguments flattened
  * @example
- * // returns [[1,3],[1,4],[2,3],[2,4]]
- * cartesian([1, 2], [3, 4])
+ * cartesian([1, 2], [3, 4]) = [[1,3],[1,4],[2,3],[2,4]]
  */
-
 // special thanks to rsp for the one liner https://stackoverflow.com/a/43053803
 // i don't understand what is going on, but hey, it works
 const cartesianProduct = (...scheduleNodes) =>
@@ -102,7 +100,7 @@ function hasConflict(schedule) {
 }
 
 /**
- * combines each subschedule into on elarger schedule
+ * combines each subschedule into one larger schedule
  * @param {schedule[]} scheduleA - first schedule to merge
  * @param {schedule[]} scheduleB - second schedule to merge
  * @returns {schedule[]} a ne wschedule where each subschedule has been merged
@@ -127,9 +125,10 @@ function merge(scheduleA, scheduleB) {
  * @param {number} left - the location of the left index in courses
  * @param {number} right - the location of the right index in courses
  * @returns {schedule[]} an array of conflict free schedules
+ * if no schedules, we would receive an empty array
  */
 function generateSubSchedules(courses, left, right) {
-  if (left > right) return [[]];
+  if (left > right) return [];
   if (left === right) {
     const currCourse = courses[left];
     return currCourse.sections.flatMap((section, sectionIdx) =>
@@ -195,23 +194,32 @@ function generateSchedules(courses) {
     return true;
   });
   return generateSubSchedules(courses, 0, courses.length - 1);
-  // return generateSubSchedules(courses, 0, 0);
 }
+
+getMaxScheduleSize = (courses) => {
+  let expectedLength = 1;
+  courses.forEach((course) => {
+    expectedLength *= course.sections.reduce(
+      (perm, section) => perm + Math.max(1, section.labs.length),
+      0
+    );
+  });
+  return expectedLength;
+};
 
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-// const start = performance.now()
+// const start = Date.now()
 // const schedules = generateSchedules(courses)
-// const end = performance.now()
-// console.log(`Time taken: ${end - start}`.red)
+// const end = Date.now()
 
-// // for prettier logs
+// for prettier logs
 // schedules.forEach((res) => {
 //   res.map((node) => console.log(node.toString())) + console.log("\n");
 // });
 
-// // console.log(generateSchedules(courses).map((s) => s.toString()));
-// console.log(generateSchedules(courses).length);
+// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
+// console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
 
 module.exports = {
   cartesianProduct,
@@ -221,4 +229,5 @@ module.exports = {
   hasConflict,
   merge,
   generateSubSchedules,
+  getMaxScheduleSize
 };
