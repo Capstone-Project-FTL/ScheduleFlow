@@ -1,6 +1,7 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon,CursorArrowRippleIcon,ShareIcon } from '@heroicons/react/20/solid';
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon,CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 
 
 const features = [
@@ -23,7 +24,7 @@ const features = [
 ];
 
 const navigation = [
-    { name: 'Home', href: '#home', current: true },
+    { name: 'Course Flow', href: '#home', current: true },
     { name: 'Plan Schedule', href: '#plan-schedule', current: false },
     { name: 'About Us', href: '#about-us', current: false },
   ];
@@ -42,12 +43,8 @@ export default function Landingpage() {
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark-white.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <span className="sr-only">Course Flow</span>
+              <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
             </a>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
@@ -62,9 +59,9 @@ export default function Landingpage() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6">
-              Log in <span aria-hidden="true"></span>
-            </a>
+          <Link to="/login" className="text-sm font-semibold leading-6"> {/* Use Link to navigate to the login page */}
+            Log in <span aria-hidden="true"></span>
+          </Link>
             <a href="#" className="ml-4 text-sm font-semibold leading-6 text-white">
               Sign Up <span aria-hidden="true"></span>
             </a>

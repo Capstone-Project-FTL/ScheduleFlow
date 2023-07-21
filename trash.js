@@ -1,27 +1,26 @@
-// /*
-// [
-//   [ 's1', 'l1', 't1', 'm1' ],
-//   [ 's1', 'l1', 't1', 'm2' ],
-//   [ 's1', 'l2', 't1', 'm1' ],
-//   [ 's1', 'l2', 't1', 'm2' ]
-// ]
-// */
-// const cartesian = (...scheduleNode) =>
-//   scheduleNode.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())));
+/*
+[
+  [ 's1', 'l1', 't1', 'm1' ],
+  [ 's1', 'l1', 't1', 'm2' ],
+  [ 's1', 'l2', 't1', 'm1' ],
+  [ 's1', 'l2', 't1', 'm2' ]
+]
+*/
+const cartesian = (...scheduleNode) =>
+  scheduleNode.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())));
 
-// // console.log(
-// //   cartesian(
-// //     [
-// //       ["s1", "l1"],
-// //       ["s1", "l2"],
-// //     ],
-// //     [
-// //       ["t1", "m1"],
-// //       ["t1", "m2"],
-// //     ]
-// //   )
-// // );
-// console.log(cartesian([["s1"], ["s2"]], [["l1", "l2"], ["l3", "l4"]]))
+// console.log(
+//   cartesian(
+//     [
+//       ["s1", "l1"],
+//       ["s1", "l2"],
+//     ],
+//     [
+//       ["t1", "m1"],
+//       ["t1", "m2"],
+//     ]
+//   )
+// );
 
 // // /**
 // //  * 
@@ -49,4 +48,5 @@
 
 
 
-console.log(_.isEqual("12:59", "12:00"))
+console.log(// console.log(_.isEqual("12:59", "12:00"))
+cartesian([[1]]))
