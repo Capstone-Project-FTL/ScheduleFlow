@@ -1,4 +1,4 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon,CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
+import { CloudArrowUpIcon, CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
