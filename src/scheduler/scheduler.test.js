@@ -8,7 +8,9 @@ const {
   merge,
   generateSubSchedules,
   generateSchedules,
+  getMaxScheduleSize,
 } = require("./scheduler");
+const allCourses = require("../scraper/umd.static.db.json");
 
 describe("cartesianProduct has correct functionality", () => {
   test("cartesianProduct works for an empty array", () => {
@@ -520,39 +522,312 @@ describe("generateSubSchedules works correctly", () => {
       ],
     };
   });
+
   test("generateSubSchedules returns empty [schedule] if left pointer > right", () => {
-    expect(generateSubSchedules([bio, compsci, comm], 5, 3)).toEqual([[]]);
+    expect(generateSubSchedules([bio, compsci, comm], 5, 3)).toEqual([]);
   });
 
-  test("generateSubSchedules generates all combinations of a section and its lab if left = right: section has labs", () => {
-    const schedule = generateSubSchedules([compsci], 0, 0);
-    expect(schedule).toHaveLength(
-      compsci.sections.reduce(
-        (perm, section) => perm + Math.max(1, section.labs.length),
-        0
-      )
-    );
+  test("generateSubSchedules for a single course generates all combinations of a section and its lab", () => {
+    const courses = [compsci];
+    const schedule = generateSubSchedules(courses, 0, 0);
+    expect(schedule).toHaveLength(getMaxScheduleSize(courses));
   });
 
-  test("generateSubSchedules generates all combinations of a section and its lab if left = right: section has labs", () => {
-    const algorithm = {
-      cartesianProduct,
-      convertTo24Hour,
-      compareFunction,
-      hasConflict,
-      merge,
-      generateSubSchedules,
-      generateSchedules,
-    };
-    const spyGenSub = jest
-      .spyOn(algorithm, "generateSubSchedules")
-    const schedule = algorithm.generateSubSchedules([comm, bio, data], 0, 2);
-    // expect(schedule).toHaveLength(
-    //   compsci.sections.reduce(
-    //     (perm, section) => perm + Math.max(1, section.labs.length),
-    //     0
-    //   )
-    // );
-  expect(spyGenSub).toHaveBeenCalledTimes(4)
+  test("generateSubSchedules for a single course generates all combinations of a section with no lab", () => {
+    const courses = [data];
+    const schedule = generateSubSchedules(courses, 0, 0);
+
+    expect(schedule).toHaveLength(getMaxScheduleSize(courses));
+  });
+
+  test("generateSubSchedules does not add zombie schedules", () => {
+    const courses = [comm, bio, data];
+    const schedule = generateSubSchedules(courses, 0, 2);
+    let expectedLength = getMaxScheduleSize(courses);
+    expect(schedule.length).toBeLessThanOrEqual(expectedLength);
+  });
+});
+
+describe("generateSchedules generates valid schedules", () => {
+  describe("generateSchdules: unit tests".yellow, () => {
+    test("generateSchedules returns empty array when given no courses", () => {
+      expect(generateSchedules([])).toHaveLength(0);
+    });
+
+    test("generateSchedules generates valid schedules for a single course with multiple sections: no labs", () => {
+      const comm = {
+        course_prefix: "COMM",
+        course_id: "107B",
+        title: "Oral Communication: Principles and Practices",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Melissa Lucas"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "12:30pm",
+            section_end_time: "1:45pm",
+            labs: [],
+          },
+          {
+            section_id: "0201",
+            section_instructor: ["Christine Schaaf"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "12:30pm",
+            section_end_time: "1:45pm",
+            labs: [],
+          },
+        ],
+      };
+      expect(generateSchedules([comm])).toHaveLength(comm.sections.length);
+    });
+
+    test("generateSchedules generates valid schedules for a single course with multiple sections: no labs", () => {
+      const compsci = {
+        course_prefix: "CMSC",
+        course_id: "106",
+        title: "Introduction to C Programming",
+        credits: "4",
+        sections: [
+          {
+            section_id: "01",
+            section_instructor: ["Maksym Morawski"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "12:30pm",
+            section_end_time: "1:45pm",
+            labs: [
+              {
+                lab_id: "01",
+                lab_days: ["Tue", "Thu"],
+                lab_start_time: "5:00pm",
+                lab_end_time: "5:50pm",
+                lab_type: "Discussion",
+              },
+            ],
+          },
+        ],
+      };
+      expect(generateSchedules([compsci])).toHaveLength(
+        getMaxScheduleSize([compsci])
+      );
+    });
+
+    test("generateSchedules remove duplicate courses: many duplicates, different courses", () => {
+      const bio = {
+        course_prefix: "BIOL",
+        course_id: "721",
+        title: "Mathematical Population Biology",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Abba Gumel"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "9:30am",
+            section_end_time: "10:45am",
+            labs: [],
+          },
+        ],
+      };
+
+      const data = {
+        course_prefix: "DATA",
+        course_id: "200",
+        title: "Knowledge in Society: Science, Data and Ethics",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Fardina Alam"],
+            section_days: ["Mon", "Wed", "Fri"],
+            section_start_time: "11:00am",
+            section_end_time: "11:50am",
+            labs: [],
+          },
+        ],
+      };
+
+      const comm = {
+        course_prefix: "COMM",
+        course_id: "107B",
+        title: "Oral Communication: Principles and Practices",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Melissa Lucas"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "12:30pm",
+            section_end_time: "1:45pm",
+            labs: [],
+          },
+          {
+            section_id: "0201",
+            section_instructor: ["Christine Schaaf"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "12:30pm",
+            section_end_time: "1:45pm",
+            labs: [],
+          },
+        ],
+      };
+
+      const schedules = generateSchedules([bio, data, bio, comm, comm]);
+      /**
+       * since the elements of a schedule are scheduleNodes, we can
+       * find a unique course by getting the course prefix and id
+       * but this alone is not sufficient, as labs would also have the same course prefix and ids
+       * to combat this, we can easily add the isLab field to the string stord in the set
+       */
+      expect(schedules.length).toBeGreaterThan(0);
+      schedules.forEach((schedule) => {
+        const seenCourses = new Set();
+        schedule.forEach((node) => {
+          const identifier = `${node.coursePrefix} ${node.courseId} ${node.isLab}}`;
+          expect(seenCourses.has(identifier)).toBe(false);
+          seenCourses.add(identifier);
+        });
+      });
+    });
+
+    test("generateSchedules remove duplicate courses: two duplicates, one courses", () => {
+      // use a course that has multiple sections without time conflicts
+      const compsci = {
+        course_prefix: "CMSC",
+        course_id: "320",
+        title: "Introduction to Data Science",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Maksym Morawski"],
+            section_days: ["Tue", "Thu"],
+            section_start_time: "3:30pm",
+            section_end_time: "4:45pm",
+            labs: [],
+          },
+          {
+            section_id: "0201",
+            section_instructor: ["Fardina Alam"],
+            section_days: ["Mon", "Wed"],
+            section_start_time: "3:30pm",
+            section_end_time: "4:45pm",
+            labs: [],
+          },
+        ],
+      };
+
+      const schedules = generateSchedules([compsci, compsci]);
+      expect(schedules.length).toBeGreaterThan(0);
+      schedules.forEach((schedule) => {
+        const seenCourses = new Set();
+        schedule.forEach((node) => {
+          const identifier = `${node.coursePrefix} ${node.courseId} ${node.isLab}}`;
+          expect(seenCourses.has(identifier)).toBe(false);
+          seenCourses.add(identifier);
+        });
+      });
+    });
+
+    test("generateSchedules returns emoty array if no schedule could be formed", () => {
+      const compsci1 = {
+        course_prefix: "CMSC",
+        course_id: "398M",
+        title:
+          "Special Topics in Computer Science; Introduction to Product Design with Figma",
+        credits: "1",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Cliff Bakalian"],
+            section_days: ["Fri"],
+            section_start_time: "10:00am",
+            section_end_time: "10:50am",
+            labs: [],
+          },
+        ],
+      };
+      const compsci2 = {
+        course_prefix: "CMSC",
+        course_id: "351H",
+        title: "Algorithms",
+        credits: "3",
+        sections: [
+          {
+            section_id: "0101",
+            section_instructor: ["Emily Kaplitz", "Auguste Gezalyan"],
+            section_days: ["Mon", "Wed", "Fri"],
+            section_start_time: "10:00am",
+            section_end_time: "10:50am",
+            labs: [],
+          },
+        ],
+      };
+
+      expect(generateSchedules([compsci1, compsci2])).toHaveLength(0);
+    });
+  });
+
+  describe("generateSchedules: property-based testing".yellow, () => {
+    const interations = []; // each element in the interation is an array of app possible schedules
+    const coursesList = []; //used to map each iteration to courses
+    // run generate schedule many times on random number of courses for random courses
+    beforeAll(() => {
+      const numberOfIterations = 50;
+      for (let i = 0; i < numberOfIterations; i++) {
+        const numberOfCOurses = Math.floor(Math.random() * 16); // max 15 courses
+        const courses = [];
+        for (let j = 0; j < numberOfCOurses; j++) {
+          const courseIndex = Math.floor(
+            Math.random() * allCourses.courses.length
+          );
+          courses.push(allCourses.courses[courseIndex]);
+        }
+        coursesList.push(courses);
+        interations.push(generateSchedules(courses));
+      }
+    });
+
+    it("should not hav eempty schedules", () => {
+      /**
+       * this means that the array of all possible schedules should not contain
+       * any empty schedules eg. [[]] or [schedule1, schedule 2, ..., [], ..., scheduleN]
+       */
+      interations.forEach((allSchedules) => {
+        expect(allSchedules.every((schedule) => schedule.length > 0)).toBe(
+          true
+        );
+      });
+    });
+
+    it("should not generate more courses that the max number", () => {
+      interations.forEach((allSchedules, index) => {
+        expect(allSchedules.length).toBeLessThanOrEqual(
+          getMaxScheduleSize(coursesList[index])
+        );
+      });
+    });
+
+    it("should only include all unique courses in each schedule", () => {
+      interations.forEach((allSchedules, index) => {
+        const courseSet = new Set(coursesList[index].map(course => `${course.coursePrefix} ${course.courseId}`))
+        allSchedules.forEach(schedule=> {
+          const coursesInSchedule = new Set(schedule.map(node => `${node.coursePrefix} ${node.courseId}`))
+          expect(courseSet.keys.length).toEqual(coursesInSchedule.keys.length)
+          expect(Array.from(courseSet.keys).every(key => coursesInSchedule.has(key))).toBe(true)
+          expect(Array.from(coursesInSchedule.keys).every(key => courseSet.has(key))).toBe(true)
+        })
+      })
+    });
+
+    it("should include a lab in the final schedules for each section that has a lab", () => {
+      
+    })
+
+    it("should generate schedules which do not have time conflicts", () => {
+      interations.forEach(allSchedules => {
+        allSchedules.forEach(schedule => expect(hasConflict(schedule)).toBe(false))
+      })
+    })
   });
 });

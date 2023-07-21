@@ -9,11 +9,10 @@ require("colors");
 
 // for demo purposes
 const courses = [
-  // allCourses[4],
+  allCourses[4],
   allCourses[90],
-  // allCourses[90],
   allCourses[55],
-  // allCourses[150],
+  allCourses[150],
   allCourses[186],
 ];
 
@@ -33,7 +32,6 @@ courses.sort((course1, course2) => {
  * @example
  * cartesian([1, 2], [3, 4]) = [[1,3],[1,4],[2,3],[2,4]]
  */
-
 // special thanks to rsp for the one liner https://stackoverflow.com/a/43053803
 // i don't understand what is going on, but hey, it works
 const cartesianProduct = (...scheduleNodes) =>
@@ -127,9 +125,10 @@ function merge(scheduleA, scheduleB) {
  * @param {number} left - the location of the left index in courses
  * @param {number} right - the location of the right index in courses
  * @returns {schedule[]} an array of conflict free schedules
+ * if no schedules, we would receive an empty array
  */
 function generateSubSchedules(courses, left, right) {
-  if (left > right) return [[]];
+  if (left > right) return [];
   if (left === right) {
     const currCourse = courses[left];
     return currCourse.sections.flatMap((section, sectionIdx) =>
@@ -197,19 +196,30 @@ function generateSchedules(courses) {
   return generateSubSchedules(courses, 0, courses.length - 1);
 }
 
+getMaxScheduleSize = (courses) => {
+  let expectedLength = 1;
+  courses.forEach((course) => {
+    expectedLength *= course.sections.reduce(
+      (perm, section) => perm + Math.max(1, section.labs.length),
+      0
+    );
+  });
+  return expectedLength;
+};
+
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-// const start = performance.now()
+// const start = Date.now()
 // const schedules = generateSchedules(courses)
-// const end = performance.now()
+// const end = Date.now()
 
 // for prettier logs
 // schedules.forEach((res) => {
 //   res.map((node) => console.log(node.toString())) + console.log("\n");
 // });
 
-// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.red)
-// console.log(generateSchedules(courses).length);
+// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
+// console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
 
 module.exports = {
   cartesianProduct,
@@ -219,4 +229,5 @@ module.exports = {
   hasConflict,
   merge,
   generateSubSchedules,
+  getMaxScheduleSize
 };
