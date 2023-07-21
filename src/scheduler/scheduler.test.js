@@ -773,7 +773,7 @@ describe("generateSchedules generates valid schedules", () => {
     const coursesList = []; //used to map each iteration to courses
     // run generate schedule many times on random number of courses for random courses
     beforeAll(() => {
-      const numberOfIterations = 50;
+      const numberOfIterations = 100;
       for (let i = 0; i < numberOfIterations; i++) {
         const numberOfCOurses = Math.floor(Math.random() * 16); // max 15 courses
         const courses = [];
@@ -810,24 +810,74 @@ describe("generateSchedules generates valid schedules", () => {
 
     it("should only include all unique courses in each schedule", () => {
       interations.forEach((allSchedules, index) => {
-        const courseSet = new Set(coursesList[index].map(course => `${course.coursePrefix} ${course.courseId}`))
-        allSchedules.forEach(schedule=> {
-          const coursesInSchedule = new Set(schedule.map(node => `${node.coursePrefix} ${node.courseId}`))
-          expect(courseSet.keys.length).toEqual(coursesInSchedule.keys.length)
-          expect(Array.from(courseSet.keys).every(key => coursesInSchedule.has(key))).toBe(true)
-          expect(Array.from(coursesInSchedule.keys).every(key => courseSet.has(key))).toBe(true)
-        })
-      })
+        const courseSet = new Set(
+          coursesList[index].map(
+            (course) => `${course.coursePrefix} ${course.courseId}`
+          )
+        );
+        allSchedules.forEach((schedule) => {
+          const coursesInSchedule = new Set(
+            schedule.map((node) => `${node.coursePrefix} ${node.courseId}`)
+          );
+          expect(courseSet.keys.length).toEqual(coursesInSchedule.keys.length);
+          expect(
+            Array.from(courseSet.keys).every((key) =>
+              coursesInSchedule.has(key)
+            )
+          ).toBe(true);
+          expect(
+            Array.from(coursesInSchedule.keys).every((key) =>
+              courseSet.has(key)
+            )
+          ).toBe(true);
+        });
+      });
     });
 
     it("should include a lab in the final schedules for each section that has a lab", () => {
-      
-    })
+      interations.forEach((allSchedules, index) => {
+        allSchedules.forEach((schedule) => {
+          /**
+           * seenNode stores a unique representation of each node in the schedule
+           * for each node in the schedule, find the corresponding course in the courses array
+           * then check lookup the section using nodeIndex
+           * if the section has labs, ensure that the final schedule has labs
+           * by looking through seenNodes for a unique string representation
+           * string representation: `${node.coursePrefix}${node.courseId}${node.isLab}`
+           * to look for a lab, just change isLab to be true and you have the lab representation of a section
+           */
+          const seenNodes = new Set(
+            schedule.map(
+              (node) => `${node.coursePrefix}${node.courseId}${node.isLab}`
+            )
+          );
+          schedule.forEach((node) => {
+            if (!node.isLab) {
+              // use the node index to link the node to the respective course
+              const course = coursesList[index].find(
+                (courses) =>
+                  courses.course_prefix === node.coursePrefix &&
+                  courses.course_id === node.courseId
+              );
+              expect(Object.keys(course).length).toBeGreaterThan(0);
+              const hasLab = course.sections[node.nodeIndex].labs.length > 0;
+              if (hasLab) {
+                expect(
+                  seenNodes.has(`${node.coursePrefix}${node.courseId}true`)
+                ).toBe(true);
+              }
+            }
+          });
+        });
+      });
+    });
 
     it("should generate schedules which do not have time conflicts", () => {
-      interations.forEach(allSchedules => {
-        allSchedules.forEach(schedule => expect(hasConflict(schedule)).toBe(false))
-      })
-    })
+      interations.forEach((allSchedules) => {
+        allSchedules.forEach((schedule) =>
+          expect(hasConflict(schedule)).toBe(false)
+        );
+      });
+    });
   });
 });
