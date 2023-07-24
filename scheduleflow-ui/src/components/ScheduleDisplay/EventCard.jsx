@@ -5,8 +5,6 @@ export default function EventCard({ start, end }) {
   const gridStart = new Date();
   gridStart.setHours(6, 30, 0);
   const getBlocksFromTop = (start) => {
-    // console.log(start.getSeconds())
-    // console.log(gridStart)
     const startSec =
       start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds();
     const gridStartSec =
@@ -27,11 +25,11 @@ export default function EventCard({ start, end }) {
   return (
     <div
       className={
-        "event-card rounded-md absolute bg-indigo-200 w-full h-10 border-none"
+        "event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10"
       }
-      style={{ top: `calc(2.5rem*${getBlocksFromTop(start)} + 1px)`, height: `calc(2.5rem * ${getHeight(start, end)} + 1px)`}}
+      style={{ top: `calc(2rem*${getBlocksFromTop(start)} + 1px)`, height: `calc(2rem * ${getHeight(start, end)})`}}
     >
-      Event
+      {start.getHours()}
     </div>
   );
 }
