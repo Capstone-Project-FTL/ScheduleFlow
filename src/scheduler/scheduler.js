@@ -11,7 +11,7 @@ require("colors");
 const courses = [
   allCourses[4],
   allCourses[90],
-  allCourses[55],
+  // allCourses[55],
   allCourses[150],
   allCourses[186],
 ];
@@ -209,17 +209,17 @@ getMaxScheduleSize = (courses) => {
 
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-// const start = Date.now()
-// const schedules = generateSchedules(courses)
-// const end = Date.now()
+const start = Date.now()
+const schedules = generateSchedules(courses)
+const end = Date.now()
 
 // for prettier logs
-// schedules.forEach((res) => {
-//   res.map((node) => console.log(node.toString())) + console.log("\n");
-// });
+schedules.forEach((res) => {
+  res.map((node) => console.log(node.toString())) + console.log("\n");
+});
 
-// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
-// console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
+console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
+console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
 
 module.exports = {
   cartesianProduct,
