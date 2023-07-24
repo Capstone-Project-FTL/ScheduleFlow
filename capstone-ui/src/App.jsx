@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landingpage from "./components/LandingPage";
 import NavBar from "./components/Navbar";
 import Login from './components/Login';
+import Register from './components/Register';
 
 export default function App() {
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>
