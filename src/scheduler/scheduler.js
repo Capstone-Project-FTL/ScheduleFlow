@@ -9,9 +9,9 @@ require("colors");
 
 // for demo purposes
 const courses = [
-  allCourses[4],
+  // allCourses[4],
   allCourses[90],
-  allCourses[55],
+  // allCourses[55],
   allCourses[150],
   allCourses[186],
 ];
@@ -39,7 +39,7 @@ const cartesianProduct = (...scheduleNodes) =>
 
 /**
  * @param {string} timeStr the string representation for a given time
- * @returns {string} a 24 hour format for the time
+ * @returns {Date} a 24 hour date object
  */
 function convertTo24Hour(timeStr) {
   var hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
@@ -47,11 +47,12 @@ function convertTo24Hour(timeStr) {
   var AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
   if (AMPM.toLowerCase() == "pm" && hours < 12) hours = hours + 12;
   if (AMPM.toLowerCase() == "am" && hours == 12) hours = hours - 12;
-  var sHours = hours.toString();
-  var sMinutes = minutes.toString();
-  if (hours < 10) sHours = "0" + sHours;
-  if (minutes < 10) sMinutes = "0" + sMinutes;
-  return sHours + ":" + sMinutes;
+  // var sHours = hours.toString();
+  // var sMinutes = minutes.toString();
+  // if (hours < 10) sHours = "0" + sHours;
+  // if (minutes < 10) sMinutes = "0" + sMinutes;
+  // return sHours + ":" + sMinutes;
+  return new Date(1970, 0, 1, hours, minutes, 0, 0 )
 }
 
 /**
@@ -209,17 +210,17 @@ getMaxScheduleSize = (courses) => {
 
 
 // courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-// const start = Date.now()
-// const schedules = generateSchedules(courses)
-// const end = Date.now()
+const start = performance.now()
+const schedules = generateSchedules(courses)
+const end = performance.now()
 
 // for prettier logs
-// schedules.forEach((res) => {
-//   res.map((node) => console.log(node.toString())) + console.log("\n");
-// });
+schedules.forEach((res) => {
+  res.map((node) => console.log(node.toString())) + console.log("\n");
+});
 
-// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
-// console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
+console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
+console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
 
 module.exports = {
   cartesianProduct,
