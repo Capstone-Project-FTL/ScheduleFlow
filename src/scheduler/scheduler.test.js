@@ -54,31 +54,43 @@ describe("cartesianProduct has correct functionality", () => {
 
 describe("convertTo24Hourconverts AM/PM time string format into 24 hour string format", () => {
   test("convertTo24Hour has basic functionality", () => {
-    expect(convertTo24Hour("1:32pm")).toEqual("13:32");
+    const nodeDate = convertTo24Hour("1:32pm")
+    expect(nodeDate.getHours()).toEqual(13);
+    expect(nodeDate.getMinutes()).toEqual(32);
   });
 
   test("convertTo24Hour works when time and modifier are spaced", () => {
-    expect(convertTo24Hour("1:00 pm")).toEqual("13:00");
+    const nodeDate = convertTo24Hour("1:00 pm")
+    expect(nodeDate.getHours()).toEqual(13);
+    expect(nodeDate.getMinutes()).toEqual(0);
+  });
+
+  test("convertTo24Hour works when time has modifier and leading 0", () => {
+    const nodeDate = convertTo24Hour("01:00 pm")
+    expect(nodeDate.getHours()).toEqual(13);
+    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getSeconds()).toEqual(0);
   });
 
   test("convertTo24Hour works for midnight", () => {
-    expect(convertTo24Hour("12:00am")).toEqual("00:00");
+    const nodeDate = convertTo24Hour("12:00am")
+    expect(nodeDate.getHours()).toEqual(0);
+    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getSeconds()).toEqual(0);
   });
 
   test("convertTo24Hour works for times before mid day", () => {
-    expect(convertTo24Hour("3:00 am")).toEqual("03:00");
+    const nodeDate = convertTo24Hour("3:00 am")
+    expect(nodeDate.getHours()).toEqual(3);
+    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getSeconds()).toEqual(0);
   });
 
   test("convertTo24Hour works for times after mid day", () => {
-    expect(convertTo24Hour("3:00 pm")).toEqual("15:00");
-  });
-
-  test("convertTo24Hour adds leading 0 to hour when hour is single digit", () => {
-    expect(convertTo24Hour("7:00 am").split(":")[0]).toEqual("07");
-  });
-
-  test("convertTo24Hour adds leading 0 to minute when minute is single digit", () => {
-    expect(convertTo24Hour("3:09 am").split(":")[1]).toEqual("09");
+    const nodeDate = convertTo24Hour("3:00 pm")
+    expect(nodeDate.getHours()).toEqual(15);
+    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getSeconds()).toEqual(0);
   });
 });
 
