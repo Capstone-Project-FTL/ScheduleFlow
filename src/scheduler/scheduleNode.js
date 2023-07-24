@@ -8,8 +8,8 @@ class ScheduleNode{
     /**
      * 
      * @param {string[]} days - the days for the node
-     * @param {string} startTime - the start time in 24 hour format
-     * @param {string} endTime - the end time in 24 hour format
+     * @param {Date} startTime - the start time in 24 hour format
+     * @param {Date} endTime - the end time in 24 hour format
      * @param {string} coursePrefix - course prefix
      * @param {string} courseId - course id
      * @param {number} nodeIndex - the index of the node in the actual course
@@ -23,10 +23,12 @@ class ScheduleNode{
         this.courseId = courseId
         this.nodeIndex = nodeIndex
         this.isLab = isLab
+        this.startTimeStr = `${String(startTime.getHours()).padStart(2, "0")}:${String(startTime.getMinutes()).padStart(2, "0")}`
+        this.endTimeStr = `${String(endTime.getHours()).padStart(2, "0")}:${String(endTime.getMinutes()).padStart(2, "0")}`
     }
 
     toString(){
-        return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${this.courseId} ${Array.from(this.days).toString()} (${this.startTime} - ${this.endTime})`
+        return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${this.courseId} ${Array.from(this.days).toString()} (${this.startTimeStr} - ${this.endTimeStr})`
     }
 }
 
