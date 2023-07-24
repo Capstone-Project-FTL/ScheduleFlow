@@ -1,4 +1,4 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon,CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
+import { CloudArrowUpIcon, CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
@@ -62,7 +62,7 @@ export default function Landingpage() {
           <Link to="/login" className="text-sm font-semibold leading-6"> {/* Use Link to navigate to the login page */}
             Log in <span aria-hidden="true"></span>
           </Link>
-            <a href="#" className="ml-4 text-sm font-semibold leading-6 text-white">
+            <a href="/register" className="ml-4 text-sm font-semibold leading-6 text-white">
               Sign Up <span aria-hidden="true"></span>
             </a>
           </div>
