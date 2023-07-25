@@ -14,15 +14,30 @@ var schedules = {};
 app.use(cors());
 app.use(express.json());
 
+//Sheduler imports
+const allCourses = require("../src/scraper/umd.static.db.json").courses;
+const {generateSchedules} = require('.././src/scheduler/scheduler')
+const ScheduleNode = require("../src/scheduler/scheduleNode");
+const staticCourses = [
+    allCourses[4],
+    allCourses[90],
+    // allCourses[55],
+    allCourses[150],
+    allCourses[186],
+  ];
+
 //ROUTES
 
 //Create a Schedule
-app.post("/courses", async (req, res) => {
+app.post("/schedules", async (req, res) => {
   try {
-    const { courses } = req.body;
-    schedules = courses;
-    res.json(courses);
-    // const passCourses = //call scheduler
+    // const { courses } = req.body;
+    // schedules = courses;
+    // res.json(courses);
+
+    res.json(generateSchedules(staticCourses));
+
+    // *const passCourses = //call scheduler*
   } catch (err) {
     console.error(err.message);
   }
