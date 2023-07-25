@@ -209,10 +209,10 @@ getMaxScheduleSize = (courses) => {
 };
 
 
-// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-const start = performance.now()
+courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
+const start = Date.now()
 const schedules = generateSchedules(courses)
-const end = performance.now()
+const end = Date.now()
 
 // for prettier logs
 schedules.forEach((res) => {
