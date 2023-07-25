@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "hydrate": "node hydrate_database.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "nodemon": "^3.0.1",
-    "pg": "^8.11.1"
+    "pg": "^8.11.1",
+    "pg-promise": "^11.5.1"
   }
 }
