@@ -1,8 +1,6 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon,CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
+import { useState } from 'react';import { CloudArrowUpIcon, CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
 import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
 
 
 const features = [
@@ -24,17 +22,51 @@ const features = [
   },
 ];
 
+const navigation = [
+    { name: 'Course Flow', href: '#home', current: true },
+    { name: 'Plan Schedule', href: '#plan-schedule', current: false },
+    { name: 'About Us', href: '#about-us', current: false },
+  ];
+
 const stats = [
   { name: 'Offices worldwide', value: '1' },
   { name: 'Full-time colleagues', value: '3' },
 ];
 
 
-export default function LandingPage() {
+export default function Landingpage() {
   return (
     
     <div className="bg-gray-800 text-white">
-      <Navbar />
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div className="flex lg:flex-1">
+            <Link to="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">Course Flow</span>
+              <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
+            </Link>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-semibold leading-6 ${item.current ? 'text-indigo-600' : ''}`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link to="/login" className="text-sm font-semibold leading-6"> {/* Use Link to navigate to the login page */}
+            Log in <span aria-hidden="true"></span>
+          </Link>
+            <a href="/register" className="ml-4 text-sm font-semibold leading-6 text-white">
+              Sign Up <span aria-hidden="true"></span>
+            </a>
+          </div>
+        </nav>
+      </header>
 
       <div id="home" className="relative isolate px-6 pt-14 lg:px-8">
         <div
@@ -59,7 +91,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="#"
+                href="/home"
                 className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Get started
@@ -81,7 +113,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div id="plan-schedule" className="overflow-hidden bg-[#EDECF8] py-24 sm:py-32">
+      <div id="plan-schedule" className="overflow-hidden bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
