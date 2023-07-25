@@ -47,11 +47,6 @@ function convertTo24Hour(timeStr) {
   var AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
   if (AMPM.toLowerCase() == "pm" && hours < 12) hours = hours + 12;
   if (AMPM.toLowerCase() == "am" && hours == 12) hours = hours - 12;
-  // var sHours = hours.toString();
-  // var sMinutes = minutes.toString();
-  // if (hours < 10) sHours = "0" + sHours;
-  // if (minutes < 10) sMinutes = "0" + sMinutes;
-  // return sHours + ":" + sMinutes;
   return new Date(1970, 0, 1, hours, minutes, 0, 0 )
 }
 
@@ -210,9 +205,9 @@ getMaxScheduleSize = (courses) => {
 
 
 courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-const start = Date.now()
+const start = performance.now()
 const schedules = generateSchedules(courses)
-const end = Date.now()
+const end = performance.now()
 
 // for prettier logs
 schedules.forEach((res) => {
