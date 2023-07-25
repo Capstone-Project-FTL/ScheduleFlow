@@ -40,8 +40,9 @@ const cartesianProduct = (...scheduleNodes) =>
 /**
  * @param {string} timeStr the string representation for a given time
  * @returns {Date} a 24 hour date object
+ * without the modifier, extractDate attempts to parse the timeStr
  */
-function convertTo24Hour(timeStr) {
+function extractDate(timeStr) {
   var hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
   var minutes = Number(timeStr.match(/:(\d+)/)[1]); // get the part after the colon
   var AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
@@ -133,8 +134,8 @@ function generateSubSchedules(courses, left, right) {
             [
               new ScheduleNode(
                 section.section_days,
-                convertTo24Hour(section.section_start_time),
-                convertTo24Hour(section.section_end_time),
+                extractDate(section.section_start_time),
+                extractDate(section.section_end_time),
                 currCourse.course_prefix,
                 currCourse.course_id,
                 sectionIdx,
@@ -145,8 +146,8 @@ function generateSubSchedules(courses, left, right) {
               (lab, labIdx) =>
                 new ScheduleNode(
                   lab.lab_days,
-                  convertTo24Hour(lab.lab_start_time),
-                  convertTo24Hour(lab.lab_end_time),
+                  extractDate(lab.lab_start_time),
+                  extractDate(lab.lab_end_time),
                   currCourse.course_prefix,
                   currCourse.course_id,
                   labIdx,
@@ -158,8 +159,8 @@ function generateSubSchedules(courses, left, right) {
             [
               new ScheduleNode(
                 section.section_days,
-                convertTo24Hour(section.section_start_time),
-                convertTo24Hour(section.section_end_time),
+                extractDate(section.section_start_time),
+                extractDate(section.section_end_time),
                 currCourse.course_prefix,
                 currCourse.course_id,
                 sectionIdx,
@@ -204,22 +205,22 @@ getMaxScheduleSize = (courses) => {
 };
 
 
-courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
-const start = performance.now()
-const schedules = generateSchedules(courses)
-const end = performance.now()
+// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
+// const start = performance.now()
+// const schedules = generateSchedules(courses)
+// const end = performance.now()
 
-// for prettier logs
-schedules.forEach((res) => {
-  res.map((node) => console.log(node.toString())) + console.log("\n");
-});
+// // for prettier logs
+// schedules.forEach((res) => {
+//   res.map((node) => console.log(node.toString())) + console.log("\n");
+// });
 
-console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
-console.log(`${generateSchedules(courses).length} of ${getMaxScheduleSize(courses)}`.green);
+// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
+// console.log(`${schedules.length} of ${getMaxScheduleSize(courses)}`.green);
 
 module.exports = {
   cartesianProduct,
-  convertTo24Hour,
+  extractDate,
   generateSchedules,
   compareFunction,
   hasConflict,

@@ -2,7 +2,7 @@ const { daysOfWeek } = require("../scraper/utilities");
 const ScheduleNode = require("./scheduleNode");
 const {
   cartesianProduct,
-  convertTo24Hour,
+  extractDate,
   compareFunction,
   hasConflict,
   merge,
@@ -52,53 +52,65 @@ describe("cartesianProduct has correct functionality", () => {
   });
 });
 
-describe("convertTo24Hourconverts AM/PM time string format into 24 hour string format", () => {
-  test("convertTo24Hour has basic functionality", () => {
-    const nodeDate = convertTo24Hour("1:32pm")
+describe("extractDateconverts AM/PM time string format into 24 hour string format", () => {
+  test("extractDate has basic functionality", () => {
+    const nodeDate = extractDate("1:32pm")
     expect(nodeDate.getHours()).toEqual(13);
     expect(nodeDate.getMinutes()).toEqual(32);
   });
 
-  test("convertTo24Hour works when time and modifier are spaced", () => {
-    const nodeDate = convertTo24Hour("1:00 pm")
+  test("extractDate works when time and modifier are spaced", () => {
+    const nodeDate = extractDate("1:00 pm")
     expect(nodeDate.getHours()).toEqual(13);
     expect(nodeDate.getMinutes()).toEqual(0);
   });
 
-  test("convertTo24Hour works when time has modifier and leading 0", () => {
-    const nodeDate = convertTo24Hour("01:00 pm")
+  test("extractDate works when time has modifier and leading 0", () => {
+    const nodeDate = extractDate("01:00 pm")
     expect(nodeDate.getHours()).toEqual(13);
     expect(nodeDate.getMinutes()).toEqual(0);
     expect(nodeDate.getSeconds()).toEqual(0);
   });
 
-  test("convertTo24Hour works for midnight", () => {
-    const nodeDate = convertTo24Hour("12:00am")
+  test("extractDate works for midnight", () => {
+    const nodeDate = extractDate("12:00am")
     expect(nodeDate.getHours()).toEqual(0);
     expect(nodeDate.getMinutes()).toEqual(0);
     expect(nodeDate.getSeconds()).toEqual(0);
   });
 
-  test("convertTo24Hour works for times before mid day", () => {
-    const nodeDate = convertTo24Hour("3:00 am")
+  test("extractDate works for times before mid day", () => {
+    const nodeDate = extractDate("3:00 am")
     expect(nodeDate.getHours()).toEqual(3);
     expect(nodeDate.getMinutes()).toEqual(0);
     expect(nodeDate.getSeconds()).toEqual(0);
   });
 
-  test("convertTo24Hour works for times after mid day", () => {
-    const nodeDate = convertTo24Hour("3:00 pm")
+  test("extractDate works for times after mid day", () => {
+    const nodeDate = extractDate("3:00 pm")
     expect(nodeDate.getHours()).toEqual(15);
     expect(nodeDate.getMinutes()).toEqual(0);
     expect(nodeDate.getSeconds()).toEqual(0);
   });
+
+  test("extractDate works on times without modifiers", () => {
+    const nodeDate = extractDate("11:00")
+    const nodeDate2 = extractDate("23:00")
+    expect(nodeDate.getHours()).toEqual(11);
+    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getSeconds()).toEqual(0);
+
+    expect(nodeDate2.getHours()).toEqual(23);
+    expect(nodeDate2.getMinutes()).toEqual(0);
+    expect(nodeDate2.getSeconds()).toEqual(0);
+  })
 });
 
 describe("compareFunction function compares times correctly", () => {
   let node1, node2;
   const generateNodes = () => [
-    new ScheduleNode([], "", "", "", "", 0),
-    new ScheduleNode([], "", "", "", "", 0),
+    new ScheduleNode([], new Date(), new Date(), "", "", 0),
+    new ScheduleNode([], new Date(), new Date(), "", "", 0),
   ];
   beforeAll(() => {
     [node1, node2] = generateNodes();
@@ -115,42 +127,42 @@ describe("compareFunction function compares times correctly", () => {
    * CASE 3: (s1 = s2) and e1 = e2 (node 1 and node 2 start and end at the same time)
    */
   test("compareFunction returns negative if first node starts before the second node", () => {
-    node1.startTime = "07:00";
-    node1.endTime = "08:00";
-    node2.startTime = "07:01";
-    node2.endTime = "08:00";
+    node1.startTime = extractDate("07:00 AM")
+    node1.endTime = extractDate("08:00 AM")
+    node2.startTime = extractDate("07:01 AM")
+    node2.endTime = extractDate("07:00 AM")
     expect(compareFunction(node1, node2)).toBeLessThan(0);
   });
 
   test("compareFunction returns positive if first node starts after the second node", () => {
-    node1.startTime = "11:00";
-    node1.endTime = "08:00";
-    node2.startTime = "07:01";
-    node2.endTime = "08:00";
+    node1.startTime = extractDate("11:00 AM")
+    node1.endTime = extractDate("08:00 AM")
+    node2.startTime = extractDate("07:01 AM")
+    node2.endTime = extractDate("08:00 AM")
     expect(compareFunction(node1, node2)).toBeGreaterThan(0);
   });
 
   test("compareFunction returns negative if both nodes start at the same time but first node ends before the second node", () => {
-    node1.startTime = "07:00";
-    node1.endTime = "08:00";
-    node2.startTime = "07:00";
-    node2.endTime = "08:01";
+    node1.startTime = extractDate("07:00 AM")
+    node1.endTime = extractDate("08:00 AM")
+    node2.startTime = extractDate("07:00 AM")
+    node2.endTime = extractDate("08:01 AM")
     expect(compareFunction(node1, node2)).toBeLessThan(0);
   });
 
   test("compareFunction returns positive if both nodes start at the same time but first node ends after the second node", () => {
-    node1.startTime = "07:00";
-    node1.endTime = "12:00";
-    node2.startTime = "07:00";
-    node2.endTime = "08:01";
+    node1.startTime = extractDate("07:01 AM")
+    node1.endTime = extractDate("12:00 PM")
+    node2.startTime =extractDate("07:00 AM")
+    node2.endTime = extractDate("08:01 AM")
     expect(compareFunction(node1, node2)).toBeGreaterThan(0);
   });
 
   test("compareFunction returns 0 if both nodes start and end at the same times", () => {
-    node1.startTime = "19:00";
-    node1.endTime = "23:00";
-    node2.startTime = "19:00";
-    node2.endTime = "23:00";
+    node1.startTime = extractDate("07:00 PM")
+    node1.endTime = extractDate("11:00 PM")
+    node2.startTime =  extractDate("07:00 PM")
+    node2.endTime = extractDate("11:00 PM")
     expect(compareFunction(node1, node2)).toBe(0);
   });
 });
@@ -166,7 +178,7 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
 
   beforeAll(() => {
     for (let i = 0; i < length; i++) {
-      nodes.push(new ScheduleNode([], "", "", "", "", 0));
+      nodes.push(new ScheduleNode([], new Date(1970, 0, 1), new Date(1970, 0, 1), "", "", 0));
     }
   });
 
@@ -175,34 +187,34 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
   });
 
   test("hasConflict returns false for schedule with only one node", () => {
-    init(nodes[1], [daysOfWeek.Monday, daysOfWeek.Friday], "09:00", "10:00");
+    init(nodes[1], [daysOfWeek.Monday, daysOfWeek.Friday], extractDate("09:00 AM"), extractDate("10:00 AM"));
     expect(hasConflict([nodes[1]])).toBe(false);
   });
 
   test("hasConflict returns false for non overlapping schedules", () => {
-    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Friday], "09:00", "10:00");
-    init(nodes[1], [daysOfWeek.Tuesday, daysOfWeek.Thursday], "10:00", "10:50");
-    init(nodes[2], [daysOfWeek.Wednesday], "10:15", "11:30");
+    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Friday], extractDate("09:00"), extractDate("10:00"));
+    init(nodes[1], [daysOfWeek.Tuesday, daysOfWeek.Thursday], extractDate("10:00 AM"), extractDate("10:50"));
+    init(nodes[2], [daysOfWeek.Wednesday], extractDate("10:15"), extractDate("11:30"));
     init(
       nodes[3],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
+      extractDate("14:00"),
+      extractDate("15:00")
     );
-    init(nodes[4], [daysOfWeek.Thursday], "11:00", "12:00");
+    init(nodes[4], [daysOfWeek.Thursday], extractDate("11:00"), extractDate("12:00"));
     expect(hasConflict(nodes)).toBe(false);
   });
 
   test("hasConflict returns true for overlapping schedules", () => {
-    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Friday], "09:00", "10:00");
-    init(nodes[2], [daysOfWeek.Wednesday], "10:15", "14:30");
+    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Friday], extractDate("09:00"), extractDate("10:00"));
+    init(nodes[2], [daysOfWeek.Wednesday], extractDate("10:15"), extractDate("14:30"));
     init(
       nodes[3],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
+      extractDate("14:00"),
+      extractDate("15:00")
     );
-    init(nodes[4], [daysOfWeek.Thursday], "11:00", "12:00");
+    init(nodes[4], [daysOfWeek.Thursday], extractDate("11:00"), extractDate("12:00"));
     expect(hasConflict(nodes)).toBe(true);
   });
 
@@ -210,8 +222,8 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
     init(
       nodes[3],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
+      extractDate("14:00"),
+      extractDate("15:00")
     );
     expect(hasConflict([nodes[3], nodes[3]])).toBe(true);
   });
@@ -220,14 +232,14 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
     init(
       nodes[0],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
+      extractDate("14:00"),
+      extractDate("15:00")
     );
     init(
       nodes[3],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "16:00",
-      "17:00"
+      extractDate("16:00"),
+      extractDate("17:00")
     );
     expect(hasConflict([nodes[3], nodes[0]])).toBe(false);
   });
@@ -236,23 +248,23 @@ describe("hasConflict coorectly indicates if a schedule has conflicts", () => {
     init(
       nodes[0],
       [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-      "14:00",
-      "15:00"
+      extractDate("14:00"),
+      extractDate("15:00")
     );
-    init(nodes[3], [daysOfWeek.Thursday, daysOfWeek.Tuesday], "16:00", "17:00");
+    init(nodes[3], [daysOfWeek.Thursday, daysOfWeek.Tuesday], extractDate("16:00"), extractDate("17:00"));
     expect(hasConflict([nodes[3], nodes[0]])).toBe(false);
   });
 
   test("hasConflict returns false overlapping boundaries", () => {
-    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Wednesday], "14:00", "15:00");
-    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], "15:00", "17:00");
+    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Wednesday], extractDate("14:00"), extractDate("15:00"));
+    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], extractDate("15:00"), extractDate("17:00"));
     expect(hasConflict([nodes[3], nodes[0]])).toBe(true);
   });
 
   test("hasConflict returns true for close butnon overlapping boundaries", () => {
-    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Wednesday], "14:00", "15:00");
-    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], "15:01", "17:00");
-    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], "17:02", "19:00");
+    init(nodes[0], [daysOfWeek.Monday, daysOfWeek.Wednesday], extractDate("14:00"), extractDate("15:00"));
+    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], extractDate("15:01"), extractDate("17:00"));
+    init(nodes[3], [daysOfWeek.Monday, daysOfWeek.Wednesday], extractDate("17:02"), extractDate("19:00"));
     expect(hasConflict([nodes[3], nodes[0]])).toBe(false);
   });
 });
@@ -273,40 +285,40 @@ describe(
 
     beforeAll(() => {
       for (let i = 0; i < length; i++) {
-        nodes.push(new ScheduleNode([], "", "", "", "", 0));
+        nodes.push(new ScheduleNode([], new Date(1970, 0, 1), new Date(1970, 0, 1), "", "", 0));
       }
       init(
         nodes[0],
         [daysOfWeek.Monday, daysOfWeek.Wednesday, daysOfWeek.Friday],
-        "14:00",
-        "15:00"
+        extractDate("14:00"),
+        extractDate("15:00")
       );
       init(
         nodes[1],
         [daysOfWeek.Tuesday, daysOfWeek.Thursday],
-        "14:00",
-        "15:00"
+        extractDate("14:00"),
+        extractDate("15:00")
       );
-      init(nodes[2], [daysOfWeek.Wednesday], "16:00", "17:00");
+      init(nodes[2], [daysOfWeek.Wednesday], extractDate("16:00"), extractDate("17:00"));
       init(
         nodes[3],
         [daysOfWeek.Monday, daysOfWeek.Thursday],
-        "07:00",
-        "09:00"
+        extractDate("07:00"),
+        extractDate("09:00")
       );
-      init(nodes[4], [daysOfWeek.Thursday], "14:00", "15:00");
+      init(nodes[4], [daysOfWeek.Thursday], extractDate("14:00"), extractDate("15:00"));
       init(
         nodes[5],
         [daysOfWeek.Thursday, daysOfWeek.Friday],
-        "07:00",
-        "08:50",
+        extractDate("07:00"),
+        extractDate("08:50"),
         true
       );
       init(
         nodes[6],
         [daysOfWeek.Thursday, daysOfWeek.Wednesday, daysOfWeek.Thursday],
-        "00:00",
-        "23:59",
+        extractDate("00:00"),
+        extractDate("23:59"),
         true
       );
     });
@@ -318,8 +330,8 @@ describe(
           [
             new ScheduleNode(
               [daysOfWeek.Monday],
-              "09:00",
-              "09:50",
+              extractDate("09:00"),
+              extractDate("09:50"),
               "CMSC",
               "100",
               0
@@ -332,8 +344,8 @@ describe(
           [
             new ScheduleNode(
               [daysOfWeek.Monday],
-              "09:00",
-              "09:50",
+              extractDate("09:00"),
+              extractDate("09:50"),
               "CMSC",
               "100",
               0
