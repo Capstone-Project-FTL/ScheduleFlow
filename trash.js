@@ -27,7 +27,7 @@ const cartesian = (...scheduleNode) =>
 // //  * @param {String} timeStr the string representation for a given time
 // //  * @returns a 24 hour format for the time
 // //  */
-// // function convertTo24Hour(timeStr) {
+// // function extractDate(timeStr) {
 // //   var hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
 // //   var minutes = Number(timeStr.match(/:(\d+)/)[1]); // get the part after the colon
 // //   var AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
@@ -40,7 +40,7 @@ const cartesian = (...scheduleNode) =>
 // //   return sHours + ":" + sMinutes;
 // // }
 
-// // console.log(convertTo24Hour("12:59 pm"));
+// // console.log(extractDate("12:59 pm"));
 
 // a = []
 // if(a.length) console.log("o")
