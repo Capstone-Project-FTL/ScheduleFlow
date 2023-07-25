@@ -1,5 +1,4 @@
-import { CloudArrowUpIcon, CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
+import { useState } from 'react';import { CloudArrowUpIcon, CursorArrowRippleIcon,ShareIcon,CalendarDaysIcon } from '@heroicons/react/20/solid';
 import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 
@@ -42,7 +41,7 @@ export default function Landingpage() {
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
-            <Link to="/home" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Course Flow</span>
               <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
             </Link>
@@ -92,7 +91,7 @@ export default function Landingpage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="#"
+                href="/home"
                 className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Get started

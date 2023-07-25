@@ -6,11 +6,13 @@ import NavBar from './Navbar';
 
 export default function HomePage() {
   return (
+    <>
+    <NavBar />
     <div className="bg-gray-800 text-white">
-      <NavBar />
+    
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          className="absolute inset-x-0  -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-85"
           aria-hidden="true"
         >
           <div
@@ -27,7 +29,7 @@ export default function HomePage() {
           <p className="mt-6 text-lg leading-8 text-gray-300">Select the classes you want to take for your current semester, add them to your cart, and hit "Generate." We'll take care of the rest for you!</p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
-              href="#"
+              href="/shoppingcart"
               className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Start Scheduling
@@ -50,5 +52,6 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
