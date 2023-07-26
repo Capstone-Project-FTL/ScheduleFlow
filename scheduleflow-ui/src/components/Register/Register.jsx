@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { CalendarDaysIcon } from '@heroicons/react/20/solid';
+import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 
 export default function Register({ setAppState }) {
   const navigate = useNavigate();
@@ -75,7 +75,9 @@ export default function Register({ setAppState }) {
     <div className="h-full bg-white">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <Link to="/"> {/* Use Link to navigate to the home page */}
+          <Link to="/">
+            {" "}
+            {/* Use Link to navigate to the home page */}
             <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600">
               Register for Course Flow
@@ -87,7 +89,10 @@ export default function Register({ setAppState }) {
           <form className="space-y-6">
             <div className="split-inputs">
               <div className="input-field">
-                <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   First Name
                 </label>
                 <div className="mt-2">
@@ -100,10 +105,17 @@ export default function Register({ setAppState }) {
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                {errors.firstName && <span className="block text-sm text-red-600 mt-1">{errors.firstName}</span>}
+                {errors.firstName && (
+                  <span className="block text-sm text-red-600 mt-1">
+                    {errors.firstName}
+                  </span>
+                )}
               </div>
               <div className="input-field">
-                <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Last Name
                 </label>
                 <div className="mt-2">
@@ -116,12 +128,19 @@ export default function Register({ setAppState }) {
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                {errors.lastName && <span className="block text-sm text-red-600 mt-1">{errors.lastName}</span>}
+                {errors.lastName && (
+                  <span className="block text-sm text-red-600 mt-1">
+                    {errors.lastName}
+                  </span>
+                )}
               </div>
             </div>
 
             <div className="input-field">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -134,11 +153,18 @@ export default function Register({ setAppState }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.email && <span className="block text-sm text-red-600 mt-1">{errors.email}</span>}
+              {errors.email && (
+                <span className="block text-sm text-red-600 mt-1">
+                  {errors.email}
+                </span>
+              )}
             </div>
 
             <div className="input-field">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Password
               </label>
               <div className="mt-2">
@@ -151,11 +177,18 @@ export default function Register({ setAppState }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.password && <span className="block text-sm text-red-600 mt-1">{errors.password}</span>}
+              {errors.password && (
+                <span className="block text-sm text-red-600 mt-1">
+                  {errors.password}
+                </span>
+              )}
             </div>
 
             <div className="input-field">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Confirm Password
               </label>
               <div className="mt-2">
@@ -168,12 +201,19 @@ export default function Register({ setAppState }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.confirmPassword && <span className="block text-sm text-red-600 mt-1">{errors.confirmPassword}</span>}
+              {errors.confirmPassword && (
+                <span className="block text-sm text-red-600 mt-1">
+                  {errors.confirmPassword}
+                </span>
+              )}
             </div>
 
             {/* New input field for school */}
             <div className="input-field">
-              <label htmlFor="school" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="school"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 School
               </label>
               <div className="mt-2">
@@ -191,16 +231,26 @@ export default function Register({ setAppState }) {
 
             {/* New input field for photo */}
             <div className="input-field">
-              <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="photo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Photo
               </label>
               <div className="mt-2">
+                <label
+                  htmlFor="photo"
+                  className="cursor-pointer bg-indigo-600 rounded-md py-1.5 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Choose file
+                </label>
                 <input
                   type="file"
+                  id="photo"
                   name="photo"
                   accept="image/*"
                   onChange={handleOnInputChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="sr-only"
                 />
               </div>
               {/* Add error handling for photo if needed */}
@@ -219,8 +269,11 @@ export default function Register({ setAppState }) {
 
           <div className="footer">
             <p className="mt-10 text-center text-sm text-gray-500">
-              Already have an account?{' '}
-              <Link to="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
                 Login here
               </Link>
             </p>
