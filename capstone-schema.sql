@@ -14,9 +14,9 @@ CREATE TABLE sections (
   course_code       VARCHAR(20) NOT NULL,
   instructor        VARCHAR(100),
   term              VARCHAR(50),
-  days_of_week      VARCHAR(50),
-  start_time        TIME,
-  end_time          TIME,
+  section_days      VARCHAR(50),
+  section_start_time        VARCHAR(100),
+  section_end_time          VARCHAR(100),
   FOREIGN KEY (course_prefix, course_code) REFERENCES courses (course_prefix, course_code),
   CONSTRAINT section_key PRIMARY KEY (course_prefix, course_code, section_id)
 );
@@ -29,9 +29,9 @@ CREATE TABLE labs (
   lab_name          VARCHAR(50),
   lab_instructor    VARCHAR(100),
   term              VARCHAR(50),
-  days_of_week      VARCHAR(50),
-  start_time        TIME,
-  end_time          TIME,
+  lab_days      VARCHAR(50),
+  lab_start_time        VARCHAR(100),
+  lab_end_time          VARCHAR(100),
   FOREIGN KEY (course_prefix, course_code, section_id) REFERENCES sections (course_prefix, course_code, section_id)
 );
 -- CREATE TABLE users (
