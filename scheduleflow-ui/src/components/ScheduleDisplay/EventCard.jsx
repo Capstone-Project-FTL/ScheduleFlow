@@ -3,7 +3,7 @@
 // Pixel offset: 1px based on the dividers thickness
 export default function EventCard({ start, end }) {
   const gridStart = new Date();
-  gridStart.setHours(6, 30, 0);
+  gridStart.setHours(5, 45, 0);
   const getBlocksFromTop = (start) => {
     const startSec =
       start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds();
@@ -11,7 +11,7 @@ export default function EventCard({ start, end }) {
       gridStart.getHours() * 3600 +
       gridStart.getMinutes() * 60 +
       gridStart.getSeconds();
-    return Math.abs(gridStartSec - startSec) / (60 * 15);
+    return Math.abs(gridStartSec - startSec) / (60 * 15) + 1; // 2 cuz of the length of the header
   };
 
   const getHeight = (start, end) => {

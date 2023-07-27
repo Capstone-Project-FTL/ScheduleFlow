@@ -464,7 +464,7 @@ describe("generateSubSchedules works correctly", () => {
   beforeAll(() => {
     bio = {
       course_prefix: "BIOL",
-      course_id: "721",
+      course_code: "721",
       title: "Mathematical Population Biology",
       credits: "3",
       sections: [
@@ -481,7 +481,7 @@ describe("generateSubSchedules works correctly", () => {
 
     compsci = {
       course_prefix: "CMSC",
-      course_id: "106",
+      course_code: "106",
       title: "Introduction to C Programming",
       credits: "4",
       sections: [
@@ -506,7 +506,7 @@ describe("generateSubSchedules works correctly", () => {
 
     comm = {
       course_prefix: "COMM",
-      course_id: "107B",
+      course_code: "107B",
       title: "Oral Communication: Principles and Practices",
       credits: "3",
       sections: [
@@ -531,7 +531,7 @@ describe("generateSubSchedules works correctly", () => {
 
     data = {
       course_prefix: "DATA",
-      course_id: "200",
+      course_code: "200",
       title: "Knowledge in Society: Science, Data and Ethics",
       credits: "3",
       sections: [
@@ -581,7 +581,7 @@ describe("generateSchedules generates valid schedules", () => {
     test("generateSchedules generates valid schedules for a single course with multiple sections: no labs", () => {
       const comm = {
         course_prefix: "COMM",
-        course_id: "107B",
+        course_code: "107B",
         title: "Oral Communication: Principles and Practices",
         credits: "3",
         sections: [
@@ -609,7 +609,7 @@ describe("generateSchedules generates valid schedules", () => {
     test("generateSchedules generates valid schedules for a single course with multiple sections: no labs", () => {
       const compsci = {
         course_prefix: "CMSC",
-        course_id: "106",
+        course_code: "106",
         title: "Introduction to C Programming",
         credits: "4",
         sections: [
@@ -639,7 +639,7 @@ describe("generateSchedules generates valid schedules", () => {
     test("generateSchedules remove duplicate courses: many duplicates, different courses", () => {
       const bio = {
         course_prefix: "BIOL",
-        course_id: "721",
+        course_code: "721",
         title: "Mathematical Population Biology",
         credits: "3",
         sections: [
@@ -656,7 +656,7 @@ describe("generateSchedules generates valid schedules", () => {
 
       const data = {
         course_prefix: "DATA",
-        course_id: "200",
+        course_code: "200",
         title: "Knowledge in Society: Science, Data and Ethics",
         credits: "3",
         sections: [
@@ -673,7 +673,7 @@ describe("generateSchedules generates valid schedules", () => {
 
       const comm = {
         course_prefix: "COMM",
-        course_id: "107B",
+        course_code: "107B",
         title: "Oral Communication: Principles and Practices",
         credits: "3",
         sections: [
@@ -718,7 +718,7 @@ describe("generateSchedules generates valid schedules", () => {
       // use a course that has multiple sections without time conflicts
       const compsci = {
         course_prefix: "CMSC",
-        course_id: "320",
+        course_code: "320",
         title: "Introduction to Data Science",
         credits: "3",
         sections: [
@@ -756,7 +756,7 @@ describe("generateSchedules generates valid schedules", () => {
     test("generateSchedules returns emoty array if no schedule could be formed", () => {
       const compsci1 = {
         course_prefix: "CMSC",
-        course_id: "398M",
+        course_code: "398M",
         title:
           "Special Topics in Computer Science; Introduction to Product Design with Figma",
         credits: "1",
@@ -773,7 +773,7 @@ describe("generateSchedules generates valid schedules", () => {
       };
       const compsci2 = {
         course_prefix: "CMSC",
-        course_id: "351H",
+        course_code: "351H",
         title: "Algorithms",
         credits: "3",
         sections: [
@@ -881,7 +881,7 @@ describe("generateSchedules generates valid schedules", () => {
               const course = coursesList[index].find(
                 (courses) =>
                   courses.course_prefix === node.coursePrefix &&
-                  courses.course_id === node.courseId
+                  courses.course_code === node.courseId
               );
               expect(Object.keys(course).length).toBeGreaterThan(0);
               const hasLab = course.sections[node.nodeIndex].labs.length > 0;

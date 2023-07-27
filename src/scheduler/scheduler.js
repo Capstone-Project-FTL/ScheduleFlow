@@ -137,7 +137,7 @@ function generateSubSchedules(courses, left, right) {
                 extractDate(section.section_start_time),
                 extractDate(section.section_end_time),
                 currCourse.course_prefix,
-                currCourse.course_id,
+                currCourse.course_code,
                 sectionIdx,
                 false
               ),
@@ -149,7 +149,7 @@ function generateSubSchedules(courses, left, right) {
                   extractDate(lab.lab_start_time),
                   extractDate(lab.lab_end_time),
                   currCourse.course_prefix,
-                  currCourse.course_id,
+                  currCourse.course_code,
                   labIdx,
                   true
                 )
@@ -162,7 +162,7 @@ function generateSubSchedules(courses, left, right) {
                 extractDate(section.section_start_time),
                 extractDate(section.section_end_time),
                 currCourse.course_prefix,
-                currCourse.course_id,
+                currCourse.course_code,
                 sectionIdx,
                 false
               ),
@@ -185,7 +185,7 @@ function generateSchedules(courses) {
   // remove duplicate courses O(n) time and space
   const courseSet = new Set();
   courses = courses.filter((course) => {
-    const courseUniqueId = course.course_prefix + course.course_id;
+    const courseUniqueId = course.course_prefix + course.course_code;
     if (courseSet.has(courseUniqueId)) return false;
     courseSet.add(courseUniqueId);
     return true;
@@ -205,7 +205,7 @@ getMaxScheduleSize = (courses) => {
 };
 
 
-// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_id}`))
+// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_code}`))
 // const start = performance.now()
 // const schedules = generateSchedules(courses)
 // const end = performance.now()
