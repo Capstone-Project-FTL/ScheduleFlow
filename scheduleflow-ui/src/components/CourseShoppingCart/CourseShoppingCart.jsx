@@ -1,11 +1,43 @@
 import React, { useState } from 'react';
-import NavBar from '../Navbar/Navbar';
+import NavBar from '../../../../capstone-ui/src/components/Navbar';
+import coursesTableInfoObject from './static_courses.json'
 
 export default function ShoppingCart() {
-  const [courseInputs, setCourseInputs] = useState([{ dropdown1: '', dropdown2: '' }]);
+  const [courseInputs, setCourseInputs] = useState([{ selectedPrefix: '', selectedCode: '' }]);
+
+  // mocking courses info that will be stored in local storage
+  const coursesTableInfo = coursesTableInfoObject.courses
+
+  // takes an array of objects that map to a row in the courses data table
+  // returns an output of an array of unique course prefixes
+  function getUniqueCoursePrefixes(array) {
+    const uniquePrefixes = [];
+
+    array.forEach((course) => {
+      if (!uniquePrefixes.includes(course.course_prefix)) {
+        uniquePrefixes.push(course.course_prefix);
+      }
+    });
+
+    return uniquePrefixes;
+  }
+
+  // takes an array of objects that map to a row in the courses data table and a string corresponding to course prefix 
+  // returns an output of an array consisting of all the course codes pertaining to the input course prefix
+  function getCourseCodesByPrefix(courses, coursePrefix) {
+    const courseCodes = [];
+
+    courses.forEach((course) => {
+      if (course.course_prefix === coursePrefix) {
+        courseCodes.push(course.course_code);
+      }
+    });
+
+    return courseCodes;
+  }
 
   const addCourseInput = () => {
-    setCourseInputs([...courseInputs, { dropdown1: '', dropdown2: '' }]);
+    setCourseInputs([...courseInputs, { selectedPrefix: '', selectedCode: '' }]);
   };
 
   const removeCourseInput = (index) => {
@@ -17,6 +49,15 @@ export default function ShoppingCart() {
   const handleChange = (index, field, value) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index][field] = value;
+    setCourseInputs(updatedInputs);
+  };
+
+  const uniqueCoursePrefixes = getUniqueCoursePrefixes(coursesTableInfo);
+
+  const handlePrefixChange = (index, prefix) => {
+    const updatedInputs = [...courseInputs];
+    updatedInputs[index].selectedPrefix = prefix;
+    updatedInputs[index].selectedCode = ''; // Reset the selected code
     setCourseInputs(updatedInputs);
   };
 
@@ -36,24 +77,30 @@ export default function ShoppingCart() {
             {courseInputs.map((input, index) => (
               <div key={index} className="mt-6 flex items-center">
                 <select
-                  value={input.dropdown1}
-                  onChange={(e) => handleChange(index, 'dropdown1', e.target.value)}
+                  value={input.selectedPrefix}
+                  onChange={(e) => handlePrefixChange(index, e.target.value)}
                   className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
                 >
                   {/* Dropdown 1 options */}
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="">Select Course Prefix</option>
+                  {uniqueCoursePrefixes.map((prefix) => (
+                    <option key={prefix} value={prefix}>
+                      {prefix}
+                    </option>
+                  ))}
                 </select>
                 <select
-                  value={input.dropdown2}
-                  onChange={(e) => handleChange(index, 'dropdown2', e.target.value)}
+                  value={input.selectedCode}
+                  onChange={(e) => handleChange(index, 'selectedCode', e.target.value)}
                   className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2"
                 >
                   {/* Dropdown 2 options */}
-                  <option value="optionA">Option A</option>
-                  <option value="optionB">Option B</option>
-                  <option value="optionC">Option C</option>
+                  <option value="">Select Course Code</option>
+                  {getCourseCodesByPrefix(coursesTableInfo, input.selectedPrefix).map((code) => (
+                    <option key={code} value={code}>
+                      {code}
+                    </option>
+                  ))}
                 </select>
                 <button
                   onClick={() => removeCourseInput(index)}
