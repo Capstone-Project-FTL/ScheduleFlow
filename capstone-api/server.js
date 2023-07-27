@@ -19,9 +19,12 @@ app.post("/schedules", async (req, res) => {
   try {
     const { courses } = req.body;
     const coursesArray = await fetchCoursesData(courses);
-    const schedules = generateSchedules(coursesArray);
+    const schedules = generateSchedules(coursesArray).splice(0,100);
 
-    res.json(schedules);
+    res.json(
+      {courses: coursesArray,
+        schedules:schedules
+    });
 
   } catch (err) {
     console.error(err.message);
