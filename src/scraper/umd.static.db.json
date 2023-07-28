@@ -2,7 +2,7 @@
   "courses": [
     {
       "course_prefix": "CMSC",
-      "course_id": "100",
+      "course_code": "100",
       "title": "Bits and Bytes of Computer and Information Sciences",
       "credits": "1",
       "sections": [
@@ -46,7 +46,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "106",
+      "course_code": "106",
       "title": "Introduction to C Programming",
       "credits": "4",
       "sections": [
@@ -78,7 +78,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "122",
+      "course_code": "122",
       "title": "Introduction to Computer Programming via the Web",
       "credits": "3",
       "sections": [
@@ -113,7 +113,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "125",
+      "course_code": "125",
       "title": "Introduction to Computing",
       "credits": "3",
       "sections": [
@@ -134,7 +134,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "131",
+      "course_code": "131",
       "title": "Object-Oriented Programming I",
       "credits": "4",
       "sections": [
@@ -587,7 +587,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "132",
+      "course_code": "132",
       "title": "Object-Oriented Programming II",
       "credits": "4",
       "sections": [
@@ -840,7 +840,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "133",
+      "course_code": "133",
       "title": "Object Oriented Programming I Beyond Fundamentals",
       "credits": "2",
       "sections": [
@@ -870,7 +870,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "141",
+      "course_code": "141",
       "title": "Programming with Purpose I: Data-Centric Computing",
       "credits": "4",
       "sections": [
@@ -968,7 +968,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "216",
+      "course_code": "216",
       "title": "Introduction to Computer Systems",
       "credits": "4",
       "sections": [
@@ -1322,7 +1322,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "250",
+      "course_code": "250",
       "title": "Discrete Structures",
       "credits": "4",
       "sections": [
@@ -1582,7 +1582,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "320",
+      "course_code": "320",
       "title": "Introduction to Data Science",
       "credits": "3",
       "sections": [
@@ -1616,7 +1616,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "330",
+      "course_code": "330",
       "title": "Organization of Programming Languages",
       "credits": "3",
       "sections": [
@@ -1846,7 +1846,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "335",
+      "course_code": "335",
       "title": "Web Application Development with JavaScript",
       "credits": "3",
       "sections": [
@@ -1867,7 +1867,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "351",
+      "course_code": "351",
       "title": "Algorithms",
       "credits": "3",
       "sections": [
@@ -1917,7 +1917,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "351H",
+      "course_code": "351H",
       "title": "Algorithms",
       "credits": "3",
       "sections": [
@@ -1940,7 +1940,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "388J",
+      "course_code": "388J",
       "title": "Special Topics in Computer Science; Building Secure Web Applications with Python and Flask",
       "credits": "1",
       "sections": [
@@ -1960,7 +1960,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "388Y",
+      "course_code": "388Y",
       "title": "Special Topics in Computer Science; History of Computer Science and Digital Technologies",
       "credits": "1",
       "sections": [
@@ -1980,7 +1980,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "389G",
+      "course_code": "389G",
       "title": "Special Topics in Computer Science; What to do After Landing a SWE Job",
       "credits": "1",
       "sections": [
@@ -2000,7 +2000,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "389O",
+      "course_code": "389O",
       "title": "Special Topics in Computer Science; The Coding Interview",
       "credits": "1",
       "sections": [
@@ -2068,7 +2068,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "389P",
+      "course_code": "389P",
       "title": "Special Topics in Computer Science; Mastering the PM Interview",
       "credits": "1",
       "sections": [
@@ -2088,7 +2088,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "389T",
+      "course_code": "389T",
       "title": "Special Topics in Computer Science; Introduction to Git, Github and Project Management",
       "credits": "1",
       "sections": [
@@ -2108,7 +2108,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "395",
+      "course_code": "395",
       "title": "Teaching Techniques for Computer Science",
       "credits": "1",
       "sections": [
@@ -2128,7 +2128,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "396H",
+      "course_code": "396H",
       "title": "Computer Science Honors Seminar",
       "credits": "1",
       "sections": [
@@ -2148,7 +2148,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "398E",
+      "course_code": "398E",
       "title": "Special Topics in Computer Science; Essential Data Science Skill & Techniques",
       "credits": "1",
       "sections": [
@@ -2168,7 +2168,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "398L",
+      "course_code": "398L",
       "title": "Special Topics in Computer Science; Introduction to Competitive Programming",
       "credits": "1",
       "sections": [
@@ -2188,7 +2188,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "398M",
+      "course_code": "398M",
       "title": "Special Topics in Computer Science; Introduction to Product Design with Figma",
       "credits": "1",
       "sections": [
@@ -2208,7 +2208,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "398N",
+      "course_code": "398N",
       "title": "Special Topics in Computer Science; Ethics in Computer Science",
       "credits": "1",
       "sections": [
@@ -2228,7 +2228,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "411",
+      "course_code": "411",
       "title": "Computer Systems Architecture",
       "credits": "3",
       "sections": [
@@ -2249,7 +2249,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "412",
+      "course_code": "412",
       "title": "Operating Systems",
       "credits": "4",
       "sections": [
@@ -2291,7 +2291,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "414",
+      "course_code": "414",
       "title": "Computer and Network Security",
       "credits": "3",
       "sections": [
@@ -2325,7 +2325,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "416",
+      "course_code": "416",
       "title": "Introduction to Parallel Computing",
       "credits": "3",
       "sections": [
@@ -2346,7 +2346,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "417",
+      "course_code": "417",
       "title": "Computer Networks",
       "credits": "3",
       "sections": [
@@ -2367,7 +2367,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "420",
+      "course_code": "420",
       "title": "Advanced Data Structures",
       "credits": "3",
       "sections": [
@@ -2427,7 +2427,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "421",
+      "course_code": "421",
       "title": "Introduction to Artificial Intelligence",
       "credits": "3",
       "sections": [
@@ -2461,7 +2461,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "422",
+      "course_code": "422",
       "title": "Introduction to Machine Learning",
       "credits": "3",
       "sections": [
@@ -2482,7 +2482,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "423",
+      "course_code": "423",
       "title": "Bioinformatic Algorithms, Databases, and Tools",
       "credits": "3",
       "sections": [
@@ -2503,7 +2503,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "424",
+      "course_code": "424",
       "title": "Database Design",
       "credits": "3",
       "sections": [
@@ -2524,7 +2524,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "425",
+      "course_code": "425",
       "title": "Game Programming",
       "credits": "3",
       "sections": [
@@ -2545,7 +2545,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "426",
+      "course_code": "426",
       "title": "Computer Vision",
       "credits": "3",
       "sections": [
@@ -2566,7 +2566,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "430",
+      "course_code": "430",
       "title": "Introduction to Compilers",
       "credits": "3",
       "sections": [
@@ -2600,7 +2600,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "433",
+      "course_code": "433",
       "title": "Programming Language Technologies and Paradigms",
       "credits": "3",
       "sections": [
@@ -2621,7 +2621,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "434",
+      "course_code": "434",
       "title": "Introduction to Human-Computer Interaction",
       "credits": "3",
       "sections": [
@@ -2655,7 +2655,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "435",
+      "course_code": "435",
       "title": "Software Engineering",
       "credits": "3",
       "sections": [
@@ -2676,7 +2676,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "436",
+      "course_code": "436",
       "title": "Programming Handheld Systems",
       "credits": "3",
       "sections": [
@@ -2710,7 +2710,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "451",
+      "course_code": "451",
       "title": "Design and Analysis of Computer Algorithms",
       "credits": "3",
       "sections": [
@@ -2744,7 +2744,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "454",
+      "course_code": "454",
       "title": "Algorithms for Data Science",
       "credits": "3",
       "sections": [
@@ -2765,7 +2765,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "456",
+      "course_code": "456",
       "title": "Cryptography",
       "credits": "3",
       "sections": [
@@ -2800,7 +2800,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "457",
+      "course_code": "457",
       "title": "Introduction to Quantum Computing",
       "credits": "3",
       "sections": [
@@ -2821,7 +2821,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "460",
+      "course_code": "460",
       "title": "Computational Methods",
       "credits": "3",
       "sections": [
@@ -2883,7 +2883,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "466",
+      "course_code": "466",
       "title": "Introduction to Numerical Analysis I",
       "credits": "3",
       "sections": [
@@ -2904,7 +2904,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "470",
+      "course_code": "470",
       "title": "Introduction to Natural Language Processing",
       "credits": "3",
       "sections": [
@@ -2925,7 +2925,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "473",
+      "course_code": "473",
       "title": "Capstone in Machine Learning",
       "credits": "3",
       "sections": [
@@ -2946,7 +2946,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "474",
+      "course_code": "474",
       "title": "Introduction to Computational Game Theory",
       "credits": "3",
       "sections": [
@@ -2967,7 +2967,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "475",
+      "course_code": "475",
       "title": "Combinatorics and Graph Theory",
       "credits": "3",
       "sections": [
@@ -2989,7 +2989,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "488A",
+      "course_code": "488A",
       "title": "Special Topics in Computer Science; Quantum Boot Camp",
       "credits": "1",
       "sections": [
@@ -3009,7 +3009,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "498E",
+      "course_code": "498E",
       "title": "Selected Topics in Computer Science; Robotics",
       "credits": "3",
       "sections": [
@@ -3030,7 +3030,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "614",
+      "course_code": "614",
       "title": "Computer and Network Security",
       "credits": "3",
       "sections": [
@@ -3051,7 +3051,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "631",
+      "course_code": "631",
       "title": "Program Analysis and Understanding",
       "credits": "3",
       "sections": [
@@ -3072,7 +3072,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "657",
+      "course_code": "657",
       "title": "Introduction to Quantum Information Processing",
       "credits": "3",
       "sections": [
@@ -3093,7 +3093,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "660",
+      "course_code": "660",
       "title": "Scientific Computing I",
       "credits": "3",
       "sections": [
@@ -3115,7 +3115,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "673",
+      "course_code": "673",
       "title": "Capstone in Machine Learning",
       "credits": "3",
       "sections": [
@@ -3136,7 +3136,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "714",
+      "course_code": "714",
       "title": "High Performance Computing Systems",
       "credits": "3",
       "sections": [
@@ -3157,7 +3157,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "715",
+      "course_code": "715",
       "title": "Wireless and Mobile Systems for the IoT",
       "credits": "3",
       "sections": [
@@ -3178,7 +3178,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "723",
+      "course_code": "723",
       "title": "Natural Language Processing",
       "credits": "3",
       "sections": [
@@ -3199,7 +3199,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "724",
+      "course_code": "724",
       "title": "Database Management Systems",
       "credits": "3",
       "sections": [
@@ -3220,7 +3220,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "730",
+      "course_code": "730",
       "title": "Interactive Technologies in Human-Computer Interaction",
       "credits": "3",
       "sections": [
@@ -3241,7 +3241,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "734",
+      "course_code": "734",
       "title": "Information  Visualization",
       "credits": "3",
       "sections": [
@@ -3262,7 +3262,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "740",
+      "course_code": "740",
       "title": "Advanced Computer Graphics",
       "credits": "3",
       "sections": [
@@ -3283,7 +3283,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "742",
+      "course_code": "742",
       "title": "Algorithms in Machine Learning: Guarantees and Analyses",
       "credits": "3",
       "sections": [
@@ -3304,7 +3304,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "754",
+      "course_code": "754",
       "title": "Computational Geometry",
       "credits": "3",
       "sections": [
@@ -3325,7 +3325,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "756",
+      "course_code": "756",
       "title": "Robotics",
       "credits": "3",
       "sections": [
@@ -3346,7 +3346,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "763",
+      "course_code": "763",
       "title": "Advanced Linear Numerical Analysis",
       "credits": "3",
       "sections": [
@@ -3367,7 +3367,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "801",
+      "course_code": "801",
       "title": "Department Internal Research Seminar",
       "credits": "1",
       "sections": [
@@ -3387,7 +3387,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818B",
+      "course_code": "818B",
       "title": "Advanced Topics in Computer Systems; Decision-Making for Robotics",
       "credits": "3",
       "sections": [
@@ -3408,7 +3408,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818E",
+      "course_code": "818E",
       "title": "Advanced Topics in Computer Systems; Clouds, Consistency, & Consensus",
       "credits": "3",
       "sections": [
@@ -3429,7 +3429,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818F",
+      "course_code": "818F",
       "title": "Advanced Topics in Computer Systems; Cryptography and Hostile Governments",
       "credits": "3",
       "sections": [
@@ -3450,7 +3450,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818I",
+      "course_code": "818I",
       "title": "Advanced Topics in Computer Systems; Large Language Models, Security, and Privacy",
       "credits": "3",
       "sections": [
@@ -3471,7 +3471,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818J",
+      "course_code": "818J",
       "title": "Advanced Topics in Computer Systems; Domain Specific Architecture",
       "credits": "3",
       "sections": [
@@ -3492,7 +3492,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "818Q",
+      "course_code": "818Q",
       "title": "Advanced Topics in Computer Systems; Cloud Networking and Computing",
       "credits": "3",
       "sections": [
@@ -3513,7 +3513,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "828C",
+      "course_code": "828C",
       "title": "Advanced Topics in Information Processing; Statistical Pattern Recognition",
       "credits": "3",
       "sections": [
@@ -3534,7 +3534,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "828I",
+      "course_code": "828I",
       "title": "Advanced Topics in Information Processing; Advanced Techniques in Visual Learning and Recognition",
       "credits": "3",
       "sections": [
@@ -3555,7 +3555,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "829A",
+      "course_code": "829A",
       "title": "Advanced Topics in Bioinformatics and Computational Biology; Algorithmic Evolutionary Biology",
       "credits": "3",
       "sections": [
@@ -3576,7 +3576,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "838B",
+      "course_code": "838B",
       "title": "Advanced Topics in Programming Languages; Differentiable Programming",
       "credits": "3",
       "sections": [
@@ -3597,7 +3597,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "839A",
+      "course_code": "839A",
       "title": "Advanced Topics in Human-Computer Interaction; Embodied Media Design",
       "credits": "3",
       "sections": [
@@ -3618,7 +3618,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "848F",
+      "course_code": "848F",
       "title": "Selected Topics in Information Processing; 3D Vision",
       "credits": "3",
       "sections": [
@@ -3639,7 +3639,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "848I",
+      "course_code": "848I",
       "title": "Selected Topics in Information Processing; Trustworthy Machine Learning",
       "credits": "3",
       "sections": [
@@ -3660,7 +3660,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "848Q",
+      "course_code": "848Q",
       "title": "Selected Topics in Information Processing; How and Why Artificial Intelligence Answers Questions",
       "credits": "3",
       "sections": [
@@ -3681,7 +3681,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "858J",
+      "course_code": "858J",
       "title": "Advanced Topics in Theory of Computing; Network Design Approximation Algorithms",
       "credits": "3",
       "sections": [
@@ -3702,7 +3702,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "858V",
+      "course_code": "858V",
       "title": "Advanced Topics in Theory of Computing; Quantum Control, Metrology, and Error Mitigation for QuantumAlgorithm Deployment",
       "credits": "3",
       "sections": [
@@ -3723,7 +3723,7 @@
     },
     {
       "course_prefix": "CMSC",
-      "course_id": "878B",
+      "course_code": "878B",
       "title": "Advanced Topics in Numerical Methods; Fast Multipole Methods: Fundamentals and Applications",
       "credits": "3",
       "sections": [
@@ -3744,7 +3744,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "100",
+      "course_code": "100",
       "title": "Elementary Statistics and Probability",
       "credits": "3",
       "sections": [
@@ -3995,7 +3995,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "200",
+      "course_code": "200",
       "title": "Knowledge in Society: Science, Data and Ethics",
       "credits": "3",
       "sections": [
@@ -4017,7 +4017,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "250",
+      "course_code": "250",
       "title": "Discrete Mathematics",
       "credits": "4",
       "sections": [
@@ -4049,7 +4049,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "320",
+      "course_code": "320",
       "title": "Introduction to Data Science",
       "credits": "3",
       "sections": [
@@ -4083,7 +4083,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "350",
+      "course_code": "350",
       "title": "Data Visualization and Presentation",
       "credits": "3",
       "sections": [
@@ -4104,7 +4104,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "400",
+      "course_code": "400",
       "title": "Applied Probability and Statistics I",
       "credits": "3",
       "sections": [
@@ -4431,7 +4431,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "601",
+      "course_code": "601",
       "title": "Probability and Statistics",
       "credits": "3",
       "sections": [
@@ -4475,7 +4475,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "602",
+      "course_code": "602",
       "title": "Principles of Data Science",
       "credits": "3",
       "sections": [
@@ -4509,7 +4509,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "603",
+      "course_code": "603",
       "title": "Principles of Machine Learning",
       "credits": "3",
       "sections": [
@@ -4551,7 +4551,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "607",
+      "course_code": "607",
       "title": "Communication in Data Science and Analytics",
       "credits": "3",
       "sections": [
@@ -4571,7 +4571,7 @@
     },
     {
       "course_prefix": "DATA",
-      "course_id": "650",
+      "course_code": "650",
       "title": "Cloud Computing",
       "credits": "3",
       "sections": [
@@ -4591,7 +4591,7 @@
     },
     {
       "course_prefix": "HLSC",
-      "course_id": "100",
+      "course_code": "100",
       "title": "Students in the University: Integrated Life Sciences",
       "credits": "1",
       "sections": [
@@ -4647,7 +4647,7 @@
     },
     {
       "course_prefix": "HLSC",
-      "course_id": "280",
+      "course_code": "280",
       "title": "Integrative and Quantitative Concepts in Biology",
       "credits": "3",
       "sections": [
@@ -4709,7 +4709,7 @@
     },
     {
       "course_prefix": "HLSC",
-      "course_id": "374",
+      "course_code": "374",
       "title": "Mathematical Modeling in Biology",
       "credits": "4",
       "sections": [
@@ -4740,7 +4740,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "107",
+      "course_code": "107",
       "title": "Oral Communication: Principles and Practices",
       "credits": "3",
       "sections": [
@@ -6071,7 +6071,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "107B",
+      "course_code": "107B",
       "title": "Oral Communication: Principles and Practices",
       "credits": "3",
       "sections": [
@@ -6105,7 +6105,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "107C",
+      "course_code": "107C",
       "title": "Oral Communication: Principles and Practices",
       "credits": "3",
       "sections": [
@@ -6126,7 +6126,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "200",
+      "course_code": "200",
       "title": "Critical Thinking and Speaking",
       "credits": "3",
       "sections": [
@@ -6186,7 +6186,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "201",
+      "course_code": "201",
       "title": "Introduction to Public Relations",
       "credits": "3",
       "sections": [
@@ -6220,7 +6220,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "230",
+      "course_code": "230",
       "title": "Argumentation and Debate",
       "credits": "3",
       "sections": [
@@ -6254,7 +6254,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "250",
+      "course_code": "250",
       "title": "Introduction to Communication Inquiry",
       "credits": "3",
       "sections": [
@@ -6330,7 +6330,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "301",
+      "course_code": "301",
       "title": "Rhetorical Theories",
       "credits": "3",
       "sections": [
@@ -6351,7 +6351,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "302",
+      "course_code": "302",
       "title": "Communication Science Theories",
       "credits": "3",
       "sections": [
@@ -6372,7 +6372,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "303",
+      "course_code": "303",
       "title": "Media Theory",
       "credits": "3",
       "sections": [
@@ -6406,7 +6406,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "304",
+      "course_code": "304",
       "title": "Communication Research Literacy",
       "credits": "3",
       "sections": [
@@ -6440,7 +6440,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "305",
+      "course_code": "305",
       "title": "Qualitative Communication Research Methods",
       "credits": "3",
       "sections": [
@@ -6461,7 +6461,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "306",
+      "course_code": "306",
       "title": "Rhetorical Methods in Communication",
       "credits": "3",
       "sections": [
@@ -6482,7 +6482,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "307",
+      "course_code": "307",
       "title": "Quantitative Methods in Communication",
       "credits": "3",
       "sections": [
@@ -6516,7 +6516,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "311",
+      "course_code": "311",
       "title": "Peer Consulting in Oral Communication",
       "credits": "3",
       "sections": [
@@ -6537,7 +6537,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "324",
+      "course_code": "324",
       "title": "Communication and Gender",
       "credits": "3",
       "sections": [
@@ -6610,7 +6610,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "330",
+      "course_code": "330",
       "title": "Argumentation and Public Policy",
       "credits": "3",
       "sections": [
@@ -6657,7 +6657,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "331",
+      "course_code": "331",
       "title": "News Writing and Reporting for Public Relations",
       "credits": "3",
       "sections": [
@@ -6691,7 +6691,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "351",
+      "course_code": "351",
       "title": "Public Relations Techniques",
       "credits": "3",
       "sections": [
@@ -6725,7 +6725,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "353",
+      "course_code": "353",
       "title": "New Media Writing for Public Relations",
       "credits": "3",
       "sections": [
@@ -6759,7 +6759,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "360",
+      "course_code": "360",
       "title": "The Rhetoric of Black America",
       "credits": "3",
       "sections": [
@@ -6793,7 +6793,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "370",
+      "course_code": "370",
       "title": "Mediated Communication",
       "credits": "3",
       "sections": [
@@ -6840,7 +6840,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "370H",
+      "course_code": "370H",
       "title": "Mediated Communication",
       "credits": "3",
       "sections": [
@@ -6861,7 +6861,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "371",
+      "course_code": "371",
       "title": "Communication and Digital Media",
       "credits": "3",
       "sections": [
@@ -6882,7 +6882,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "372",
+      "course_code": "372",
       "title": "Communication, Meaning, and Digital Media",
       "credits": "3",
       "sections": [
@@ -6902,7 +6902,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "373",
+      "course_code": "373",
       "title": "Communication and Digital Visual Narrative",
       "credits": "3",
       "sections": [
@@ -6922,7 +6922,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "375",
+      "course_code": "375",
       "title": "Documentary Theory and Practice",
       "credits": "3",
       "sections": [
@@ -6942,7 +6942,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "382",
+      "course_code": "382",
       "title": "Essentials of Intercultural Communication",
       "credits": "3",
       "sections": [
@@ -7002,7 +7002,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398E",
+      "course_code": "398E",
       "title": "Selected Topics in Communication; Health Communication",
       "credits": "3",
       "sections": [
@@ -7023,7 +7023,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398N",
+      "course_code": "398N",
       "title": "Selected Topics in Communication; Communication and Digital Imaging",
       "credits": "3",
       "sections": [
@@ -7044,7 +7044,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398O",
+      "course_code": "398O",
       "title": "Selected Topics in Communication; Environmental Communication",
       "credits": "3",
       "sections": [
@@ -7065,7 +7065,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398Q",
+      "course_code": "398Q",
       "title": "Selected Topics in Communication; Social Media Analytics",
       "credits": "3",
       "sections": [
@@ -7085,7 +7085,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398T",
+      "course_code": "398T",
       "title": "Selected Topics in Communication; Digital Culture and Civic Life",
       "credits": "3",
       "sections": [
@@ -7106,7 +7106,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "398U",
+      "course_code": "398U",
       "title": "Selected Topics in Communication; Peer Mentoring in Oral Communication",
       "credits": "3",
       "sections": [
@@ -7127,7 +7127,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "424",
+      "course_code": "424",
       "title": "Communication in Complex Organizations",
       "credits": "3",
       "sections": [
@@ -7149,7 +7149,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "425",
+      "course_code": "425",
       "title": "Negotiation and Conflict Management",
       "credits": "3",
       "sections": [
@@ -7170,7 +7170,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "426",
+      "course_code": "426",
       "title": "Conflict Management",
       "credits": "3",
       "sections": [
@@ -7191,7 +7191,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "427",
+      "course_code": "427",
       "title": "Crisis Communication",
       "credits": "3",
       "sections": [
@@ -7212,7 +7212,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "435",
+      "course_code": "435",
       "title": "Theories of Interpersonal Communication",
       "credits": "3",
       "sections": [
@@ -7246,7 +7246,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "449B",
+      "course_code": "449B",
       "title": "Special Topics in Digital Communication; Communication and Social Media",
       "credits": "3",
       "sections": [
@@ -7280,7 +7280,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "449E",
+      "course_code": "449E",
       "title": "Special Topics in Digital Communication; Communication, Sport, and Media",
       "credits": "3",
       "sections": [
@@ -7301,7 +7301,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "449F",
+      "course_code": "449F",
       "title": "Special Topics in Digital Communication; Media Campaign Message Design",
       "credits": "3",
       "sections": [
@@ -7322,7 +7322,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "449L",
+      "course_code": "449L",
       "title": "Special Topics in Digital Communication; Media Literacy",
       "credits": "3",
       "sections": [
@@ -7343,7 +7343,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "449P",
+      "course_code": "449P",
       "title": "Special Topics in Digital Communication; Black Podcasts",
       "credits": "3",
       "sections": [
@@ -7364,7 +7364,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "456",
+      "course_code": "456",
       "title": "Freedom of Speech & the First Amendment",
       "credits": "3",
       "sections": [
@@ -7385,7 +7385,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "459A",
+      "course_code": "459A",
       "title": "Special Topics in Science Communication; Science Communication",
       "credits": "3",
       "sections": [
@@ -7406,7 +7406,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "462",
+      "course_code": "462",
       "title": "Visual Communication",
       "credits": "3",
       "sections": [
@@ -7427,7 +7427,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "475",
+      "course_code": "475",
       "title": "Persuasion",
       "credits": "3",
       "sections": [
@@ -7448,7 +7448,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "476",
+      "course_code": "476",
       "title": "Language, Communication, and Action",
       "credits": "3",
       "sections": [
@@ -7482,7 +7482,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "483",
+      "course_code": "483",
       "title": "Senior Seminar in Public Relations",
       "credits": "3",
       "sections": [
@@ -7503,7 +7503,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "498I",
+      "course_code": "498I",
       "title": "Seminar; New Media & Health Communication",
       "credits": "3",
       "sections": [
@@ -7524,7 +7524,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "498J",
+      "course_code": "498J",
       "title": "Seminar; Strategic Communication",
       "credits": "3",
       "sections": [
@@ -7558,7 +7558,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "631",
+      "course_code": "631",
       "title": "Seminar in Public Relations Publics",
       "credits": "3",
       "sections": [
@@ -7578,7 +7578,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "686",
+      "course_code": "686",
       "title": "Teaching Communication",
       "credits": "1",
       "sections": [
@@ -7598,7 +7598,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "698A",
+      "course_code": "698A",
       "title": "Special Problems in Communication; Science Communication",
       "credits": "3",
       "sections": [
@@ -7618,7 +7618,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "698M",
+      "course_code": "698M",
       "title": "Special Problems in Communication; Colloquium in Digital Studies",
       "credits": "1",
       "sections": [
@@ -7638,7 +7638,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "700",
+      "course_code": "700",
       "title": "Introduction to Graduate Study in Communication",
       "credits": "3",
       "sections": [
@@ -7658,7 +7658,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "712",
+      "course_code": "712",
       "title": "Advanced Historical/Critical Methods in Communication Research",
       "credits": "3",
       "sections": [
@@ -7678,7 +7678,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "714",
+      "course_code": "714",
       "title": "Introduction to Qualitative Methods in Communication Research",
       "credits": "3",
       "sections": [
@@ -7698,7 +7698,7 @@
     },
     {
       "course_prefix": "COMM",
-      "course_id": "748",
+      "course_code": "748",
       "title": "The Rhetoric of the Presidency",
       "credits": "3",
       "sections": [
@@ -7718,7 +7718,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "101",
+      "course_code": "101",
       "title": "Intensive Elementary Chinese I",
       "credits": "6",
       "sections": [
@@ -7790,7 +7790,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "105",
+      "course_code": "105",
       "title": "Elementary Chinese - Accelerated Track",
       "credits": "3",
       "sections": [
@@ -7812,7 +7812,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "201",
+      "course_code": "201",
       "title": "Intermediate Spoken Chinese I",
       "credits": "3",
       "sections": [
@@ -7848,7 +7848,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "202",
+      "course_code": "202",
       "title": "Intermediate Written Chinese I",
       "credits": "3",
       "sections": [
@@ -7869,7 +7869,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "301",
+      "course_code": "301",
       "title": "Advanced Chinese I",
       "credits": "3",
       "sections": [
@@ -7905,7 +7905,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "305",
+      "course_code": "305",
       "title": "Life in China through TV Plays I",
       "credits": "3",
       "sections": [
@@ -7927,7 +7927,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "315",
+      "course_code": "315",
       "title": "Modern Chinese Literature in Translation",
       "credits": "3",
       "sections": [
@@ -7948,7 +7948,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "331",
+      "course_code": "331",
       "title": "Chinese Calligraphy: Theory and Practice",
       "credits": "3",
       "sections": [
@@ -7968,7 +7968,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "401",
+      "course_code": "401",
       "title": "Readings in Modern Chinese I",
       "credits": "3",
       "sections": [
@@ -7990,7 +7990,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "411",
+      "course_code": "411",
       "title": "Business Chinese I",
       "credits": "3",
       "sections": [
@@ -8011,7 +8011,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "418T",
+      "course_code": "418T",
       "title": "Special Topics in Contemporary Chinese Fiction and Film; Where Truth Lies: Chinese Cinema between Fact and Fiction",
       "credits": "3",
       "sections": [
@@ -8032,7 +8032,7 @@
     },
     {
       "course_prefix": "CHIN",
-      "course_id": "441",
+      "course_code": "441",
       "title": "Traditional Chinese Fiction",
       "credits": "3",
       "sections": [
@@ -8053,7 +8053,7 @@
     },
     {
       "course_prefix": "BIOM",
-      "course_id": "301",
+      "course_code": "301",
       "title": "Introduction to Biometrics",
       "credits": "3",
       "sections": [
@@ -8138,7 +8138,7 @@
     },
     {
       "course_prefix": "BIOM",
-      "course_id": "601",
+      "course_code": "601",
       "title": "Biostatistics I",
       "credits": "4",
       "sections": [
@@ -8191,7 +8191,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "608K",
+      "course_code": "608K",
       "title": "Biology Seminar; Biological Sciences Teaching and Learning in Higher Education",
       "credits": "2",
       "sections": [
@@ -8211,7 +8211,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "667",
+      "course_code": "667",
       "title": "Mathematical Biology",
       "credits": "4",
       "sections": [
@@ -8242,7 +8242,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "704",
+      "course_code": "704",
       "title": "Cell Biology from a Biophysical Perspective",
       "credits": "3",
       "sections": [
@@ -8263,7 +8263,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "708A",
+      "course_code": "708A",
       "title": "Advanced Topics in Biology; Evolution of Aging",
       "credits": "1",
       "sections": [
@@ -8284,7 +8284,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "708B",
+      "course_code": "708B",
       "title": "Advanced Topics in Biology; Animal Behavior",
       "credits": "3",
       "sections": [
@@ -8318,7 +8318,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "708M",
+      "course_code": "708M",
       "title": "Advanced Topics in Biology; Mammalian Physiology",
       "credits": "3",
       "sections": [
@@ -8340,7 +8340,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "709C",
+      "course_code": "709C",
       "title": "Selected Advanced Topics in Biology; Population and Evolutionary Genetics",
       "credits": "3",
       "sections": [
@@ -8371,7 +8371,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "709W",
+      "course_code": "709W",
       "title": "Selected Advanced Topics in Biology; Molecular Neuroethology",
       "credits": "3",
       "sections": [
@@ -8392,7 +8392,7 @@
     },
     {
       "course_prefix": "BIOL",
-      "course_id": "721",
+      "course_code": "721",
       "title": "Mathematical Population Biology",
       "credits": "3",
       "sections": [

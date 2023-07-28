@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mtucourses/rate-my-professors": "^2.2.1",
     "colors": "^1.4.0"
   },
   "devDependencies": {

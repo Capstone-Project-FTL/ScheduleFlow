@@ -48,5 +48,9 @@ const cartesian = (...scheduleNode) =>
 
 
 
-console.log(// console.log(_.isEqual("12:59", "12:00"))
-cartesian([[1]]))
+// console.log(// console.log(_.isEqual("12:59", "12:00"))
+// cartesian([[1]]))
+
+let a = {name: "jiexy"}
+let b = {school: "Umass"}
+console.log("N/A" < 0)
