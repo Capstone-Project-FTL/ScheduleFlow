@@ -12,7 +12,7 @@ export default function ScheduleContentGrid() {
   ]}
   const numOfIterations = Math.ceil((end - start) / (3600 * 1000 * 0.25)); // 0.5 means 30 minutes per divider
   return (
-    <div className="schedule-content-grid relative grid lg:grid-cols-6 grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black w-full ">
+    <div className="schedule-content-grid relative grid auto-cols-fr lg:grid-cols-6 grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black min-w-full w-max ">
       <div
         className={`time-span sticky left-0 grid divide-y-2 divide-gray-300 text-base bg-indigo-100 z-40`}
       >
@@ -34,7 +34,7 @@ export default function ScheduleContentGrid() {
       </div>
       {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, idx) => (
         <div
-          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base `}
+          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-3 sm:col-span-2 md:col-span-1`}
           id={`${idx}`}
         >
           <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-start z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">

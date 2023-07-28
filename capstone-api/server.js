@@ -3,7 +3,8 @@ const app = express();
 const cors = require("cors");
 const pool = require("./database");
 const fetchCoursesData = require("./utils/fetchCoursesData");
-const { generateSchedules } = require(".././src/scheduler/scheduler");
+const { generateScheduleFlows } = require(".././src/scheduler/scheduler");
+const morgan = require("morgan")
 
 const PORT = 3001;
 
@@ -11,8 +12,7 @@ const PORT = 3001;
 //middleware
 app.use(cors());
 app.use(express.json());
-
-
+app.use(morgan("tiny"))
 //ROUTES
 
 //Create a Schedule
@@ -20,7 +20,7 @@ app.post("/schedules", async (req, res) => {
   try {
     const { courses } = req.body;
     const coursesArray = await fetchCoursesData(courses);
-    const schedules = generateSchedules(coursesArray);
+    const schedules = await generateScheduleFlows(coursesArray);
 
     //the below code console.logs the entirety of the generated schedules
     // console.dir(schedules, { depth: null });
