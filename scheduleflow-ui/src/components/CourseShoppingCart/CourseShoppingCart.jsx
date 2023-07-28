@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../../../../capstone-ui/src/components/Navbar';
-import coursesTableInfoObject from './static_courses.json'
+import coursesTableInfoObject from './static_courses.json';
+import axios from 'axios'
+
 
 export default function ShoppingCart() {
-  const [courseInputs, setCourseInputs] = useState([{ selectedPrefix: '', selectedCode: '' }]);
+  const [courseInputs, setCourseInputs] = useState([{ course_prefix: '', course_code: '' }]);
+  const [showError, setShowError] = useState(false);
 
   // mocking courses info that will be stored in local storage
-  const coursesTableInfo = coursesTableInfoObject.courses
+  const coursesTableInfo = coursesTableInfoObject.courses;
 
   // takes an array of objects that map to a row in the courses data table
   // returns an output of an array of unique course prefixes
@@ -22,7 +26,7 @@ export default function ShoppingCart() {
     return uniquePrefixes;
   }
 
-  // takes an array of objects that map to a row in the courses data table and a string corresponding to course prefix 
+  // takes an array of objects that map to a row in the courses data table and a string corresponding to course prefix
   // returns an output of an array consisting of all the course codes pertaining to the input course prefix
   function getCourseCodesByPrefix(courses, coursePrefix) {
     const courseCodes = [];
@@ -37,7 +41,7 @@ export default function ShoppingCart() {
   }
 
   const addCourseInput = () => {
-    setCourseInputs([...courseInputs, { selectedPrefix: '', selectedCode: '' }]);
+    setCourseInputs([...courseInputs, { course_prefix: '', course_code: '' }]);
   };
 
   const removeCourseInput = (index) => {
@@ -56,10 +60,85 @@ export default function ShoppingCart() {
 
   const handlePrefixChange = (index, prefix) => {
     const updatedInputs = [...courseInputs];
-    updatedInputs[index].selectedPrefix = prefix;
-    updatedInputs[index].selectedCode = ''; // Reset the selected code
+    updatedInputs[index].course_prefix = prefix;
+    updatedInputs[index].course_code = ''; // Reset the selected code
     setCourseInputs(updatedInputs);
   };
+
+  // Use the useNavigate hook to get the navigate function
+  const navigate = useNavigate();
+
+  const handleGenerate = async () => {
+    // Check if all course inputs have both fields filled out
+    const hasIncompleteCourses = courseInputs.some(
+      (input) => !input.course_prefix || !input.course_code
+    );
+
+    if (hasIncompleteCourses) {
+      // Display error message if any course input is incomplete
+      setShowError(true);
+      return;
+    }
+
+    // Hide the error message if all courses are complete
+    setShowError(false);
+
+    // Your logic for generating the schedule goes here
+    // For now, we will just store the course inputs in local storage
+    localStorage.setItem('course_keys', JSON.stringify(courseInputs));
+    const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys')) };
+    console.log(requestBody);
+
+    try {
+      const response = await axios.post('http://localhost:3001/schedules', requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // console.log('Response data:', response.data);
+      localStorage.setItem('courses', JSON.stringify(response.data.courses))
+      localStorage.setItem('schedules', JSON.stringify(response.data.schedules))
+
+      // Navigate to the schedule page using the navigate function
+      navigate('/schedule');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+//     const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys'))}
+//     console.log(requestBody)
+//     console.dir(requestBody, { depth: null });
+
+//     // const requestInfo = await axios.post('http://localhost:3001/schedules', requestBody)
+    
+//     const requestInfo = await fetch('http://localhost:3001/schedules', {
+//       method: 'POST',
+//       headers: {'Content-Type':'application/json'},
+//       body: JSON.stringify(requestBody)
+//     })
+//     .then((response) => {
+//       // Check if the response status is successful (2xx)
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+//       // Parse the JSON data from the response body
+//       return response.json();
+//     })
+//     .then((data) => {
+//       // Here, "data" is the parsed JSON data from the response
+//       console.log('Response data:', data);
+//       // Use the data as needed
+//     })
+// .catch((error) => {
+//       // Handle any errors that occurred during the fetch or parsing
+//       console.error('Error:', error);
+//     });
+
+
+//     // Navigate to the schedule page using the navigate function
+//     navigate('/schedule');
+//   };
 
   return (
     <>
@@ -77,7 +156,7 @@ export default function ShoppingCart() {
             {courseInputs.map((input, index) => (
               <div key={index} className="mt-6 flex items-center">
                 <select
-                  value={input.selectedPrefix}
+                  value={input.course_prefix}
                   onChange={(e) => handlePrefixChange(index, e.target.value)}
                   className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
                 >
@@ -90,13 +169,13 @@ export default function ShoppingCart() {
                   ))}
                 </select>
                 <select
-                  value={input.selectedCode}
-                  onChange={(e) => handleChange(index, 'selectedCode', e.target.value)}
+                  value={input.course_code}
+                  onChange={(e) => handleChange(index, 'course_code', e.target.value)}
                   className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2"
                 >
                   {/* Dropdown 2 options */}
                   <option value="">Select Course Code</option>
-                  {getCourseCodesByPrefix(coursesTableInfo, input.selectedPrefix).map((code) => (
+                  {getCourseCodesByPrefix(coursesTableInfo, input.course_prefix).map((code) => (
                     <option key={code} value={code}>
                       {code}
                     </option>
@@ -110,6 +189,7 @@ export default function ShoppingCart() {
                 </button>
               </div>
             ))}
+            {showError && <p className="text-red-500">Please complete all your courses or remove any incomplete courses.</p>}
             <button
               onClick={addCourseInput}
               className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
@@ -118,9 +198,7 @@ export default function ShoppingCart() {
             </button>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
-                onClick={() => {
-                  // Handle the logic for generating the schedule based on the inputs
-                }}
+                onClick={handleGenerate}
                 className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
               >
                 Generate
