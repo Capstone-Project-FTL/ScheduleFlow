@@ -251,6 +251,11 @@ function rankingFunction(scheduleFlowA, scheduleFlowB){
  */
 async function generateScheduleFlows(courses){
   const schedules = generateSchedules(courses)
+  for(let schedule of schedules){
+    for(let node of schedule){
+      node.days = [...node.days]
+    }
+  }
   const professors = await getProfessors(
     "University of Maryland",
     getAllProfessorsName(schedules)
