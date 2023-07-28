@@ -1,6 +1,15 @@
+const { getProfessors } = require("./utilities/rmp");
+
 /**
  * @typedef {ScheduleNode[]} schedule
+ * @typedef {Object} scheduleFlow
+ * @property {schedule} schedule a conflict free schedule
+ * @property {number|null} scheduleRating the rating for the schedule 
+    [gotten from the average of all professors in the schedule]
  */
+
+// for every date method, use the UTC version even at the front end
+// use the UTC to parse into date
 
 const allCourses = require("../scraper/umd.static.db.json").courses;
 const ScheduleNode = require("./scheduleNode");
@@ -9,11 +18,11 @@ require("colors");
 
 // for demo purposes
 const courses = [
-  // allCourses[4],
-  allCourses[90],
-  // allCourses[55],
-  allCourses[150],
-  allCourses[186],
+  allCourses[4],
+  allCourses[95],
+  // allCourses[132],
+  // allCourses[150],
+  // allCourses[186],
 ];
 
 /**
@@ -39,16 +48,16 @@ const cartesianProduct = (...scheduleNodes) =>
 
 /**
  * @param {string} timeStr the string representation for a given time
- * @returns {Date} a 24 hour date object
+ * @returns {Date} a 24 hour UTC date object
  * without the modifier, extractDate attempts to parse the timeStr
  */
 function extractDate(timeStr) {
-  var hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
-  var minutes = Number(timeStr.match(/:(\d+)/)[1]); // get the part after the colon
-  var AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
+  let hours = Number(timeStr.match(/^(\d+)/)[1]); // get the hour part
+  let minutes = Number(timeStr.match(/:(\d+)/)[1]); // get the part after the colon
+  let AMPM = timeStr.match(/:(\d+)\s*(.*)$/)[2]; // get the modifier (am or pm)
   if (AMPM.toLowerCase() == "pm" && hours < 12) hours = hours + 12;
   if (AMPM.toLowerCase() == "am" && hours == 12) hours = hours - 12;
-  return new Date(1970, 0, 1, hours, minutes, 0, 0 )
+  return new Date(Date.UTC(70, 0, 1, hours, minutes, 0, 0));
 }
 
 /**
@@ -139,7 +148,11 @@ function generateSubSchedules(courses, left, right) {
                 currCourse.course_prefix,
                 currCourse.course_code,
                 sectionIdx,
-                false
+                false,
+                section.section_instructor.map((instructor) => ({
+                  name: instructor,
+                  rating: null,
+                }))
               ),
             ],
             section.labs.map(
@@ -164,7 +177,13 @@ function generateSubSchedules(courses, left, right) {
                 currCourse.course_prefix,
                 currCourse.course_code,
                 sectionIdx,
-                false
+                false,
+                // from the database, the instructors are stored as their string names
+                // change that to the instructor type
+                section.section_instructor.map((instructor) => ({
+                  name: instructor,
+                  rating: null,
+                }))
               ),
             ],
           ])
@@ -176,6 +195,22 @@ function generateSubSchedules(courses, left, right) {
   return merge(subScheduleA, subScheduleB);
 }
 
+/**
+ *
+ * @param {schedule[]} schedules
+ * @returns {Set<string>} a set of all professors accumulated from all the schedule
+ */
+function getAllProfessorsName(schedules) {
+  const professors = new Set();
+  schedules.forEach((schedule) => {
+    schedule.forEach((node) => {
+      node.instructors.forEach((instructor) => {
+        professors.add(instructor.name);
+      });
+    });
+  });
+  return professors;
+}
 /**
  * finds all the possible schedules without conflict
  * @param {allCourses} courses - an array of courses to be scheduled
@@ -193,7 +228,65 @@ function generateSchedules(courses) {
   return generateSubSchedules(courses, 0, courses.length - 1);
 }
 
-getMaxScheduleSize = (courses) => {
+/**
+ * 
+ * @param {scheduleFlow} scheduleFlowA 
+ * @param {scheduleFlow} scheduleFlowB 
+ */
+function rankingFunction(scheduleFlowA, scheduleFlowB){
+  let ratingOfA = scheduleFlowA.scheduleRating
+  let ratingOfB = scheduleFlowB.scheduleRating
+  // all ratings with N/A should be handled last
+  if(ratingOfA === "N/A") ratingOfA = -1
+  if(ratingOfB === "N/A") ratingOfB = -1
+  if(ratingOfA < ratingOfB) return 1
+  if(ratingOfA > ratingOfB) return -1
+  return 0
+}
+
+/**
+ * 
+ * @param {courses} courses
+ * @returns {scheduleFlow[]} an array of schedule flows sorted based on their rank
+ */
+async function generateScheduleFlows(courses){
+  const schedules = generateSchedules(courses)
+  const professors = await getProfessors(
+    "University of Maryland",
+    getAllProfessorsName(schedules)
+  );
+  const professorRatingMap = {} // for fast lookup
+  for(let professor of professors){
+    professorRatingMap[professor.name] = professor.rating
+  }
+
+  const scheduleFlows = [] // store all the conflict free schedules
+  for(let schedule of schedules){
+    const currentScheduleFlow = {schedule: schedule}
+    let totalRating = 0
+    let count = 0
+    for(let node of schedule){
+      for(let instructor of node.instructors){
+        instructor.rating = professorRatingMap[instructor.name]
+        if(instructor.rating){
+          totalRating += instructor.rating
+          count += 1
+        }
+      }
+    }
+    currentScheduleFlow.scheduleRating =  (count === 0) ? "N/A" : (totalRating/count).toFixed(2)
+    scheduleFlows.push(currentScheduleFlow)
+  }
+  const finalScheduleFlows = scheduleFlows.sort(rankingFunction).slice(0, 100)
+  let i = 100
+  while(i < finalScheduleFlows.length){
+    if(scheduleFlows[i] === finalScheduleFlows[i - 1]) finalScheduleFlows.push(scheduleFlows[i])
+    i += 1
+  }
+  return finalScheduleFlows;
+}
+
+function getMaxScheduleSize(courses){
   let expectedLength = 1;
   courses.forEach((course) => {
     expectedLength *= course.sections.reduce(
@@ -204,19 +297,27 @@ getMaxScheduleSize = (courses) => {
   return expectedLength;
 };
 
+if (require.main === module) {
+    courses.forEach((course) =>
+      console.log(`${course.course_prefix} ${course.course_code}`)
+    );
+    const start = performance.now();
+    const schedules = generateSchedules(courses);
+    const end = performance.now();
+    
+    (async function(){
+      const scheduleFlows = await generateScheduleFlows(courses)
+      // for prettier logs
+      scheduleFlows.forEach((scheduleFlow) => {
+        console.log(scheduleFlow.scheduleRating.green)
+        scheduleFlow.schedule.forEach((node) => console.log(node.toString())) + console.log("\n");
+      });
+      console.log(`${schedules.length} of ${getMaxScheduleSize(courses)}`.green);
+      console.log(`Time taken for scheduling only: ${(end - start).toFixed(2)} ms`.yellow);
+      console.log(`final schedule has ${scheduleFlows.length} schedules`.blue)
+    })();
 
-// courses.forEach(course => console.log(`${course.course_prefix} ${course.course_code}`))
-// const start = performance.now()
-// const schedules = generateSchedules(courses)
-// const end = performance.now()
-
-// // for prettier logs
-// schedules.forEach((res) => {
-//   res.map((node) => console.log(node.toString())) + console.log("\n");
-// });
-
-// console.log(`Time taken: ${(end - start).toFixed(2)} ms`.yellow)
-// console.log(`${schedules.length} of ${getMaxScheduleSize(courses)}`.green);
+  }
 
 module.exports = {
   cartesianProduct,
@@ -226,5 +327,6 @@ module.exports = {
   hasConflict,
   merge,
   generateSubSchedules,
-  getMaxScheduleSize
+  getMaxScheduleSize,
+  generateScheduleFlows
 };

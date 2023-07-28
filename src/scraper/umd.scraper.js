@@ -181,7 +181,7 @@ const extract = async (url) => {
         ".course-prefix-abbr",
         (e) => e.textContent
       );
-      result.course_id = await courseContainer.$eval(
+      result.course_code = await courseContainer.$eval(
         ".course-id",
         (e, prefix) => e.textContent.substring(prefix.length),
         result.course_prefix

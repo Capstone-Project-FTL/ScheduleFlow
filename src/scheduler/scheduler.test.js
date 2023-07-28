@@ -55,54 +55,54 @@ describe("cartesianProduct has correct functionality", () => {
 describe("extractDateconverts AM/PM time string format into 24 hour string format", () => {
   test("extractDate has basic functionality", () => {
     const nodeDate = extractDate("1:32pm")
-    expect(nodeDate.getHours()).toEqual(13);
-    expect(nodeDate.getMinutes()).toEqual(32);
+    expect(nodeDate.getUTCHours()).toEqual(13);
+    expect(nodeDate.getUTCMinutes()).toEqual(32);
   });
 
   test("extractDate works when time and modifier are spaced", () => {
     const nodeDate = extractDate("1:00 pm")
-    expect(nodeDate.getHours()).toEqual(13);
-    expect(nodeDate.getMinutes()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(13);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
   });
 
   test("extractDate works when time has modifier and leading 0", () => {
     const nodeDate = extractDate("01:00 pm")
-    expect(nodeDate.getHours()).toEqual(13);
-    expect(nodeDate.getMinutes()).toEqual(0);
-    expect(nodeDate.getSeconds()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(13);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
+    expect(nodeDate.getUTCSeconds()).toEqual(0);
   });
 
   test("extractDate works for midnight", () => {
     const nodeDate = extractDate("12:00am")
-    expect(nodeDate.getHours()).toEqual(0);
-    expect(nodeDate.getMinutes()).toEqual(0);
-    expect(nodeDate.getSeconds()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(0);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
+    expect(nodeDate.getUTCSeconds()).toEqual(0);
   });
 
   test("extractDate works for times before mid day", () => {
     const nodeDate = extractDate("3:00 am")
-    expect(nodeDate.getHours()).toEqual(3);
-    expect(nodeDate.getMinutes()).toEqual(0);
-    expect(nodeDate.getSeconds()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(3);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
+    expect(nodeDate.getUTCSeconds()).toEqual(0);
   });
 
   test("extractDate works for times after mid day", () => {
     const nodeDate = extractDate("3:00 pm")
-    expect(nodeDate.getHours()).toEqual(15);
-    expect(nodeDate.getMinutes()).toEqual(0);
-    expect(nodeDate.getSeconds()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(15);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
+    expect(nodeDate.getUTCSeconds()).toEqual(0);
   });
 
   test("extractDate works on times without modifiers", () => {
     const nodeDate = extractDate("11:00")
     const nodeDate2 = extractDate("23:00")
-    expect(nodeDate.getHours()).toEqual(11);
-    expect(nodeDate.getMinutes()).toEqual(0);
-    expect(nodeDate.getSeconds()).toEqual(0);
+    expect(nodeDate.getUTCHours()).toEqual(11);
+    expect(nodeDate.getUTCMinutes()).toEqual(0);
+    expect(nodeDate.getUTCSeconds()).toEqual(0);
 
-    expect(nodeDate2.getHours()).toEqual(23);
-    expect(nodeDate2.getMinutes()).toEqual(0);
-    expect(nodeDate2.getSeconds()).toEqual(0);
+    expect(nodeDate2.getUTCHours()).toEqual(23);
+    expect(nodeDate2.getUTCMinutes()).toEqual(0);
+    expect(nodeDate2.getUTCSeconds()).toEqual(0);
   })
 });
 
@@ -699,7 +699,7 @@ describe("generateSchedules generates valid schedules", () => {
       const schedules = generateSchedules([bio, data, bio, comm, comm]);
       /**
        * since the elements of a schedule are scheduleNodes, we can
-       * find a unique course by getting the course prefix and id
+       * find a unique course by getUTCting the course prefix and id
        * but this alone is not sufficient, as labs would also have the same course prefix and ids
        * to combat this, we can easily add the isLab field to the string stord in the set
        */
