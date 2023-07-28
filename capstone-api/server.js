@@ -8,7 +8,6 @@ const morgan = require("morgan")
 
 const PORT = 3001;
 
-
 //middleware
 app.use(cors());
 app.use(express.json());
@@ -22,12 +21,11 @@ app.post("/schedules", async (req, res) => {
     const coursesArray = await fetchCoursesData(courses);
     const schedules = await generateScheduleFlows(coursesArray);
 
-    //the below code console.logs the entirety of the generated schedules
-    // console.dir(schedules, { depth: null });
+    res.json(
+      {courses: coursesArray,
+        schedules:schedules
+    });
 
-    res.json(schedules);
-    // the below code reveals the days of the week that the course is held
-    // res.json(schedules[0].map((s)=> Array.from(s.days)))
   } catch (err) {
     console.error(err.message);
   }
@@ -36,6 +34,7 @@ app.post("/schedules", async (req, res) => {
 //Return Schedules
 app.get("/schedules", async (req, res) => {
   try {
+
     res.json(schedules);
   } catch (err) {
     console.error(err.message);
