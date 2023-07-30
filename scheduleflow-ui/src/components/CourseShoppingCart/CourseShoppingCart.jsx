@@ -96,7 +96,7 @@ export default function ShoppingCart() {
         },
       });
 
-      // console.log('Response data:', response.data);
+      console.log('Response data:', response.data);
       localStorage.setItem('courses', JSON.stringify(response.data.courses))
       localStorage.setItem('schedules', JSON.stringify(response.data.schedules))
 
