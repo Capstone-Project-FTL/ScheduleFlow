@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../../../capstone-ui/src/components/Navbar";
 import axios from "axios";
@@ -115,7 +115,7 @@ export default function ShoppingCart() {
         }
       );
 
-      // console.log('Response data:', response.data);
+      setAppState({...appState, courses: response.data.courses, schedules: response.data.schedules})
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",
