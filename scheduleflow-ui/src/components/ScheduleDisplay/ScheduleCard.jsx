@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { CurrentScheduleContext } from "./ScheduleDisplay";
+
 const getRatingColor = (rating) => {
   if(rating === "N/A") return "text-indigo-500"
   if(rating >= 4) return "text-green-500"
@@ -37,8 +40,10 @@ const getClassDays = (schedule) => {
 export default function ScheduleCard({scheduleFlow, index}) {
   const currRating = scheduleFlow.scheduleRating
   const {earliestTime, latestTime} = getEarliestAndLatestTime(scheduleFlow.schedule)
+  const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
   return (
-    <div className="card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200">
+    <div className="card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200"
+    onClick={() => setCurrScheduleId(index - 1)}>
       <div className="flex flex-col h-full justify-center">
         <div
           className={"radial-progress group-active:text-indigo-700 text-xl font-extrabold shadow-md " + getRatingColor(currRating)}
@@ -51,8 +56,8 @@ export default function ScheduleCard({scheduleFlow, index}) {
       <div className=" flex flex-row">
         <div className="flex flex-col text-black">
           <p className="inline">Class Days: &nbsp;</p>
-          <p className="inline">Earliest Stat Time: &nbsp;</p>
-          <p className="inline">Latest Stat Time: &nbsp;</p>
+          <p className="inline">Earliest Start Time: &nbsp;</p>
+          <p className="inline">Latest End Time: &nbsp;</p>
         </div>
         <div className="flex flex-col">
           <p className="text-black text-md">{getClassDays(scheduleFlow.schedule)}</p>
