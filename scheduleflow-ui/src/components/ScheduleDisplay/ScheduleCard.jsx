@@ -17,9 +17,9 @@ export default function ScheduleCard() {
           <p className="inline">Latest Stat Time: &nbsp;</p>
         </div>
         <div className="flex flex-col">
-          <p className="text-black text-md">M Tu W Th F</p>
-          <p className="text-black text-md">24:00</p>
-          <p className="text-black text-md">24:00</p>
+          <p className="text-black text-md">M W F</p>
+          <p className="text-black text-md">09:30</p>
+          <p className="text-black text-md">15:50</p>
         </div>
       </div>
       </div>
