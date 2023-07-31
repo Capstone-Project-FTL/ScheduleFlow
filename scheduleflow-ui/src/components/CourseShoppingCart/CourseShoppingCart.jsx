@@ -151,15 +151,18 @@ export default function ShoppingCart() {
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-72 text-center">
             {/* Set py-72 to increase the height for centering */}
             {/* Your text content goes here */}
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Select Your Courses</h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300">When you're ready, click Generate</p>
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              Select Your Courses
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              When you're ready, click Generate
+            </p>
             {courseInputs.map((input, index) => (
               <div key={index} className="mt-6 flex items-center">
                 <select
                   value={input.course_prefix}
                   onChange={(e) => handlePrefixChange(index, e.target.value)}
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
-                >
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500">
                   {/* Dropdown 1 options */}
                   <option value="">Select Course Prefix</option>
                   {uniqueCoursePrefixes.map((prefix) => (
@@ -183,8 +186,7 @@ export default function ShoppingCart() {
                 </select>
                 <button
                   onClick={() => removeCourseInput(index)}
-                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500"
-                >
+                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500">
                   Remove
                 </button>
               </div>
@@ -192,8 +194,7 @@ export default function ShoppingCart() {
             {showError && <p className="text-red-500">Please complete all your courses or remove any incomplete courses.</p>}
             <button
               onClick={addCourseInput}
-              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
-            >
+              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
               + Add Another Course
             </button>
             <div className="mt-10 flex items-center justify-center gap-x-6">

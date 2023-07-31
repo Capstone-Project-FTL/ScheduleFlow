@@ -20,7 +20,7 @@ require("colors");
 const courses = [
   allCourses[4],
   allCourses[95],
-  // allCourses[132],
+  allCourses[132],
   // allCourses[150],
   // allCourses[186],
 ];

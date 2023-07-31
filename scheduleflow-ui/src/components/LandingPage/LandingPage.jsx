@@ -43,7 +43,7 @@ export default function Landingpage() {
           <div className="flex lg:flex-1">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Course Flow</span>
-              <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
+              <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-500" />
             </Link>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
@@ -51,19 +51,19 @@ export default function Landingpage() {
               <a
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-semibold leading-6 ${item.current ? 'text-indigo-600' : ''}`}
+                className={` text-base font-semibold leading-6 ${item.current ? 'text-indigo-500' : ''}`}
               >
                 {item.name}
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to="/login" className="text-sm font-semibold leading-6"> {/* Use Link to navigate to the login page */}
+          <div className="hidden lg:gap-12 lg:flex lg:flex-1 lg:justify-end">
+          <Link to="/login" className=" font-semibold leading-6 bg-indigo-500 w-28 h-10 flex items-center justify-center rounded-lg"> {/* Use Link to navigate to the login page */}
             Log in <span aria-hidden="true"></span>
           </Link>
-            <a href="/register" className="ml-4 text-sm font-semibold leading-6 text-white">
+            <Link to="/register" className="ml-4  font-semibold leading-6 w-28 h-10 flex items-center justify-center rounded-lg border-2 border-indigo-500">
               Sign Up <span aria-hidden="true"></span>
-            </a>
+            </Link>
           </div>
         </nav>
       </header>
@@ -84,7 +84,7 @@ export default function Landingpage() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-              Generate Your Perfect Schedule
+              <span className='text-indigo-500'>Generate</span> Your Perfect Schedule
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Discover the most efficient way to organize your classes and optimize your academic journey. Our innovative scheduling tool simplifies the process, allowing you to create a personalized schedule that fits your needs seamlessly.
@@ -92,7 +92,7 @@ export default function Landingpage() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/home"
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                className="rounded-md bg-indigo-500 px-3.5 py-2.5  font-semibold shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Get started
               </a>
@@ -118,7 +118,7 @@ export default function Landingpage() {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
               <div className="lg:max-w-lg">
-                <h2 className="text-base font-semibold leading-7 text-indigo-600">Schedule your courses faster</h2>
+                <h2 className="text-base font-semibold leading-7 text-indigo-500">Schedule your courses faster</h2>
                 <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Streamline Your Class Scheduling</p>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
                 Say goodbye to the hassle of managing multiple platforms. Our all-in-one website provides a convenient solution for students, serving as a centralized hub for scheduling classes. From course selection to professor ratings, everything you need is just a few clicks away.
@@ -127,7 +127,7 @@ export default function Landingpage() {
                   {features.map((feature) => (
                     <div key={feature.name} className="relative pl-9">
                       <dt className="inline font-semibold text-gray-900">
-                        <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true" />
+                        <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-500" aria-hidden="true" />
                         {feature.name}
                       </dt>{' '}
                       <dd className="inline">{feature.description}</dd>
