@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { CurrentScheduleContext } from "./ScheduleDisplay";
 
 const getRatingColor = (rating) => {
-  if(rating === "N/A") return "text-indigo-500"
-  if(rating >= 4) return "text-green-500"
-  if(rating >= 3) return "text-amber-500"
+  if(rating === "N/A") return "text-indigo-500 group-active:text-indigo-600 "
+  if(rating >= 4) return "text-green-500 group-active:text-green-600 "
+  if(rating >= 3) return "text-amber-500 group-active:text-amber-600"
   return "text-red-500"
 }
 
@@ -41,12 +41,13 @@ export default function ScheduleCard({scheduleFlow, index}) {
   const currRating = scheduleFlow.scheduleRating
   const {earliestTime, latestTime} = getEarliestAndLatestTime(scheduleFlow.schedule)
   const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
+  const focusClass = index - 1 === currScheduleId ? "bg-indigo-200" : ""
   return (
-    <div className="card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200"
+    <div className={"card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200 " + focusClass}
     onClick={() => setCurrScheduleId(index - 1)}>
       <div className="flex flex-col h-full justify-center">
         <div
-          className={"radial-progress group-active:text-indigo-700 text-xl font-extrabold shadow-md " + getRatingColor(currRating)}
+          className={"radial-progress text-xl font-extrabold shadow-md " + getRatingColor(currRating)}
           style={{ "--value": `${currRating === "N/A" ? 0 : currRating/5 * 100}`, "--size": "5.5rem", "--thickness": "0.35rem" }}>
           {currRating === "N/A" ? "N/A" : `${currRating}/5`}
         </div>
@@ -59,10 +60,10 @@ export default function ScheduleCard({scheduleFlow, index}) {
           <p className="inline">Earliest Start Time: &nbsp;</p>
           <p className="inline">Latest End Time: &nbsp;</p>
         </div>
-        <div className="flex flex-col">
-          <p className="text-black text-md">{getClassDays(scheduleFlow.schedule)}</p>
-          <p className="text-black text-md">{earliestTime}</p>
-          <p className="text-black text-md">{latestTime}</p>
+        <div className="flex flex-col text-black text-md">
+          <p>{getClassDays(scheduleFlow.schedule)}</p>
+          <p>{earliestTime}</p>
+          <p>{latestTime}</p>
         </div>
       </div>
       </div>
