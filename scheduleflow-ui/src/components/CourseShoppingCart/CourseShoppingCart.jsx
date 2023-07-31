@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../../../capstone-ui/src/components/Navbar";
 import axios from "axios";
+import { AppStateContext } from "../App/App";
 
 export default function ShoppingCart() {
+  const {appState, setAppState} = useContext(AppStateContext)
   const [courseInputs, setCourseInputs] = useState([
     { course_prefix: "", course_code: "" },
   ]);
