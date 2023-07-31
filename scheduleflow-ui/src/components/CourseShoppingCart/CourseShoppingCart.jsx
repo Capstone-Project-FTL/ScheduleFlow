@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../../../capstone-ui/src/components/Navbar";
-import coursesTableInfoObject from "./static_courses.json";
 import axios from "axios";
 import { AppStateContext } from "../App/App";
 
@@ -11,9 +10,21 @@ export default function ShoppingCart() {
     { course_prefix: "", course_code: "" },
   ]);
   const [showError, setShowError] = useState(false);
+  const [coursesTableInfo, setCourseTableInfo] = useState([]);
 
-  // mocking courses info that will be stored in local storage
-  const coursesTableInfo = coursesTableInfoObject.courses;
+  useEffect(() => {
+    const fetchCoursesData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/courses");
+        setCourseTableInfo([...coursesTableInfo, ...response.data]);
+        return response.data; // The response.data is already an array
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    };
+    fetchCoursesData();
+  }, []);
 
   // takes an array of objects that map to a row in the courses data table
   // returns an output of an array of unique course prefixes
@@ -82,7 +93,6 @@ export default function ShoppingCart() {
       setShowError(true);
       return;
     }
-
     // Hide the error message if all courses are complete
     setShowError(false);
 
@@ -97,12 +107,15 @@ export default function ShoppingCart() {
     try {
       const response = await axios.post(
         "http://localhost:3001/schedules",
-        requestBody
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      console.log("Response data:", response.data);
-      setAppState({...appState, courses: response.data.courses, schedules: response.data.schedules})
-      console.log(appState)
+      // console.log('Response data:', response.data);
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",
@@ -115,39 +128,6 @@ export default function ShoppingCart() {
       console.error("Error:", error);
     }
   };
-  //     const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys'))}
-  //     console.log(requestBody)
-  //     console.dir(requestBody, { depth: null });
-
-  //     // const requestInfo = await axios.post('http://localhost:3001/schedules', requestBody)
-
-  //     const requestInfo = await fetch('http://localhost:3001/schedules', {
-  //       method: 'POST',
-  //       headers: {'Content-Type':'application/json'},
-  //       body: JSON.stringify(requestBody)
-  //     })
-  //     .then((response) => {
-  //       // Check if the response status is successful (2xx)
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       // Parse the JSON data from the response body
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // Here, "data" is the parsed JSON data from the response
-  //       console.log('Response data:', data);
-  //       // Use the data as needed
-  //     })
-  // .catch((error) => {
-  //       // Handle any errors that occurred during the fetch or parsing
-  //       console.error('Error:', error);
-  //     });
-
-  //     // Navigate to the schedule page using the navigate function
-  //     navigate('/schedule');
-  //   };
-
   return (
     <>
       <NavBar />
@@ -170,7 +150,8 @@ export default function ShoppingCart() {
                 <select
                   value={input.course_prefix}
                   onChange={(e) => handlePrefixChange(index, e.target.value)}
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500">
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
+                >
                   {/* Dropdown 1 options */}
                   <option value="">Select Course Prefix</option>
                   {uniqueCoursePrefixes.map((prefix) => (
@@ -184,7 +165,8 @@ export default function ShoppingCart() {
                   onChange={(e) =>
                     handleChange(index, "course_code", e.target.value)
                   }
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2">
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2"
+                >
                   {/* Dropdown 2 options */}
                   <option value="">Select Course Code</option>
                   {getCourseCodesByPrefix(
@@ -198,7 +180,8 @@ export default function ShoppingCart() {
                 </select>
                 <button
                   onClick={() => removeCourseInput(index)}
-                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500">
+                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500"
+                >
                   Remove
                 </button>
               </div>
@@ -211,13 +194,15 @@ export default function ShoppingCart() {
             )}
             <button
               onClick={addCourseInput}
-              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
+              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
+            >
               + Add Another Course
             </button>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
                 onClick={handleGenerate}
-                className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
+                className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
+              >
                 Generate
               </button>
             </div>
