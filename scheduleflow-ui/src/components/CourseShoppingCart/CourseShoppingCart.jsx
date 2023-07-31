@@ -107,10 +107,14 @@ export default function ShoppingCart() {
     try {
       const response = await axios.post(
         "http://localhost:3001/schedules",
-        requestBody
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      // console.log('Response data:', response.data);
       setAppState({...appState, courses: response.data.courses, schedules: response.data.schedules})
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
