@@ -11,7 +11,7 @@ const getTimeSlots = (schedule) => {
     Fri: [],
   };
 
-  schedule.forEach((node) => {
+  schedule?.forEach((node) => {
     node.days.forEach((day) => {
       timeSlotDays[day].push(node);
     });
@@ -19,17 +19,9 @@ const getTimeSlots = (schedule) => {
   return timeSlotDays;
 };
 
-const getMilliSeconds = (date) => {
-  return (
-    ((gridStartTime.getUTCHours() * 60 + gridStartTime.getUTCMinutes()) * 60 +
-      gridStartTime.getUTCSeconds()) *
-    1000
-  );
-};
-
 const cellDuration = 0.5; // fraction in hours
 const schedules = JSON.parse(localStorage.getItem("schedules"));
-const timeSlotDays = getTimeSlots(schedules[0].schedule);
+const timeSlotDays = getTimeSlots(schedules[0]?.schedule);
 const numOfIterations = Math.ceil(
   (gridEndTime - gridStartTime) / (3600 * 1000 * cellDuration)
 ); // 0.5 means 30 minutes per divider
@@ -49,9 +41,6 @@ export default function ScheduleContentGrid() {
             tempStartTime.setTime(
               tempStartTime.getTime() + cellDuration * 60 * 60 * 1000
             );
-            // console.log(tempStartTime.getHours())
-            console.log(tempStartTime.getUTCHours());
-            console.log("here");
             return (
               <p className="header-cell font-extrabold px-2 flex justify-end text-neutral-600 h-16">
                 {`${String(tempStartTime.getUTCHours()).padStart(

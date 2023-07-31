@@ -1,10 +1,10 @@
 export default function ScheduleCard() {
   return (
-    <div className="card group rounded-md bg-indigo-100 h-[7.5rem] w-full my-1 p-4 shadow-md drop-shadow-[0_0px_10px_rgba(0,0,0,0.05)] flex flex-row gap-x-2 active:bg-indigo-200">
+    <div className="card group rounded-md bg-indigo-100 h-[7.5rem] w-full my-1 p-4 shadow-md flex flex-row gap-x-2 active:bg-indigo-200">
       <div className="flex flex-col h-full justify-center">
         <div
-          className="radial-progress text-sky-500 group-active:text-indigo-700 text-xl font-extrabold shadow-lg"
-          style={{ "--value": 80, "--size": "5.5rem", "--thickness": "0.4rem" }}>
+          className="radial-progress text-indigo-500 group-active:text-indigo-700 text-xl font-extrabold shadow-lg"
+          style={{ "--value": 80, "--size": "5.5rem", "--thickness": "0.35rem" }}>
           4.00/5
         </div>
       </div>
