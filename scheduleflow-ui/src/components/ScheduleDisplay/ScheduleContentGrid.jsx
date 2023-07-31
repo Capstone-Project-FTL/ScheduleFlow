@@ -22,8 +22,6 @@ const getTimeSlots = (schedule) => {
 };
 
 const cellDuration = 0.5; // fraction in hours
-// const schedules = JSON.parse(localStorage.getItem("schedules"))
-// const timeSlotDays = getTimeSlots(schedules[0]?.schedule);
 const numOfIterations = Math.ceil(
   (gridEndTime - gridStartTime) / (3600 * 1000 * cellDuration)
 ); // 0.5 means 30 minutes per divider
@@ -60,7 +58,7 @@ export default function ScheduleContentGrid() {
       </div>
       {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, idx) => (
         <div
-          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-4 md:col-span-3 xl:col-span-2 bg-indigo-50`}
+          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-4 xl:col-span-2 bg-indigo-50`}
           id={`${idx}`}>
           <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-start z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">
             <header className="header-cell text-black font-semibold px-4">
