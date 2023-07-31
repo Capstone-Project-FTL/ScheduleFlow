@@ -36,7 +36,7 @@ export default function ScheduleContentGrid() {
   const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
   console.log(currScheduleId)
   const currentSchedule = schedules[currScheduleId]
-  const timeSlotDays = getTimeSlots(currentSchedule.schedule)
+  const timeSlotDays = getTimeSlots(currentSchedule?.schedule)
   return (
     <div className="schedule-content-grid relative grid auto-cols-fr xl:grid-cols-[repeat(16, minmax(0, 1fr))] grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black xl:w-full w-max ">
       <div
