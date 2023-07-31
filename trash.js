@@ -54,3 +54,19 @@ const cartesian = (...scheduleNode) =>
 let a = {name: "jiexy"}
 let b = {school: "Umass"}
 console.log("N/A" < 0)
+
+`
+4.37
+Section: COMM 398E Tue,Thu (11:00 - 12:15) by Xiaoli Nan(4.1) 
+Section: DATA 400 Mon,Wed,Fri (12:00 - 12:50) by Jonathan Fernandes(4.1) 
+Lab: DATA 400 Tue (15:00 - 15:50)  
+Section: CMSC 131 Mon,Wed,Fri (15:00 - 15:50) by Nelson Padua-Perez(4.9) 
+Lab: CMSC 131 Mon,Wed (14:00 - 14:50)  `
+
+`
+4.37
+Section: COMM 398E Tue,Thu (11:00 - 12:15) by Xiaoli Nan(4.1) 
+Section: DATA 400 Mon,Wed,Fri (12:00 - 12:50) by Jonathan Fernandes(4.1) 
+Lab: DATA 400 Tue (15:00 - 15:50)  
+Section: CMSC 131 Mon,Wed,Fri (15:00 - 15:50) by Nelson Padua-Perez(4.9) 
+Lab: CMSC 131 Mon,Wed (14:00 - 14:50)  `

@@ -12,9 +12,11 @@ export default function App() {
   useEffect(() => {
     document.title = "Course Flow";
   }, []);
+
+  const [appState, setAppState] = useState({user: null, courses: null, schedules: null})
   return (
     <>
-    <div className="App">
+    <div className="App text-base">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landingpage />} />

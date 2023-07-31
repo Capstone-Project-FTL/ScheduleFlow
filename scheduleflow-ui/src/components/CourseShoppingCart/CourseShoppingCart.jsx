@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import NavBar from '../../../../capstone-ui/src/components/Navbar';
-import coursesTableInfoObject from './static_courses.json';
-import axios from 'axios'
-
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import NavBar from "../../../../capstone-ui/src/components/Navbar";
+import coursesTableInfoObject from "./static_courses.json";
+import axios from "axios";
 
 export default function ShoppingCart() {
-  const [courseInputs, setCourseInputs] = useState([{ course_prefix: '', course_code: '' }]);
+  const [courseInputs, setCourseInputs] = useState([
+    { course_prefix: "", course_code: "" },
+  ]);
   const [showError, setShowError] = useState(false);
 
   // mocking courses info that will be stored in local storage
@@ -41,7 +42,7 @@ export default function ShoppingCart() {
   }
 
   const addCourseInput = () => {
-    setCourseInputs([...courseInputs, { course_prefix: '', course_code: '' }]);
+    setCourseInputs([...courseInputs, { course_prefix: "", course_code: "" }]);
   };
 
   const removeCourseInput = (index) => {
@@ -61,7 +62,7 @@ export default function ShoppingCart() {
   const handlePrefixChange = (index, prefix) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index].course_prefix = prefix;
-    updatedInputs[index].course_code = ''; // Reset the selected code
+    updatedInputs[index].course_code = ""; // Reset the selected code
     setCourseInputs(updatedInputs);
   };
 
@@ -85,60 +86,63 @@ export default function ShoppingCart() {
 
     // Your logic for generating the schedule goes here
     // For now, we will just store the course inputs in local storage
-    localStorage.setItem('course_keys', JSON.stringify(courseInputs));
-    const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys')) };
+    localStorage.setItem("course_keys", JSON.stringify(courseInputs));
+    const requestBody = {
+      courses: JSON.parse(localStorage.getItem("course_keys")),
+    };
     console.log(requestBody);
 
     try {
-      const response = await axios.post('http://localhost:3001/schedules', requestBody, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/schedules",
+        requestBody
+      );
 
-      // console.log('Response data:', response.data);
-      localStorage.setItem('courses', JSON.stringify(response.data.courses))
-      localStorage.setItem('schedules', JSON.stringify(response.data.schedules))
+      console.log("Response data:", response.data);
+      localStorage.setItem("courses", JSON.stringify(response.data.courses));
+      localStorage.setItem(
+        "schedules",
+        JSON.stringify(response.data.schedules)
+      );
 
       // Navigate to the schedule page using the navigate function
-      navigate('/schedule');
+      navigate("/schedule");
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-//     const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys'))}
-//     console.log(requestBody)
-//     console.dir(requestBody, { depth: null });
+  //     const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys'))}
+  //     console.log(requestBody)
+  //     console.dir(requestBody, { depth: null });
 
-//     // const requestInfo = await axios.post('http://localhost:3001/schedules', requestBody)
-    
-//     const requestInfo = await fetch('http://localhost:3001/schedules', {
-//       method: 'POST',
-//       headers: {'Content-Type':'application/json'},
-//       body: JSON.stringify(requestBody)
-//     })
-//     .then((response) => {
-//       // Check if the response status is successful (2xx)
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok');
-//       }
-//       // Parse the JSON data from the response body
-//       return response.json();
-//     })
-//     .then((data) => {
-//       // Here, "data" is the parsed JSON data from the response
-//       console.log('Response data:', data);
-//       // Use the data as needed
-//     })
-// .catch((error) => {
-//       // Handle any errors that occurred during the fetch or parsing
-//       console.error('Error:', error);
-//     });
+  //     // const requestInfo = await axios.post('http://localhost:3001/schedules', requestBody)
 
+  //     const requestInfo = await fetch('http://localhost:3001/schedules', {
+  //       method: 'POST',
+  //       headers: {'Content-Type':'application/json'},
+  //       body: JSON.stringify(requestBody)
+  //     })
+  //     .then((response) => {
+  //       // Check if the response status is successful (2xx)
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       // Parse the JSON data from the response body
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       // Here, "data" is the parsed JSON data from the response
+  //       console.log('Response data:', data);
+  //       // Use the data as needed
+  //     })
+  // .catch((error) => {
+  //       // Handle any errors that occurred during the fetch or parsing
+  //       console.error('Error:', error);
+  //     });
 
-//     // Navigate to the schedule page using the navigate function
-//     navigate('/schedule');
-//   };
+  //     // Navigate to the schedule page using the navigate function
+  //     navigate('/schedule');
+  //   };
 
   return (
     <>
@@ -151,15 +155,18 @@ export default function ShoppingCart() {
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-72 text-center">
             {/* Set py-72 to increase the height for centering */}
             {/* Your text content goes here */}
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Select Your Courses</h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300">When you're ready, click Generate</p>
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              Select Your Courses
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              When you're ready, click Generate
+            </p>
             {courseInputs.map((input, index) => (
               <div key={index} className="mt-6 flex items-center">
                 <select
                   value={input.course_prefix}
                   onChange={(e) => handlePrefixChange(index, e.target.value)}
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
-                >
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500">
                   {/* Dropdown 1 options */}
                   <option value="">Select Course Prefix</option>
                   {uniqueCoursePrefixes.map((prefix) => (
@@ -170,12 +177,16 @@ export default function ShoppingCart() {
                 </select>
                 <select
                   value={input.course_code}
-                  onChange={(e) => handleChange(index, 'course_code', e.target.value)}
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2"
-                >
+                  onChange={(e) =>
+                    handleChange(index, "course_code", e.target.value)
+                  }
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2">
                   {/* Dropdown 2 options */}
                   <option value="">Select Course Code</option>
-                  {getCourseCodesByPrefix(coursesTableInfo, input.course_prefix).map((code) => (
+                  {getCourseCodesByPrefix(
+                    coursesTableInfo,
+                    input.course_prefix
+                  ).map((code) => (
                     <option key={code} value={code}>
                       {code}
                     </option>
@@ -183,24 +194,26 @@ export default function ShoppingCart() {
                 </select>
                 <button
                   onClick={() => removeCourseInput(index)}
-                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500"
-                >
+                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500">
                   Remove
                 </button>
               </div>
             ))}
-            {showError && <p className="text-red-500">Please complete all your courses or remove any incomplete courses.</p>}
+            {showError && (
+              <p className="text-red-500">
+                Please complete all your courses or remove any incomplete
+                courses.
+              </p>
+            )}
             <button
               onClick={addCourseInput}
-              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
-            >
+              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
               + Add Another Course
             </button>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
                 onClick={handleGenerate}
-                className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
-              >
+                className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
                 Generate
               </button>
             </div>
