@@ -1,6 +1,6 @@
 export default function ScheduleCard() {
   return (
-    <div className="card group rounded-md bg-indigo-100 h-[7.5rem] w-full my-1 p-4 shadow-md flex flex-row gap-x-2 active:bg-indigo-200">
+    <div className="card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200">
       <div className="flex flex-col h-full justify-center">
         <div
           className="radial-progress text-indigo-500 group-active:text-indigo-700 text-xl font-extrabold shadow-lg"
