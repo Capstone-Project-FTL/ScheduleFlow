@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import NavBar from '../../../../capstone-ui/src/components/Navbar';
-import coursesTableInfoObject from './static_courses.json';
-import axios from 'axios'
-
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import NavBar from "../../../../capstone-ui/src/components/Navbar";
+import axios from "axios";
 
 export default function ShoppingCart() {
-  const [courseInputs, setCourseInputs] = useState([{ course_prefix: '', course_code: '' }]);
+  const [courseInputs, setCourseInputs] = useState([
+    { course_prefix: "", course_code: "" },
+  ]);
   const [showError, setShowError] = useState(false);
+  const [coursesTableInfo, setCourseTableInfo] = useState([]);
 
-  // mocking courses info that will be stored in local storage
-  const coursesTableInfo = coursesTableInfoObject.courses;
+  useEffect(() => {
+    const fetchCoursesData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/courses");
+        setCourseTableInfo([...coursesTableInfo, ...response.data]);
+        return response.data; // The response.data is already an array
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    };
+    fetchCoursesData();
+  }, []);
 
   // takes an array of objects that map to a row in the courses data table
   // returns an output of an array of unique course prefixes
@@ -41,7 +53,7 @@ export default function ShoppingCart() {
   }
 
   const addCourseInput = () => {
-    setCourseInputs([...courseInputs, { course_prefix: '', course_code: '' }]);
+    setCourseInputs([...courseInputs, { course_prefix: "", course_code: "" }]);
   };
 
   const removeCourseInput = (index) => {
@@ -61,7 +73,7 @@ export default function ShoppingCart() {
   const handlePrefixChange = (index, prefix) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index].course_prefix = prefix;
-    updatedInputs[index].course_code = ''; // Reset the selected code
+    updatedInputs[index].course_code = ""; // Reset the selected code
     setCourseInputs(updatedInputs);
   };
 
@@ -79,67 +91,41 @@ export default function ShoppingCart() {
       setShowError(true);
       return;
     }
-
     // Hide the error message if all courses are complete
     setShowError(false);
 
     // Your logic for generating the schedule goes here
     // For now, we will just store the course inputs in local storage
-    localStorage.setItem('course_keys', JSON.stringify(courseInputs));
-    const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys')) };
+    localStorage.setItem("course_keys", JSON.stringify(courseInputs));
+    const requestBody = {
+      courses: JSON.parse(localStorage.getItem("course_keys")),
+    };
     console.log(requestBody);
 
     try {
-      const response = await axios.post('http://localhost:3001/schedules', requestBody, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/schedules",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // console.log('Response data:', response.data);
-      localStorage.setItem('courses', JSON.stringify(response.data.courses))
-      localStorage.setItem('schedules', JSON.stringify(response.data.schedules))
+      localStorage.setItem("courses", JSON.stringify(response.data.courses));
+      localStorage.setItem(
+        "schedules",
+        JSON.stringify(response.data.schedules)
+      );
 
       // Navigate to the schedule page using the navigate function
-      navigate('/schedule');
+      navigate("/schedule");
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-//     const requestBody = { courses: JSON.parse(localStorage.getItem('course_keys'))}
-//     console.log(requestBody)
-//     console.dir(requestBody, { depth: null });
-
-//     // const requestInfo = await axios.post('http://localhost:3001/schedules', requestBody)
-    
-//     const requestInfo = await fetch('http://localhost:3001/schedules', {
-//       method: 'POST',
-//       headers: {'Content-Type':'application/json'},
-//       body: JSON.stringify(requestBody)
-//     })
-//     .then((response) => {
-//       // Check if the response status is successful (2xx)
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok');
-//       }
-//       // Parse the JSON data from the response body
-//       return response.json();
-//     })
-//     .then((data) => {
-//       // Here, "data" is the parsed JSON data from the response
-//       console.log('Response data:', data);
-//       // Use the data as needed
-//     })
-// .catch((error) => {
-//       // Handle any errors that occurred during the fetch or parsing
-//       console.error('Error:', error);
-//     });
-
-
-//     // Navigate to the schedule page using the navigate function
-//     navigate('/schedule');
-//   };
-
   return (
     <>
       <NavBar />
@@ -162,7 +148,8 @@ export default function ShoppingCart() {
                 <select
                   value={input.course_prefix}
                   onChange={(e) => handlePrefixChange(index, e.target.value)}
-                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500">
+                  className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500"
+                >
                   {/* Dropdown 1 options */}
                   <option value="">Select Course Prefix</option>
                   {uniqueCoursePrefixes.map((prefix) => (
@@ -173,12 +160,17 @@ export default function ShoppingCart() {
                 </select>
                 <select
                   value={input.course_code}
-                  onChange={(e) => handleChange(index, 'course_code', e.target.value)}
+                  onChange={(e) =>
+                    handleChange(index, "course_code", e.target.value)
+                  }
                   className="rounded-md bg-white w-full px-16 py-2 text-black text-sm font-semibold shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 ml-2"
                 >
                   {/* Dropdown 2 options */}
                   <option value="">Select Course Code</option>
-                  {getCourseCodesByPrefix(coursesTableInfo, input.course_prefix).map((code) => (
+                  {getCourseCodesByPrefix(
+                    coursesTableInfo,
+                    input.course_prefix
+                  ).map((code) => (
                     <option key={code} value={code}>
                       {code}
                     </option>
@@ -186,15 +178,22 @@ export default function ShoppingCart() {
                 </select>
                 <button
                   onClick={() => removeCourseInput(index)}
-                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500">
+                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm ml-2 hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500"
+                >
                   Remove
                 </button>
               </div>
             ))}
-            {showError && <p className="text-red-500">Please complete all your courses or remove any incomplete courses.</p>}
+            {showError && (
+              <p className="text-red-500">
+                Please complete all your courses or remove any incomplete
+                courses.
+              </p>
+            )}
             <button
               onClick={addCourseInput}
-              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500">
+              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500"
+            >
               + Add Another Course
             </button>
             <div className="mt-10 flex items-center justify-center gap-x-6">
