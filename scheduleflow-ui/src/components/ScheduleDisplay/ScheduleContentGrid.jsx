@@ -1,4 +1,6 @@
+import { AppStateContext } from "../App/App";
 import EventCard from "./EventCard";
+import { useContext } from "react";
 
 const gridStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0));
 const gridEndTime = new Date(Date.UTC(1970, 0, 1, 22, 0, 0));
@@ -20,14 +22,19 @@ const getTimeSlots = (schedule) => {
 };
 
 const cellDuration = 0.5; // fraction in hours
-const schedules = JSON.parse(localStorage.getItem("schedules"));
-const timeSlotDays = getTimeSlots(schedules[0]?.schedule);
+// const schedules = JSON.parse(localStorage.getItem("schedules"))
+// const timeSlotDays = getTimeSlots(schedules[0]?.schedule);
 const numOfIterations = Math.ceil(
   (gridEndTime - gridStartTime) / (3600 * 1000 * cellDuration)
 ); // 0.5 means 30 minutes per divider
 
 export default function ScheduleContentGrid() {
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
+  const {appState, setAppState} = useContext(AppStateContext)
+  if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
+  // if async setSappState has not finished setting the state
+  const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
+  const timeSlotDays = getTimeSlots(schedules[0].schedule)
   return (
     <div className="schedule-content-grid relative grid auto-cols-fr xl:grid-cols-[repeat(16, minmax(0, 1fr))] grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black xl:w-full w-max ">
       <div

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../../../capstone-ui/src/components/Navbar";
 import coursesTableInfoObject from "./static_courses.json";
 import axios from "axios";
+import { AppStateContext } from "../App/App";
 
 export default function ShoppingCart() {
+  const {appState, setAppState} = useContext(AppStateContext)
   const [courseInputs, setCourseInputs] = useState([
     { course_prefix: "", course_code: "" },
   ]);
@@ -99,6 +101,8 @@ export default function ShoppingCart() {
       );
 
       console.log("Response data:", response.data);
+      setAppState({...appState, courses: response.data.courses, schedules: response.data.schedules})
+      console.log(appState)
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",
