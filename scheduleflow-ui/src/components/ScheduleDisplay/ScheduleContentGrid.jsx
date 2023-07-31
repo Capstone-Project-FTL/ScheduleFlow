@@ -1,6 +1,7 @@
 import { AppStateContext } from "../App/App";
 import EventCard from "./EventCard";
 import { useContext } from "react";
+import { CurrentScheduleContext } from "./ScheduleDisplay";
 
 const gridStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0));
 const gridEndTime = new Date(Date.UTC(1970, 0, 1, 22, 0, 0));
@@ -27,12 +28,15 @@ const numOfIterations = Math.ceil(
 ); // 0.5 means 30 minutes per divider
 
 export default function ScheduleContentGrid() {
+  const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
   const {appState, setAppState} = useContext(AppStateContext)
   if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
   // if async setSappState has not finished setting the state
   const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
-  const timeSlotDays = getTimeSlots(schedules[0].schedule)
+  console.log(currScheduleId)
+  const currentSchedule = schedules[currScheduleId]
+  const timeSlotDays = getTimeSlots(currentSchedule.schedule)
   return (
     <div className="schedule-content-grid relative grid auto-cols-fr xl:grid-cols-[repeat(16, minmax(0, 1fr))] grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black xl:w-full w-max ">
       <div
@@ -58,7 +62,7 @@ export default function ScheduleContentGrid() {
       </div>
       {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, idx) => (
         <div
-          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-4 xl:col-span-2 bg-indigo-50`}
+          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-4 md:col-span-3 xl:col-span-2 bg-indigo-50`}
           id={`${idx}`}>
           <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-start z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">
             <header className="header-cell text-black font-semibold px-4">
