@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const filename = "./umd.static.db.json";
+const prefixes = require("./umd.prefixes.json");
 const { daysOfWeek } = require("./utilities");
 require("colors");
 
@@ -47,20 +48,27 @@ const getSections = (sectionContainers, child, umdDaysOfWeek) => {
    */
 
   /**
-   * 
+   *
    * @param {String} daysText represents the days of the week text
    * @param {Object} umdDaysOfWeek mapsumd representation to our standard representation
    * @returns {Array} the days for the section or lab
    */
   const getDays = (daysText, umdDaysOfWeek) => {
-    return daysText ? Object.keys(umdDaysOfWeek)
-      .map((day) => (daysText.indexOf(day) >= 0 ? umdDaysOfWeek[day] : null))
-      .filter((day) => day): [];
+    return daysText
+      ? Object.keys(umdDaysOfWeek)
+          .map((day) =>
+            daysText.indexOf(day) >= 0 ? umdDaysOfWeek[day] : null
+          )
+          .filter((day) => day)
+      : [];
   };
 
   const getLab = (labContainer, labId) => ({
     lab_id: labId,
-    lab_days: getDays(labContainer.querySelector(".section-days")?.innerText, umdDaysOfWeek),
+    lab_days: getDays(
+      labContainer.querySelector(".section-days")?.innerText,
+      umdDaysOfWeek
+    ),
     lab_start_time: labContainer.querySelector(".class-start-time")?.innerText,
     lab_end_time: labContainer.querySelector(".class-end-time")?.innerText,
     lab_type: labContainer.querySelector(".class-type")?.innerText,
@@ -97,7 +105,10 @@ const getSections = (sectionContainers, child, umdDaysOfWeek) => {
         section_instructor: Array.from(
           sectionHTML.querySelectorAll(".section-instructor")
         ).map((instructorDiv) => instructorDiv.innerText),
-        section_days: getDays(sectionHTML.querySelector(".section-days")?.innerText, umdDaysOfWeek),
+        section_days: getDays(
+          sectionHTML.querySelector(".section-days")?.innerText,
+          umdDaysOfWeek
+        ),
         section_start_time: start_time,
         section_end_time: end_time,
         labs: hasLab
@@ -148,7 +159,7 @@ const clean = (courses) => {
 };
 
 /**
- * @typedef courses 
+ * @typedef courses
  * @param {String} url the url to scrape
  * @returns {[courses]} an array of FACE TO FACE courses which have at least one section
  */
@@ -220,21 +231,33 @@ const extract = async (url) => {
 // const url = "https://app.testudo.umd.edu/soc/202308/COMM";
 // const url = "https://app.testudo.umd.edu/soc/202308/CHIN";
 // const url = "https://app.testudo.umd.edu/soc/202308/BIOM";
-const url = "https://app.testudo.umd.edu/soc/202308/BIOL";
-extract(url).then((res) => {
-  if (fs.existsSync(filename)) {
-    const db = require(filename);
-    db.courses.push(...res.courses);
-    db.allCourseCount = db.courses.length
-    fs.writeFile(filename, JSON.stringify(db, null, 2), (error) => {
-      if (error) console.error(error.message.red);
-      console.log("new courses added successfully".green);
-    });
-  } else {
-    res.allCourseCount = res.courses.length
-    fs.writeFile(filename, JSON.stringify(res, null, 2), (error) => {
-      if (error) console.error(error.message.red);
-      console.log("new courses added successfully".green);
-    });
-  }
-});
+const baseURL = "https://app.testudo.umd.edu/soc/202308/";
+
+(async () => {
+  let pass = false
+  for (let prefix of prefixes) {
+    // if(prefix === "BMGT"){
+    //   pass = true
+    //   continue
+    // }
+    // if(!pass) continue
+    const url = baseURL + prefix;
+    await extract(url).then((res) => {
+      if (fs.existsSync(filename)) {
+        const db = require(filename);
+        db.courses.push(...res.courses);
+        db.allCourseCount = db.courses.length;
+        fs.writeFile(filename, JSON.stringify(db, null, 2), (error) => {
+          if (error) console.error(error.message.red);
+          console.log(`${prefix} added successfully`.green);
+        });
+      } else {
+        res.allCourseCount = res.courses.length;
+        fs.writeFile(filename, JSON.stringify(res, null, 2), (error) => {
+          if (error) console.error(`${error.message} at ${prefix}`.red);
+          console.log(`${prefix} added successfully`.green);
+        });
+      }
+    }).catch(error=>console.log(prefix))
+  };
+})()

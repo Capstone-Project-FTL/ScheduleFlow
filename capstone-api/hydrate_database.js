@@ -28,16 +28,16 @@ async function doesSectionExist(course_prefix, course_code, section_id) {
 async function hydrateDatabase() {
   try {
     for (const course of jsonData.courses) {
-      const { course_prefix, course_id, title, credits, sections } = course;
+      const { course_prefix, course_code, title, credits, sections } = course;
 
       // Check if the course already exists in the database
-      const courseExists = await doesCourseExist(course_prefix, course_id);
+      const courseExists = await doesCourseExist(course_prefix, course_code);
 
       if (!courseExists) {
         // Insert course into the courses table
         await db.none(
           "INSERT INTO courses (course_prefix, course_code, term, course_description) VALUES ($1, $2, $3, $4)",
-          [course_prefix, course_id, null, title]
+          [course_prefix, course_code, null, title]
         );
       }
 
@@ -55,7 +55,7 @@ async function hydrateDatabase() {
         // Check if the section already exists in the database
         const sectionExists = await doesSectionExist(
           course_prefix,
-          course_id,
+          course_code,
           section_id
         );
 
@@ -66,7 +66,7 @@ async function hydrateDatabase() {
             [
               section_id,
               course_prefix,
-              course_id,
+              course_code,
               section_instructor[0],
               null,
               section_days.join(", "),
@@ -87,7 +87,7 @@ async function hydrateDatabase() {
               lab_id,
               section_id,
               course_prefix,
-              course_id,
+              course_code,
               null,
               null,
               null,
