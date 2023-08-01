@@ -29,15 +29,7 @@ export default function ShoppingCart() {
   // takes an array of objects that map to a row in the courses data table
   // returns an output of an array of unique course prefixes
   function getUniqueCoursePrefixes(array) {
-    const uniquePrefixes = [];
-
-    array.forEach((course) => {
-      if (!uniquePrefixes.includes(course.course_prefix)) {
-        uniquePrefixes.push(course.course_prefix);
-      }
-    });
-
-    return uniquePrefixes;
+    return Array.from(new Set(array.map(course => course.course_prefix))).sort()
   }
 
   // takes an array of objects that map to a row in the courses data table and a string corresponding to course prefix
