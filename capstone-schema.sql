@@ -22,7 +22,7 @@ CREATE TABLE sections (
 );
 
 CREATE TABLE labs (
-  lab_id            INT NOT NULL,
+  lab_id            VARCHAR(50) NOT NULL,
   section_id    VARCHAR(50) NOT NULL,
   course_prefix     VARCHAR(255) NOT NULL,
   course_code       VARCHAR(20) NOT NULL,
@@ -34,43 +34,3 @@ CREATE TABLE labs (
   lab_end_time          VARCHAR(100),
   FOREIGN KEY (course_prefix, course_code, section_id) REFERENCES sections (course_prefix, course_code, section_id)
 );
--- CREATE TABLE users (
---     id              SERIAL PRIMARY KEY,
---     email           VARCHAR(255) NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
---     username        VARCHAR(255) NOT NULL,
---     first_name      VARCHAR(255) NOT NULL,
---     last_name       VARCHAR(255) NOT NULL,
---     password        VARCHAR(255) NOT NULL,
---     created_at      TIMESTAMP NOT NULL DEFAULT NOW()
---     );
-
-    -- CREATE TABLE universities (
-    -- id              SERIAL PRIMARY KEY,
-    -- name            VARCHAR(255),
-    -- subjects        VARCHAR(255)
-    -- );
-
-    -- CREATE TABLE courses (
-    -- id              VARCHAR(255),
-    -- name            VARCHAR(255),
-    -- number          VARCHAR(255)
-    -- );
-
-    -- CREATE TABLE sections (
-    -- id              SERIAL PRIMARY KEY,
-    -- number          VARCHAR(255) NOT NULL,
-    -- days            VARCHAR(255) NOT NULL,
-    -- time            VARCHAR(255) NOT NULL,
-    -- room            VARCHAR(255) NOT NULL,
-    -- instructor      VARCHAR(255) NOT NULL,
-    -- has_lab         VARCHAR(255) NOT NULL,
-    -- labs            VARCHAR(255) NOT NULL,
-    -- seats           VARCHAR(255) NOT NULL,
-    -- rating          VARCHAR(255) NOT NULL
-    -- );
-
-    -- CREATE TABLE labs (
-    -- id              SERIAL PRIMARY KEY,
-    -- course          VARCHAR(255)
-
-    -- );
