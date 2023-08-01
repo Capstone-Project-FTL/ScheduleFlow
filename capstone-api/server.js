@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./database");
+const {PORT} = require("./config")
 const fetchCoursesData = require("./utils/fetchCoursesData");
 const { generateScheduleFlows } = require(".././src/scheduler/scheduler");
 const morgan = require("morgan")
 
-const PORT = 3001;
+
 
 //middleware
 app.use(cors());
