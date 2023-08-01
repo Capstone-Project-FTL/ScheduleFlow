@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import NavBar from "../../../../capstone-ui/src/components/Navbar";
+import NavBar from "../Navbar/Navbar";
 import axios from "axios";
 import { AppStateContext } from "../App/App";
 
