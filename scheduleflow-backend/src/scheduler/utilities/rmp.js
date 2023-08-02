@@ -1,5 +1,5 @@
 const rmp = require("@mtucourses/rate-my-professors").default;
-require("../../../../capstone-api/node_modules/colors");
+require("../../../capstone-api/node_modules/colors");
 /**
  * @typedef school an interpolation of ISchoolFromSearch (the default returned by the library)
  * @property {number} id the school id on rateMyProfessor
