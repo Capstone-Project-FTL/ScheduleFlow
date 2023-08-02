@@ -65,10 +65,10 @@ export default function ShoppingCart() {
         course_code: "Select Course Code",
       },
     ]);
-    setSearchText({ prefix: "", code: "" })
+    setSearchText({ prefix: "", code: "" });
   };
 
-  function handleSearchChange(event, isForCode = false) {
+  function handleSearchChange(event) {
     setSearchText({ ...searchText, [event.target.name]: event.target.value });
   }
 
@@ -177,7 +177,9 @@ export default function ShoppingCart() {
                   as="div"
                   className="relative inline-block text-center w-full max-w-[18rem] h-10">
                   <div className="h-full">
-                    <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 h-full">
+                    <Menu.Button
+                      className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 h-full"
+                      onClick={(e) => setSearchText({ prefix: "", code: "" })}>
                       {courseInputs[index].course_prefix}
                       <ChevronDownIcon
                         className="-mr-1 h-5 w-5 text-gray-400"
@@ -217,12 +219,12 @@ export default function ShoppingCart() {
                               <Menu.Item>
                                 {({ active }) => (
                                   <p
-                                    onClick={(e) =>
+                                    onClick={(e) => {
                                       handlePrefixChange(
                                         index,
                                         e.target.textContent
-                                      )
-                                    }
+                                      );
+                                    }}
                                     value={prefix}
                                     className={classNames(
                                       active
@@ -247,7 +249,9 @@ export default function ShoppingCart() {
                   as="div"
                   className="relative inline-block text-center w-full max-w-[18rem] h-10">
                   <div className="h-full">
-                    <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 h-full">
+                    <Menu.Button
+                      className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 h-full"
+                      onClick={(e) => setSearchText({ prefix: "", code: "" })}>
                       {courseInputs[index].course_code}
                       <ChevronDownIcon
                         className="-mr-1 h-5 w-5 text-gray-400"
@@ -265,7 +269,7 @@ export default function ShoppingCart() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 z-10 mt-2  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full">
-                    <div className="sticky top-0 left-0 w-full h-12 mt-2 flex item-center justify-center px-2 py-1 pb-2">
+                      <div className="sticky top-0 left-0 w-full h-12 mt-2 flex item-center justify-center px-2 py-1 pb-2">
                         <label htmlFor="code" />
                         <input
                           type="text"
@@ -279,36 +283,40 @@ export default function ShoppingCart() {
                         {getCourseCodesByPrefix(
                           coursesTableInfo,
                           input.course_prefix
-                        ).filter(code => code
-                          .toLowerCase()
-                          .includes(searchText.code.toLowerCase())).map((code, i, arr) => (
-                          <>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <p
-                                  onClick={(e) =>
-                                    handleChange(
-                                      index,
-                                      "course_code",
-                                      e.target.textContent
-                                    )
-                                  }
-                                  value={code}
-                                  className={classNames(
-                                    active
-                                      ? "bg-indigo-500 text-white rounded-sm"
-                                      : "text-gray-700",
-                                    "block px-4 py-2 text-base font-semibold"
-                                  )}>
-                                  {code}
-                                </p>
-                              )}
-                            </Menu.Item>
-                            {i < arr.length - 1 ? (
-                              <div className="divider my-0"></div>
-                            ) : undefined}
-                          </>
-                        ))}
+                        )
+                          .filter((code) =>
+                            code
+                              .toLowerCase()
+                              .includes(searchText.code.toLowerCase())
+                          )
+                          .map((code, i, arr) => (
+                            <>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <p
+                                    onClick={(e) => {
+                                      handleChange(
+                                        index,
+                                        "course_code",
+                                        e.target.textContent
+                                      );
+                                    }}
+                                    value={code}
+                                    className={classNames(
+                                      active
+                                        ? "bg-indigo-500 text-white rounded-sm"
+                                        : "text-gray-700",
+                                      "block px-4 py-2 text-base font-semibold"
+                                    )}>
+                                    {code}
+                                  </p>
+                                )}
+                              </Menu.Item>
+                              {i < arr.length - 1 ? (
+                                <div className="divider my-0"></div>
+                              ) : undefined}
+                            </>
+                          ))}
                       </div>
                     </Menu.Items>
                   </Transition>
@@ -316,7 +324,7 @@ export default function ShoppingCart() {
                 <button
                   onClick={() => removeCourseInput(index)}
                   className="rounded-md text-white bg-red-500 px-3.5 py-2.5  font-semibold shadow-sm hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500 flex gap-2 h-10 items-center justify-center">
-                  <TrashIcon className="h-5 w-5 inline"/>
+                  <TrashIcon className="h-5 w-5 inline" />
                   Remove
                 </button>
               </div>
