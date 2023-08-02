@@ -5,4 +5,4 @@ DROP DATABASE IF EXISTS capstone;
 CREATE DATABASE capstone;
 \connect capstone;
 
-\i capstone-schema.sql
+\i scheduleflow-backend/capstone-schema.sql
