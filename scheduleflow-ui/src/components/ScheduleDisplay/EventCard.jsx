@@ -31,13 +31,13 @@ export default function EventCard({ gridStartTime, schedule}) {
   return (
     <div
       className={
-        "event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-1"
+        "event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-2 font-semibold"
       }
       style={{
         top: `calc(4rem*${getBlocksFromTop(start)} + 1px)`,
         height: `calc(4rem * ${getHeight(start, end)})`,
       }}>
-      <p className="font-semibold">
+      <p>
         {`${String(start.getUTCHours()).padStart(2, "0")}:${String(
           start.getUTCMinutes()
         ).padStart(2, "0")} - ${String(end.getUTCHours()).padStart(
@@ -45,8 +45,8 @@ export default function EventCard({ gridStartTime, schedule}) {
           "0"
         )}:${String(end.getUTCMinutes()).padStart(2, "0")}`}
       </p>
-      <p className="font-semibold">{`${schedule.coursePrefix} ${schedule.courseCode}`}</p>
-      <p>{`${instructors}`}</p>
+      <p>{`${schedule.coursePrefix} ${schedule.courseCode}`}</p>
+      <p>{instructors.length > 0 ? `Instructor(s): ${instructors}`: ""}</p>
     </div>
   );
 }
