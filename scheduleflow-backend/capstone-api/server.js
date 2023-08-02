@@ -40,6 +40,8 @@ app.get("/schedules", async (req, res) => {
   }
 });
 
+app.get("/", console.log('pong'))
+
 // Return Subjects and Course IDs
 app.get("/courses", async (req, res) => {
   try {
