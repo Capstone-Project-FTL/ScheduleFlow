@@ -54,7 +54,7 @@ export default function CardModal({ currentNode }) {
           <span className="font-normal">{getMinHourTime(node.endTime)}</span>
         </p>
         <div className="flex">
-          <p>{currentNode.instructors ? "Instructor(s):": ""} &nbsp;&nbsp;</p>
+          <p>{!currentNode.isLab ? "Instructor(s):": ""} &nbsp;&nbsp;</p>
           <div>
 
           {currentNode.instructors.map((instructorObj) => (

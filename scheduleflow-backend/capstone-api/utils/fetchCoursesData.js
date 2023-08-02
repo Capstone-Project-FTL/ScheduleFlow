@@ -32,7 +32,7 @@ async function fetchCoursesData(coursesArray) {
 
         const section = {
           section_id,
-          section_instructors: instructors.split(","),
+          section_instructors: instructors.split(", "),
           section_days: section_days ? section_days.split(", ") : [],
           section_start_time: section_start_time,
           section_end_time: section_end_time,

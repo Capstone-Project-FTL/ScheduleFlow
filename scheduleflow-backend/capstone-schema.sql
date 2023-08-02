@@ -12,7 +12,7 @@ CREATE TABLE sections (
   section_id    VARCHAR(50) NOT NULL,
   course_prefix     VARCHAR(255) NOT NULL,
   course_code       VARCHAR(20) NOT NULL,
-  instructors        VARCHAR(100),
+  instructors       TEXT,
   term              VARCHAR(50),
   section_days      VARCHAR(50),
   section_start_time        VARCHAR(100),

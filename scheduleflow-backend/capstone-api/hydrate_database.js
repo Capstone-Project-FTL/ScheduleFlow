@@ -67,7 +67,7 @@ async function hydrateDatabase() {
               section_id,
               course_prefix,
               course_code,
-              section_instructors.join(","),
+              section_instructors.join(", "),
               null,
               section_days.join(", "),
               section_start_time,
