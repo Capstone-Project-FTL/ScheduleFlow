@@ -19,7 +19,7 @@ export default function ScheduleList() {
               return (
                 <>
                   <ScheduleCard scheduleFlow={schedule} index={i + 1}/>
-                  <div className="divider my-1"></div>
+                  {i < appState.schedules.length - 1? <div className="divider my-1"></div> : undefined}
                 </>
               );
             })
