@@ -4,10 +4,21 @@
   "description": "",
   "main": "capstone-api/server.js",
   "scripts": {
-    "start": "nodemon capstone-api/server.js ",
+    "start": "node capstone-api/server.js ",
     "build": ""
 
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "pg": "^8.11.1",
+    "pg-promise": "^11.5.1",
+    "@mtucourses/rate-my-professors": "^2.2.1"
+  }
 }
