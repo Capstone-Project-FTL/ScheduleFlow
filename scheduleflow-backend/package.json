@@ -5,6 +5,7 @@
   "main": "capstone-api/server.js",
   "scripts": {
     "start": "nodemon capstone-api/server.js ",
+    "build": "",
     "test": "echo \"Error: no test specified\" && exit 1"
 
   },
