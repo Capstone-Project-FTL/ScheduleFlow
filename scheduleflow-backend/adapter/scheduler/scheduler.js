@@ -149,7 +149,7 @@ function generateSubSchedules(courses, left, right) {
                 currCourse.course_code,
                 sectionIdx,
                 false,
-                section.section_instructor.map((instructor) => ({
+                section.section_instructors.map((instructor) => ({
                   name: instructor,
                   rating: null,
                 }))
@@ -180,7 +180,7 @@ function generateSubSchedules(courses, left, right) {
                 false,
                 // from the database, the instructors are stored as their string names
                 // change that to the instructor type
-                section.section_instructor.map((instructor) => ({
+                section.section_instructors.map((instructor) => ({
                   name: instructor,
                   rating: null,
                 }))

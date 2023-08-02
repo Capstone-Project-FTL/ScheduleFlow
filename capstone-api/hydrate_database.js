@@ -45,7 +45,7 @@ async function hydrateDatabase() {
         const {
           section_id,
           section_name,
-          section_instructor,
+          section_instructors,
           section_days,
           section_start_time,
           section_end_time,
@@ -62,12 +62,12 @@ async function hydrateDatabase() {
         if (!sectionExists) {
           // Insert section into the sections table
           await db.none(
-            "INSERT INTO sections (section_id, course_prefix, course_code, instructor, term, section_days, section_start_time, section_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+            "INSERT INTO sections (section_id, course_prefix, course_code, instructors, term, section_days, section_start_time, section_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             [
               section_id,
               course_prefix,
               course_code,
-              section_instructor[0],
+              section_instructors[0],
               null,
               section_days.join(", "),
               section_start_time,
@@ -82,7 +82,7 @@ async function hydrateDatabase() {
 
           // Insert lab into the labs table
           await db.none(
-            "INSERT INTO labs (lab_id, section_id, course_prefix, course_code, lab_name, lab_instructor, term, lab_days, lab_start_time, lab_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+            "INSERT INTO labs (lab_id, section_id, course_prefix, course_code, lab_name, lab_instructorss, term, lab_days, lab_start_time, lab_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
             [
               lab_id,
               section_id,
