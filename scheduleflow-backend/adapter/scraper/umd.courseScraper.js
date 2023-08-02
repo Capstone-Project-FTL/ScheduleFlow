@@ -31,7 +31,7 @@ const umdDaysOfWeek = {
  * returns the sections as an array of section objects
  * @typedef section
  * @property {String} section_id the section identifier
- * @property {String} section_instructor the sections instructor
+ * @property {String} section_instructors the sections instructor
  * @property {String} section_days the days for the section
  * @property {String} start_time section start time
  * @property {String} end_time section end time
@@ -102,7 +102,7 @@ const getSections = (sectionContainers, child, umdDaysOfWeek) => {
       const end_time = sectionHTML.querySelector(".class-end-time")?.innerText;
       currSection = {
         section_id: sectionId,
-        section_instructor: Array.from(
+        section_instructors: Array.from(
           sectionHTML.querySelectorAll(".section-instructor")
         ).map((instructorDiv) => instructorDiv.innerText),
         section_days: getDays(
