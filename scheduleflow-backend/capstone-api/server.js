@@ -4,7 +4,7 @@ const cors = require("cors");
 const pool = require("./database");
 const {PORT} = require("./config")
 const fetchCoursesData = require("./utils/fetchCoursesData");
-const { generateScheduleFlows } = require(".././src/scheduler/scheduler");
+const { generateScheduleFlows } = require("../adapter/scheduler/scheduler");
 const morgan = require("morgan")
 
 
@@ -42,13 +42,13 @@ app.get("/schedules", async (req, res) => {
   }
 });
 
-//Return Subjects and Course IDs
+// Return Subjects and Course IDs
 app.get("/courses", async (req, res) => {
   try {
-    const subjectsAndCourses = await pool.query("SELECT * FROM courses");
+    const subjectsAndCourses = await pool.query("SELECT * FROM courses;");
     res.json(subjectsAndCourses.rows);
   } catch (err) {
-    console.error(err.message);
+    console.error("error " +  err.message);
   }
 });
 
