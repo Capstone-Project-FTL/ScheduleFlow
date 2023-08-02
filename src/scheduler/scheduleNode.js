@@ -12,7 +12,7 @@ class ScheduleNode {
    * @param {Date} startTime - the start time in 24 hour format
    * @param {Date} endTime - the end time in 24 hour format
    * @param {string} coursePrefix - course prefix
-   * @param {string} courseId - course id
+   * @param {string} courseCode - course id
    * @param {number} nodeIndex - the index of the node in the actual course
    * @param {boolean} [isLab=false] - indicates if it is a lab, if not then it is a section
    * @param {instructor[]} [instructors=[]] an array of the instructors for each node. Labs do not have one
@@ -22,7 +22,7 @@ class ScheduleNode {
     startTime,
     endTime,
     coursePrefix,
-    courseId,
+    courseCode,
     nodeIndex,
     isLab = false,
     instructors = []
@@ -31,7 +31,7 @@ class ScheduleNode {
     this.startTime = startTime;
     this.endTime = endTime;
     this.coursePrefix = coursePrefix;
-    this.courseId = courseId;
+    this.courseCode = courseCode;
     this.nodeIndex = nodeIndex;
     this.isLab = isLab;
     this.instructors = instructors;
@@ -56,7 +56,7 @@ class ScheduleNode {
           );
 
     return `${this.isLab ? "Lab" : "Section"}: ${this.coursePrefix} ${
-      this.courseId
+      this.courseCode
     } ${Array.from(
       this.days
     ).toString()} (${startTimeStr} - ${endTimeStr}) ${instructorsStr} `;

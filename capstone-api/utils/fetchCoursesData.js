@@ -97,7 +97,6 @@ fetchCoursesData(coursesArray)
     const jsonData = {
       courses: coursesData,
     };
-    // console.log(JSON.stringify(jsonData, null, 2));
   })
   .catch((error) => {
     console.error("Error:", error);

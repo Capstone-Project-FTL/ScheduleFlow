@@ -34,7 +34,6 @@ export default function ScheduleContentGrid() {
   if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
   // if async setSappState has not finished setting the state
   const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
-  console.log(currScheduleId)
   const currentSchedule = schedules[currScheduleId]
   const timeSlotDays = getTimeSlots(currentSchedule?.schedule)
   return (
@@ -73,11 +72,10 @@ export default function ScheduleContentGrid() {
             .fill(0)
             .map((_, i) => (
               <div className="h-16">
-                {timeSlotDays[day].map((e) => (
+                {timeSlotDays[day].map((schedule) => (
                   <EventCard
                     gridStartTime={gridStartTime}
-                    start={e.startTime}
-                    end={e.endTime}
+                    schedule={schedule}
                   />
                 ))}
               </div>

@@ -99,7 +99,7 @@ async function hydrateDatabase() {
         }
       }
     }
-    console.log("Data hydrated successfully!");
+    console.log("Data hydrated successfully!".green);
   } catch (error) {
     console.error("Error:", error);
   } finally {
