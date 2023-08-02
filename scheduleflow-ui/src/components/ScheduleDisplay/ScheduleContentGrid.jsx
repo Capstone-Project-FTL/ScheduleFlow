@@ -1,7 +1,8 @@
 import { AppStateContext } from "../App/App";
 import EventCard from "./EventCard";
-import { useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { CurrentScheduleContext } from "./ScheduleDisplay";
+import CardModal from "./CardModal";
 
 const gridStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0));
 const gridEndTime = new Date(Date.UTC(1970, 0, 1, 22, 0, 0));
@@ -27,10 +28,15 @@ const numOfIterations = Math.ceil(
   (gridEndTime - gridStartTime) / (3600 * 1000 * cellDuration)
 ); // 0.5 means 30 minutes per divider
 
+
+export const ModalContext = createContext()
 export default function ScheduleContentGrid() {
   const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
   const {appState, setAppState} = useContext(AppStateContext)
+  const [isOpen, setIsOpen] = useState(true) // for modal view
+
+
   if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
   // if async setSappState has not finished setting the state
   const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
@@ -73,15 +79,18 @@ export default function ScheduleContentGrid() {
             .map((_, i) => (
               <div className="h-16">
                 {timeSlotDays[day].map((schedule) => (
-                  <EventCard
+                  <ModalContext.Provider value={{isOpen, setIsOpen}}>
+                    <EventCard
                     gridStartTime={gridStartTime}
                     schedule={schedule}
                   />
+                  </ModalContext.Provider>
                 ))}
               </div>
             ))}
         </div>
       ))}
+      {isOpen ? (<ModalContext.Provider value={{isOpen, setIsOpen}}><CardModal /></ModalContext.Provider>) : undefined}
     </div>
   );
 }
