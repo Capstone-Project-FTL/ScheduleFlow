@@ -6,7 +6,7 @@ import { AppStateContext } from "../App/App";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import {TrashIcon, PlusIcon} from "@heroicons/react/24/outline"
+import { TrashIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,6 +19,7 @@ export default function ShoppingCart() {
   ]);
   const [showError, setShowError] = useState(false);
   const [coursesTableInfo, setCourseTableInfo] = useState([]);
+  const [searchText, setSearchText] = useState({ prefix: "", code: "" });
 
   useEffect(() => {
     const fetchCoursesData = async () => {
@@ -45,7 +46,7 @@ export default function ShoppingCart() {
   // takes an array of objects that map to a row in the courses data table and a string corresponding to course prefix
   // returns an output of an array consisting of all the course codes pertaining to the input course prefix
   function getCourseCodesByPrefix(courses, coursePrefix) {
-    const courseCodes = new Set()
+    const courseCodes = new Set();
 
     courses.forEach((course) => {
       if (course.course_prefix === coursePrefix) {
@@ -64,7 +65,12 @@ export default function ShoppingCart() {
         course_code: "Select Course Code",
       },
     ]);
+    setSearchText({ prefix: "", code: "" })
   };
+
+  function handleSearchChange(event, isForCode = false) {
+    setSearchText({ ...searchText, [event.target.name]: event.target.value });
+  }
 
   const removeCourseInput = (index) => {
     const updatedInputs = [...courseInputs];
@@ -78,8 +84,6 @@ export default function ShoppingCart() {
     setCourseInputs(updatedInputs);
   };
 
-  const uniqueCoursePrefixes = getUniqueCoursePrefixes(coursesTableInfo);
-
   const handlePrefixChange = (index, prefix) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index].course_prefix = prefix;
@@ -89,11 +93,16 @@ export default function ShoppingCart() {
 
   // Use the useNavigate hook to get the navigate function
   const navigate = useNavigate();
+  const uniqueCoursePrefixes = getUniqueCoursePrefixes(coursesTableInfo);
 
   const handleGenerate = async () => {
     // Check if all course inputs have both fields filled out
     const hasIncompleteCourses = courseInputs.some(
-      (input) => !input.course_prefix || !input.course_code || input.course_prefix === "Select Your Courses" || input.course_code === "Select Course Code"
+      (input) =>
+        !input.course_prefix ||
+        !input.course_code ||
+        input.course_prefix === "Select Your Courses" ||
+        input.course_code === "Select Course Code"
     );
 
     if (hasIncompleteCourses) {
@@ -110,8 +119,6 @@ export default function ShoppingCart() {
     const requestBody = {
       courses: JSON.parse(localStorage.getItem("course_keys")),
     };
-    console.log(requestBody);
-
     try {
       const response = await axios.post(
         "http://localhost:3001/schedules",
@@ -133,7 +140,6 @@ export default function ShoppingCart() {
         "schedules",
         JSON.stringify(response.data.schedules)
       );
-
       // Navigate to the schedule page using the navigate function
       navigate("/schedule");
     } catch (error) {
@@ -141,9 +147,11 @@ export default function ShoppingCart() {
     }
   };
   return (
-    <>
+    <div className="overflow-y-scroll bg-gray-700 h-screen box-content w-full">
       <NavBar />
-      <div className="bg-gray-800 text-white flex flex-col justify-center items-center" style={{minHeight: "calc(100vh - 4rem)"}}>
+      <div
+        className="text-white flex flex-col justify-center items-center mb-8"
+        style={{ minHeight: "calc(100vh - 4rem)" }}>
         {/* Set h-full and flex properties */}
         <div className="relative isolate px-6 pt-14 lg:px-8 h-full flex flex-col justify-center items-center w-4/5">
           {/* Set h-full to fill available vertical space */}
@@ -162,7 +170,9 @@ export default function ShoppingCart() {
             {/* Insertion ends here */}
 
             {courseInputs.map((input, index) => (
-              <div key={index} className="mt-6 flex flex-col md:flex-row gap-4 items-center">
+              <div
+                key={index}
+                className="mt-6 flex flex-col md:flex-row gap-4 items-center">
                 <Menu
                   as="div"
                   className="relative inline-block text-center w-full max-w-[18rem] h-10">
@@ -185,34 +195,50 @@ export default function ShoppingCart() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 z-10 mt-2  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full">
-                      <div className="py-2 px-2 max-h-80 overflow-y-scroll">
-                        {uniqueCoursePrefixes.map((prefix, i) => (
-                          <>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <p
-                                  onClick={(e) =>
-                                    handlePrefixChange(
-                                      index,
-                                      e.target.textContent
-                                    )
-                                  }
-                                  value={prefix}
-                                  className={classNames(
-                                    active
-                                      ? "bg-indigo-500 text-white rounded-sm"
-                                      : "text-gray-700",
-                                    "block px-4 py-2 text-base"
-                                  )}>
-                                  {prefix}
-                                </p>
-                              )}
-                            </Menu.Item>
-                            {i < uniqueCoursePrefixes.length - 1 ? (
-                              <div className="divider my-0"></div>
-                            ) : undefined}
-                          </>
-                        ))}
+                      <div className="sticky top-0 left-0 w-full h-12 mt-2 flex item-center justify-center px-2 py-1 pb-2">
+                        <label htmlFor="prefix" />
+                        <input
+                          type="text"
+                          name="prefix"
+                          value={searchText.prefix}
+                          onChange={handleSearchChange}
+                          className="text-black w-full rounded-sm"
+                        />
+                      </div>
+                      <div className="py-2 px-2 max-h-96 overflow-y-scroll">
+                        {uniqueCoursePrefixes
+                          .filter((prefix) =>
+                            prefix
+                              .toLowerCase()
+                              .includes(searchText.prefix.toLowerCase())
+                          )
+                          .map((prefix, i, arr) => (
+                            <>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <p
+                                    onClick={(e) =>
+                                      handlePrefixChange(
+                                        index,
+                                        e.target.textContent
+                                      )
+                                    }
+                                    value={prefix}
+                                    className={classNames(
+                                      active
+                                        ? "bg-indigo-500 text-white rounded-sm"
+                                        : "text-gray-700",
+                                      "block px-4 py-2 text-base font-semibold"
+                                    )}>
+                                    {prefix}
+                                  </p>
+                                )}
+                              </Menu.Item>
+                              {i < arr.length - 1 ? (
+                                <div className="divider my-0"></div>
+                              ) : undefined}
+                            </>
+                          ))}
                       </div>
                     </Menu.Items>
                   </Transition>
@@ -239,24 +265,40 @@ export default function ShoppingCart() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 z-10 mt-2  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full">
+                    <div className="sticky top-0 left-0 w-full h-12 mt-2 flex item-center justify-center px-2 py-1 pb-2">
+                        <label htmlFor="code" />
+                        <input
+                          type="text"
+                          name="code"
+                          value={searchText.code}
+                          onChange={handleSearchChange}
+                          className="text-black w-full rounded-sm"
+                        />
+                      </div>
                       <div className="py-2 px-2 max-h-96 overflow-y-scroll">
                         {getCourseCodesByPrefix(
-                    coursesTableInfo,
-                    input.course_prefix
-                  ).map((code, i, arr) => (
+                          coursesTableInfo,
+                          input.course_prefix
+                        ).filter(code => code
+                          .toLowerCase()
+                          .includes(searchText.code.toLowerCase())).map((code, i, arr) => (
                           <>
                             <Menu.Item>
                               {({ active }) => (
                                 <p
                                   onClick={(e) =>
-                                    handleChange(index, "course_code", e.target.textContent)
+                                    handleChange(
+                                      index,
+                                      "course_code",
+                                      e.target.textContent
+                                    )
                                   }
                                   value={code}
                                   className={classNames(
                                     active
                                       ? "bg-indigo-500 text-white rounded-sm"
                                       : "text-gray-700",
-                                    "block px-4 py-2 text-base"
+                                    "block px-4 py-2 text-base font-semibold"
                                   )}>
                                   {code}
                                 </p>
@@ -273,7 +315,7 @@ export default function ShoppingCart() {
                 </Menu>
                 <button
                   onClick={() => removeCourseInput(index)}
-                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5  font-semibold shadow-sm hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500 flex gap-2">
+                  className="rounded-md text-white bg-red-500 px-3.5 py-2.5  font-semibold shadow-sm hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-500 flex gap-2 h-10 items-center justify-center">
                   <TrashIcon className="h-5 w-5 inline"/>
                   Remove
                 </button>
@@ -286,12 +328,12 @@ export default function ShoppingCart() {
               </p>
             )}
             <div className=" flex items-center justify-center w-full">
-            <button
-              onClick={addCourseInput}
-              className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5  font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 flex gap-2">
-              <PlusIcon className="w-5 h-5 inline"/>
-              Add Another Course
-            </button>
+              <button
+                onClick={addCourseInput}
+                className="rounded-md text-white bg-indigo-500 px-3.5 py-2.5  font-semibold shadow-sm mt-4 hover:bg-indigo-400 focus:outline-none focus:ring focus:ring-indigo-500 flex gap-2">
+                <PlusIcon className="w-5 h-5 inline" />
+                Add Another Course
+              </button>
             </div>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
@@ -303,6 +345,6 @@ export default function ShoppingCart() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
