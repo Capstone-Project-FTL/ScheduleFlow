@@ -40,7 +40,7 @@ app.get("/schedules", async (req, res) => {
   }
 });
 
-app.get("/", console.log('pong'))
+app.get("/",(req, res) => {res.send('pong')})
 
 // Return Subjects and Course IDs
 app.get("/courses", async (req, res) => {
