@@ -1,7 +1,12 @@
 // 2.5 rem is used becuse thats the height of each cell block
 // I may abstact that away
+
+import { useContext } from "react";
+import { ModalContext } from "./ScheduleContentGrid";
+
 // Pixel offset: 1px based on the dividers thickness
-export default function EventCard({ gridStartTime, schedule}) {
+export default function EventCard({ gridStartTime, schedule }) {
+  const {isOpen, setIsOpen} = useContext(ModalContext)
   const start = new Date(schedule.startTime);
   const end = new Date(schedule.endTime);
   const getBlocksFromTop = (start) => {
@@ -26,17 +31,18 @@ export default function EventCard({ gridStartTime, schedule}) {
     return Math.abs(endSec - startSec) / (60 * 30);
   };
 
-  const instructors = schedule.instructors.map(instructorObj => instructorObj.name).join(", ")
+  const instructors = schedule.instructors
+    .map((instructorObj) => instructorObj.name)
+    .join(", ");
 
   return (
     <div
-      className={
-        "event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-2 font-semibold"
-      }
+      className="event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-2 font-semibold overflow-y-scroll"
       style={{
         top: `calc(4rem*${getBlocksFromTop(start)} + 1px)`,
         height: `calc(4rem * ${getHeight(start, end)})`,
-      }}>
+      }}
+      onClick={(e) => setIsOpen(true)}>
       <p>
         {`${String(start.getUTCHours()).padStart(2, "0")}:${String(
           start.getUTCMinutes()
@@ -46,7 +52,8 @@ export default function EventCard({ gridStartTime, schedule}) {
         )}:${String(end.getUTCMinutes()).padStart(2, "0")}`}
       </p>
       <p>{`${schedule.coursePrefix} ${schedule.courseCode}`}</p>
-      <p>{instructors.length > 0 ? `Instructor(s): ${instructors}`: ""}</p>
+      <p>{instructors.length > 0 ? `Instructor(s): ${instructors}` : ""}</p>
+      <p>{schedule.isLab ? "Lab" : ""}</p>
     </div>
   );
 }
