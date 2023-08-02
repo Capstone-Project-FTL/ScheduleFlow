@@ -7,8 +7,6 @@ const fetchCoursesData = require("./utils/fetchCoursesData");
 const { generateScheduleFlows } = require("../adapter/scheduler/scheduler");
 const morgan = require("morgan")
 
-
-
 //middleware
 app.use(cors());
 app.use(express.json());
