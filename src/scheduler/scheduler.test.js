@@ -707,7 +707,7 @@ describe("generateSchedules generates valid schedules", () => {
       schedules.forEach((schedule) => {
         const seenCourses = new Set();
         schedule.forEach((node) => {
-          const identifier = `${node.coursePrefix} ${node.courseId} ${node.isLab}}`;
+          const identifier = `${node.coursePrefix} ${node.courseCode} ${node.isLab}}`;
           expect(seenCourses.has(identifier)).toBe(false);
           seenCourses.add(identifier);
         });
@@ -746,7 +746,7 @@ describe("generateSchedules generates valid schedules", () => {
       schedules.forEach((schedule) => {
         const seenCourses = new Set();
         schedule.forEach((node) => {
-          const identifier = `${node.coursePrefix} ${node.courseId} ${node.isLab}}`;
+          const identifier = `${node.coursePrefix} ${node.courseCode} ${node.isLab}}`;
           expect(seenCourses.has(identifier)).toBe(false);
           seenCourses.add(identifier);
         });
@@ -836,12 +836,12 @@ describe("generateSchedules generates valid schedules", () => {
       interations.forEach((allSchedules, index) => {
         const courseSet = new Set(
           coursesList[index].map(
-            (course) => `${course.coursePrefix} ${course.courseId}`
+            (course) => `${course.coursePrefix} ${course.courseCode}`
           )
         );
         allSchedules.forEach((schedule) => {
           const coursesInSchedule = new Set(
-            schedule.map((node) => `${node.coursePrefix} ${node.courseId}`)
+            schedule.map((node) => `${node.coursePrefix} ${node.courseCode}`)
           );
           expect(courseSet.keys.length).toEqual(coursesInSchedule.keys.length);
           expect(
@@ -867,12 +867,12 @@ describe("generateSchedules generates valid schedules", () => {
            * then check lookup the section using nodeIndex
            * if the section has labs, ensure that the final schedule has labs
            * by looking through seenNodes for a unique string representation
-           * string representation: `${node.coursePrefix}${node.courseId}${node.isLab}`
+           * string representation: `${node.coursePrefix}${node.courseCode}${node.isLab}`
            * to look for a lab, just change isLab to be true and you have the lab representation of a section
            */
           const seenNodes = new Set(
             schedule.map(
-              (node) => `${node.coursePrefix}${node.courseId}${node.isLab}`
+              (node) => `${node.coursePrefix}${node.courseCode}${node.isLab}`
             )
           );
           schedule.forEach((node) => {
@@ -881,13 +881,13 @@ describe("generateSchedules generates valid schedules", () => {
               const course = coursesList[index].find(
                 (courses) =>
                   courses.course_prefix === node.coursePrefix &&
-                  courses.course_code === node.courseId
+                  courses.course_code === node.courseCode
               );
               expect(Object.keys(course).length).toBeGreaterThan(0);
               const hasLab = course.sections[node.nodeIndex].labs.length > 0;
               if (hasLab) {
                 expect(
-                  seenNodes.has(`${node.coursePrefix}${node.courseId}true`)
+                  seenNodes.has(`${node.coursePrefix}${node.courseCode}true`)
                 ).toBe(true);
               }
             }

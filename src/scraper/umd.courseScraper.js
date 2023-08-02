@@ -225,22 +225,11 @@ const extract = async (url) => {
   await browser.close();
   return { courses: clean(courses) };
 };
-// const url = "https://app.testudo.umd.edu/soc/202308/CMSC";
-// const url = "https://app.testudo.umd.edu/soc/202308/DATA";
-// const url = "https://app.testudo.umd.edu/soc/202308/HLSC";
-// const url = "https://app.testudo.umd.edu/soc/202308/COMM";
-// const url = "https://app.testudo.umd.edu/soc/202308/CHIN";
-// const url = "https://app.testudo.umd.edu/soc/202308/BIOM";
 const baseURL = "https://app.testudo.umd.edu/soc/202308/";
 
 (async () => {
   let pass = false
   for (let prefix of prefixes) {
-    // if(prefix === "BMGT"){
-    //   pass = true
-    //   continue
-    // }
-    // if(!pass) continue
     const url = baseURL + prefix;
     await extract(url).then((res) => {
       if (fs.existsSync(filename)) {
@@ -258,6 +247,6 @@ const baseURL = "https://app.testudo.umd.edu/soc/202308/";
           console.log(`${prefix} added successfully`.green);
         });
       }
-    }).catch(error=>console.log(prefix))
+    }).catch(error=>console.log(prefix.red))
   };
 })()
