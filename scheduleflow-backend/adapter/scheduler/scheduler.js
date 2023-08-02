@@ -14,7 +14,7 @@ const { getProfessors } = require("./utilities/rmp");
 const allCourses = require("../scraper/umd.static.db.json").courses;
 const ScheduleNode = require("./scheduleNode");
 const { daysOfWeek } = require("../scraper/utilities");
-require("../../capstone-api/node_modules/colors");
+require("colors");
 
 // for demo purposes
 const courses = [
