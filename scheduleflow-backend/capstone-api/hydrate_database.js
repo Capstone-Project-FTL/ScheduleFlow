@@ -1,5 +1,5 @@
-const pgp = require("pg-promise")();
-const db = pgp("postgres://postgres:postgres@localhost:5432/capstone");
+const pool = require("./database");
+// const db = pgp(process.env.DATABASE_URL);
 require("colors")
 
 const allCourses = require("../adapter/scraper/umd.static.db.json");
@@ -8,25 +8,26 @@ const jsonData = allCourses;
 
 // Function to check if a course already exists
 async function doesCourseExist(course_prefix, course_code) {
-  const course = await db.oneOrNone(
+  const course = await pool.query(
     "SELECT * FROM courses WHERE course_prefix = $1 AND course_code = $2",
     [course_prefix, course_code]
   );
-  return course !== null;
+  return course.rows.length > 0;
 }
 
 // Function to check if a section already exists
 async function doesSectionExist(course_prefix, course_code, section_id) {
-  const section = await db.oneOrNone(
+  const section = await pool.query(
     "SELECT * FROM sections WHERE course_prefix = $1 AND course_code = $2 AND section_id = $3",
     [course_prefix, course_code, section_id]
   );
-  return section !== null;
+  return section.rows.length > 0;
 }
 
 // Function to hydrate courses, sections, and labs into the database
 async function hydrateDatabase() {
   try {
+
     for (const course of jsonData.courses) {
       const { course_prefix, course_code, title, credits, sections } = course;
 
@@ -35,7 +36,7 @@ async function hydrateDatabase() {
 
       if (!courseExists) {
         // Insert course into the courses table
-        await db.none(
+        await pool.query(
           "INSERT INTO courses (course_prefix, course_code, term, course_description) VALUES ($1, $2, $3, $4)",
           [course_prefix, course_code, null, title]
         );
@@ -61,7 +62,7 @@ async function hydrateDatabase() {
 
         if (!sectionExists) {
           // Insert section into the sections table
-          await db.none(
+          await pool.query(
             "INSERT INTO sections (section_id, course_prefix, course_code, instructors, term, section_days, section_start_time, section_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             [
               section_id,
@@ -81,7 +82,7 @@ async function hydrateDatabase() {
             lab;
 
           // Insert lab into the labs table
-          await db.none(
+          await pool.query(
             "INSERT INTO labs (lab_id, section_id, course_prefix, course_code, lab_name, lab_instructors, term, lab_days, lab_start_time, lab_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
             [
               lab_id,
@@ -100,10 +101,8 @@ async function hydrateDatabase() {
       }
     }
     console.log("Data hydrated successfully!".green);
-  } catch (error) {
-    console.error("Error:", error);
-  } finally {
-    pgp.end();
+  } catch (err) {
+    console.error(err.message);
   }
 }
 

@@ -1,5 +1,6 @@
-const pgp = require("pg-promise")();
-const db = pgp("postgres://postgres:postgres@localhost:5432/capstone");
+
+const pool = require('.././database')
+// const db = pgp(process.env.DATABASE_URL);
 
 // Function to fetch data and reconstruct JSON objects
 async function fetchCoursesData(coursesArray) {
@@ -9,15 +10,17 @@ async function fetchCoursesData(coursesArray) {
     for (const course of coursesArray) {
       const { course_prefix, course_code } = course;
 
-      const courses = await db.any(
+      //TODO: Simplify
+      let courses = await pool.query(
         "SELECT * FROM courses LEFT JOIN sections ON courses.course_prefix = sections.course_prefix AND courses.course_code = sections.course_code WHERE courses.course_prefix = $1 AND courses.course_code = $2",
         [course_prefix, course_code]
       );
 
+      courses = courses.rows
       const courseObject = {
         course_prefix,
         course_code,
-        course_title : courses[0].course_description,
+        course_description : courses[0].course_description,
         sections: [],
       };
 
@@ -43,10 +46,12 @@ async function fetchCoursesData(coursesArray) {
       }
 
       // Fetch labs for the course using a subquery
-      const labs = await db.any(
+      let labs = await pool.query(
         "SELECT * FROM labs WHERE course_prefix = $1 AND course_code = $2",
         [course_prefix, course_code]
       );
+
+      labs = labs.rows
 
       for (const lab of labs) {
         const { 
@@ -80,9 +85,8 @@ async function fetchCoursesData(coursesArray) {
     }
 
     return coursesData;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
+  } catch (err) {
+    console.error(err.message);
   }
 }
 
@@ -99,8 +103,8 @@ fetchCoursesData(coursesArray)
       courses: coursesData,
     };
   })
-  .catch((error) => {
-    console.error("Error:", error);
+  .catch((err) => {
+    console.error(err.message);
   });
 
 module.exports = fetchCoursesData;
