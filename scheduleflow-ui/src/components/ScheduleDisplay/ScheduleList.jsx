@@ -11,7 +11,7 @@ export default function ScheduleList() {
       <div className="divider my-1"></div>
       </div>
       {!appState.schedules || appState.schedules.length === 0 ? (
-        <p>No schedule could be generated ;(</p>
+        <p className="text-center font-extrabold text-2xl text-neutral-600">No schedule could be generated &nbsp; ;(</p>
       ) : (
         <div className="sticky top-16 overflow-scroll" style={{height: `calc(100% - 4rem)`}}>
           {
