@@ -1,4 +1,3 @@
-const pgp = require("pg-promise")();
 const pool = require("./database");
 // const db = pgp(process.env.DATABASE_URL);
 require("colors")
@@ -107,4 +106,15 @@ async function hydrateDatabase() {
 }
 
 // Call the function to start hydrating the database
-hydrateDatabase();
+async function insertIntoCreatedDB(){
+  try {
+    const db = await pool.query('psql -f capstone.sql')
+
+    db.then(hydrateDatabase())
+
+  } catch (err) {
+    console.error(err.message)
+  }
+}
+// hydrateDatabase();
+insertIntoCreatedDB()
