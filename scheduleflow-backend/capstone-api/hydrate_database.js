@@ -33,7 +33,7 @@ async function hydrateDatabase() {
         course_prefix VARCHAR(255) NOT NULL,
         course_code VARCHAR(20) NOT NULL,
         term VARCHAR(50),
-        course_description TEXT,
+        course_description VARCHAR(255),
         CONSTRAINT course_id PRIMARY KEY (course_prefix, course_code)
       );
     `);
