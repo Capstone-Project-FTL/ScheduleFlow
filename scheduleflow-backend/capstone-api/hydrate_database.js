@@ -70,6 +70,12 @@ async function hydrateDatabase() {
     for (const course of jsonData.courses) {
       const { course_prefix, course_code, title, credits, sections } = course;
 
+            // Check if the 'title' property exists in the course object
+            if (!title) {
+              console.error(`Course with prefix ${course_prefix} and code ${course_code} has no title.`);
+              continue; // Skip this course and continue with the next one
+            }
+
       // Check if the course already exists in the database
       const courseExists = await doesCourseExist(course_prefix, course_code);
 
