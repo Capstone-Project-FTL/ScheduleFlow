@@ -52,31 +52,31 @@ app.get("/courses", async (req, res) => {
   }
 });
 
-// Function to close the connection pool gracefully
-function closeConnectionPool() {
-  pool.end().finally(() => {
-    console.log("Connection pool closed.");
-    process.exit(0); // Exit the process with a success code (0).
-  });
-}
+// // Function to close the connection pool gracefully
+// function closeConnectionPool() {
+//   pool.end().finally(() => {
+//     console.log("Connection pool closed.");
+//     process.exit(0); // Exit the process with a success code (0).
+//   });
+// }
 
 
-//Close pool connection when server is down
+// //Close pool connection when server is down
 
-// Listen for the exit event
-process.on("exit", closeConnectionPool);
+// // Listen for the exit event
+// process.on("exit", closeConnectionPool);
 
-// Listen for the SIGINT event (Ctrl+C) to handle process termination
-process.on("SIGINT", () => {
-  console.log("Server terminated by SIGINT.");
-  closeConnectionPool();
-});
+// // Listen for the SIGINT event (Ctrl+C) to handle process termination
+// process.on("SIGINT", () => {
+//   console.log("Server terminated by SIGINT.");
+//   closeConnectionPool();
+// });
 
-// Listen for the SIGTERM event to handle process termination
-process.on("SIGTERM", () => {
-  console.log("Server terminated by SIGTERM.");
-  closeConnectionPool();
-});
+// // Listen for the SIGTERM event to handle process termination
+// process.on("SIGTERM", () => {
+//   console.log("Server terminated by SIGTERM.");
+//   closeConnectionPool();
+// });
 
 //Run server on the following port
 app.listen(PORT, () => {
