@@ -78,7 +78,7 @@ process.on("SIGTERM", () => {
   closeConnectionPool();
 });
 
-
+const PORT = process.env.DATABASE_URL || 3001
 //Run server on the following port
 app.listen(PORT, () => {
   console.log(`🚀Server running on Port ${PORT}`);
