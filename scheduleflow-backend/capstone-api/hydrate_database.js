@@ -28,7 +28,6 @@ async function doesSectionExist(course_prefix, course_code, section_id) {
 async function hydrateDatabase() {
   try {
     // Asynchronously execute the SQL file that creates the database and tables
-    await pool.query(`CREATE DATABASE capstone;`);
     await pool.query(`
       CREATE TABLE courses (
         course_prefix VARCHAR(255) NOT NULL,
