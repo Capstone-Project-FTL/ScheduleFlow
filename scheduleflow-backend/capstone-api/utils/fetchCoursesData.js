@@ -46,10 +46,12 @@ async function fetchCoursesData(coursesArray) {
       }
 
       // Fetch labs for the course using a subquery
-      const labs = await pool.query(
+      let labs = await pool.query(
         "SELECT * FROM labs WHERE course_prefix = $1 AND course_code = $2",
         [course_prefix, course_code]
       );
+
+      labs = labs.rows
 
       for (const lab of labs) {
         const { 
