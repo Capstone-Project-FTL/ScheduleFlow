@@ -12,7 +12,7 @@ async function doesCourseExist(course_prefix, course_code) {
     "SELECT * FROM courses WHERE course_prefix = $1 AND course_code = $2",
     [course_prefix, course_code]
   );
-  return course !== null;
+  return course.rows.length > 0;
 }
 
 // Function to check if a section already exists
@@ -21,7 +21,7 @@ async function doesSectionExist(course_prefix, course_code, section_id) {
     "SELECT * FROM sections WHERE course_prefix = $1 AND course_code = $2 AND section_id = $3",
     [course_prefix, course_code, section_id]
   );
-  return result.rows.length > 0;
+  return section.rows.length > 0;
 }
 
 // Function to hydrate courses, sections, and labs into the database
