@@ -47,7 +47,6 @@ app.get("/courses", async (req, res) => {
   try {
     const subjectsAndCourses = await pool.query("SELECT * FROM courses;");
     res.json(subjectsAndCourses.rows);
-    res.send(subjectsAndCourses.rows)
   } catch (err) {
     console.error("error " +  err.message);
   }
