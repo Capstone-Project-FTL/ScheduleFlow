@@ -4,7 +4,7 @@
   "description": "",
   "main": "capstone-api/server.js",
   "scripts": {
-    "start": "node capstone-api/server.js ",
+    "start": "psql -f capstone.sql && cd capstone-api && npm run hydrate && cd server.js ",
     "build": ""
 
   },
