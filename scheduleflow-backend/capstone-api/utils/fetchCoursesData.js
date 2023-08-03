@@ -19,7 +19,7 @@ async function fetchCoursesData(coursesArray) {
       const courseObject = {
         course_prefix,
         course_code,
-        course_description : courses[0].course_description,
+        course_description : courses.rows[0].course_description,
         sections: [],
       };
 
