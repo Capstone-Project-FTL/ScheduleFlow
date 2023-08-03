@@ -37,7 +37,7 @@ export default function EventCard({ gridStartTime, scheduleNode, setCurrentNode 
 
   return (
     <div
-      className="event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-1.5 font-semibold overflow-y-scroll"
+      className="event-card absolute bg-indigo-200 w-full h-10 border-l-4 border-l-indigo-500 z-10 pl-1.5 font-semibold overflow-y-scroll hover:cursor-pointer"
       style={{
         top: `calc(4rem*${getBlocksFromTop(start)} + 1px)`,
         height: `calc(4rem * ${getHeight(start, end)})`,
