@@ -1,5 +1,5 @@
 const pgp = require("pg-promise")();
-const db = pgp("postgres://postgres:postgres@localhost:5432/capstone");
+const db = pgp(process.env.DATABASE_URL);
 
 // Function to fetch data and reconstruct JSON objects
 async function fetchCoursesData(coursesArray) {

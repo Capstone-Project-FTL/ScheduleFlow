@@ -1,5 +1,5 @@
 const pgp = require("pg-promise")();
-const db = pgp("postgres://postgres:postgres@localhost:5432/capstone");
+const db = pgp(process.env.DATABASE_URL);
 require("colors")
 
 const allCourses = require("../adapter/scraper/umd.static.db.json");
