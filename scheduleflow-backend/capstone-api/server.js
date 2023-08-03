@@ -80,5 +80,5 @@ process.on("SIGTERM", () => {
 
 //Run server on the following port
 app.listen(PORT, () => {
-  console.log(`🚀Server running on Port ${PORT}`);
+  console.log(`🚀Server running on Port ${PORT} this is the env db url ${process.env.DATABASE_URL}`);
 });
