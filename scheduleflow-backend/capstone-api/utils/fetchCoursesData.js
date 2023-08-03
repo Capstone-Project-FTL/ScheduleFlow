@@ -17,13 +17,14 @@ async function fetchCoursesData(coursesArray) {
       const courseObject = {
         course_prefix,
         course_code,
+        course_title : courses[0].course_description,
         sections: [],
       };
 
       for (const row of courses) {
         const {
           section_id,
-          instructor,
+          instructors,
           section_days,
           section_start_time,
           section_end_time,
@@ -31,7 +32,7 @@ async function fetchCoursesData(coursesArray) {
 
         const section = {
           section_id,
-          section_instructor: [instructor],
+          section_instructors: instructors.split(", "),
           section_days: section_days ? section_days.split(", ") : [],
           section_start_time: section_start_time,
           section_end_time: section_end_time,
