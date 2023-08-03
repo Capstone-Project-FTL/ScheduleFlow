@@ -11,15 +11,16 @@ async function fetchCoursesData(coursesArray) {
       const { course_prefix, course_code } = course;
 
       //TODO: Simplify
-      const courses = await pool.query(
+      let courses = await pool.query(
         "SELECT * FROM courses LEFT JOIN sections ON courses.course_prefix = sections.course_prefix AND courses.course_code = sections.course_code WHERE courses.course_prefix = $1 AND courses.course_code = $2",
         [course_prefix, course_code]
       );
 
+      courses = courses.rows
       const courseObject = {
         course_prefix,
         course_code,
-        course_description : courses.course_description,
+        course_description : courses[0].course_description,
         sections: [],
       };
 
