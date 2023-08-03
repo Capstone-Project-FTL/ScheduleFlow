@@ -70,3 +70,4 @@ Section: DATA 400 Mon,Wed,Fri (12:00 - 12:50) by Jonathan Fernandes(4.1)
 Lab: DATA 400 Tue (15:00 - 15:50)  
 Section: CMSC 131 Mon,Wed,Fri (15:00 - 15:50) by Nelson Padua-Perez(4.9) 
 Lab: CMSC 131 Mon,Wed (14:00 - 14:50)  `
+
