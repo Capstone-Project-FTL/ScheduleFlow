@@ -21,7 +21,7 @@ async function doesSectionExist(course_prefix, course_code, section_id) {
     "SELECT * FROM sections WHERE course_prefix = $1 AND course_code = $2 AND section_id = $3",
     [course_prefix, course_code, section_id]
   );
-  return section !== null;
+  return result.rows.length > 0;
 }
 
 // Function to hydrate courses, sections, and labs into the database
