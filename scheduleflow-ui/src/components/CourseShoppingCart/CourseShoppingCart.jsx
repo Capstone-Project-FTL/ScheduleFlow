@@ -179,7 +179,8 @@ export default function ShoppingCart() {
                   <div className="h-full">
                     <Menu.Button
                       className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 h-full"
-                      onClick={(e) => setSearchText({ prefix: "", code: "" })}>
+                      onClick={(e) => {
+                        setSearchText({ prefix: "", code: "" })}}>
                       {courseInputs[index].course_prefix}
                       <ChevronDownIcon
                         className="-mr-1 h-5 w-5 text-gray-400"
@@ -202,9 +203,12 @@ export default function ShoppingCart() {
                         <input
                           type="text"
                           name="prefix"
+                          id="prefix"
+                          placeholder="Search Course Prefix"
                           value={searchText.prefix}
                           onChange={handleSearchChange}
-                          className="text-black w-full rounded-sm"
+                          className="text-black text-center w-full rounded-sm"
+                          autoComplete="off"
                         />
                       </div>
                       <div className="py-2 px-2 max-h-96 overflow-y-scroll">
@@ -274,9 +278,11 @@ export default function ShoppingCart() {
                         <input
                           type="text"
                           name="code"
+                          placeholder="Search Course Code"
                           value={searchText.code}
                           onChange={handleSearchChange}
                           className="text-black w-full rounded-sm"
+                          autoComplete="off"
                         />
                       </div>
                       <div className="py-2 px-2 max-h-96 overflow-y-scroll">
