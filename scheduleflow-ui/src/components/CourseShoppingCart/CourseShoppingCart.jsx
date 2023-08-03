@@ -24,7 +24,8 @@ export default function ShoppingCart() {
   useEffect(() => {
     const fetchCoursesData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/courses");
+        // const response = await axios.get("http://localhost:3001/courses");
+        const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses");
         setCourseTableInfo([...coursesTableInfo, ...response.data]);
         return response.data; // The response.data is already an array
       } catch (error) {
@@ -121,7 +122,8 @@ export default function ShoppingCart() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3001/schedules",
+        "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
+        // "http://localhost:3001/schedules",
         requestBody,
         {
           headers: {
