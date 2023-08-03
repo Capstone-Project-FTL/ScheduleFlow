@@ -34,7 +34,8 @@ export default function ScheduleContentGrid() {
   const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
   const {appState, setAppState} = useContext(AppStateContext)
-  const [isOpen, setIsOpen] = useState(true) // for modal view
+  const [isOpen, setIsOpen] = useState(false) // for modal view
+  const [currentNode, setCurrentNode] = useState(null)
 
 
   if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
@@ -78,11 +79,12 @@ export default function ScheduleContentGrid() {
             .fill(0)
             .map((_, i) => (
               <div className="h-16">
-                {timeSlotDays[day].map((schedule) => (
+                {timeSlotDays[day].map((scheduleNode) => (
                   <ModalContext.Provider value={{isOpen, setIsOpen}}>
                     <EventCard
                     gridStartTime={gridStartTime}
-                    schedule={schedule}
+                    scheduleNode={scheduleNode}
+                    setCurrentNode={setCurrentNode}
                   />
                   </ModalContext.Provider>
                 ))}
@@ -90,7 +92,7 @@ export default function ScheduleContentGrid() {
             ))}
         </div>
       ))}
-      {isOpen ? (<ModalContext.Provider value={{isOpen, setIsOpen}}><CardModal /></ModalContext.Provider>) : undefined}
+      {isOpen ? (<ModalContext.Provider value={{isOpen, setIsOpen}}><CardModal currentNode={currentNode}/></ModalContext.Provider>) : undefined}
     </div>
   );
 }
