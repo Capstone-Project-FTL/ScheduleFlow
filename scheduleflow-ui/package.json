@@ -1,8 +1,8 @@
 {
   "name": "scheduleflow-ui",
-  "private": true,
+  "private": "",
   "version": "0.0.0",
-  "type": "module",
+  "type": "",
   "scripts": {
     "start": "vite",
     "dev": "vite ",
