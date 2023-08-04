@@ -37,6 +37,8 @@ app.get("/schedules", async (req, res) => {
     res.json(schedules);
   } catch (err) {
     console.error(err.message);
+    res.status(400).json({ error: err.message });
+
   }
 });
 
