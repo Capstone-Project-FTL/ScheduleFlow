@@ -45,7 +45,7 @@ export default function Login({ appState, setAppState }) {
 
   return (
     <div className="h-screen bg-indigo-50 flex w-full flex-col items-center justify-center">
-      <div className="flex flex-row justify-center items-center h-5/6 w-5/6 rounded-lg drop-shadow-[0_0px_20px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-row justify-center items-center  h-full w-full lg:h-5/6 lg:w-5/6 rounded-lg drop-shadow-[0_0px_20px_rgba(0,0,0,0.25)]">
         <div className="hidden h-full rounded-l-lg w-7/12 bg-indigo-200 lg:flex items-center justify-center">
           <img className="h-2/3" src={loginImg} />
         </div>

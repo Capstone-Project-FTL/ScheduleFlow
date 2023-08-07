@@ -12,7 +12,8 @@ export const AppStateContext = createContext();
 export default function App() {
   useEffect(() => {
     document.title = "Course Flow";
-  }, []);
+    setAppState(appState => ({...appState, token: localStorage.getItem("token")}))
+  }, [localStorage]);
 
   const [appState, setAppState] = useState({
     user: null,
@@ -26,7 +27,7 @@ export default function App() {
         <BrowserRouter>
           <AppStateContext.Provider value={{appState, setAppState}}>
             <Routes>
-              <Route path="/" element={<Landingpage />} />
+              <Route path="/" element={<Landingpage appState={appState} setAppState={setAppState}/>} />
               <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
               <Route path="/login" element={<Login appState={appState} setAppState={setAppState}/>} />
               <Route path="/schedule" element={<ScheduleDisplay />} />
