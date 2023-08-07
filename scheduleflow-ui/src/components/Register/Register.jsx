@@ -58,7 +58,7 @@ export default function Register({ appState, setAppState }) {
       });
       navigate("/home");
     } catch (error) {
-      if (error.code === "ERR_BAD_REQUEST") localStorage.clear();
+      if (error.code === "ERR_BAD_REQUEST") localStorage.removeItem("token");
       setErrorMessage(error.response.data.message);
       setAppState({
         user: null,

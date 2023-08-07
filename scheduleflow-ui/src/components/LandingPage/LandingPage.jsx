@@ -43,7 +43,7 @@ const stats = [
 export default function Landingpage({ appState, setAppState }) {
   const navigate = useNavigate();
   const handleLogOut = (event) => {
-    localStorage.clear();
+    localStorage.removeItem("token");
     navigate("/");
   };
 
