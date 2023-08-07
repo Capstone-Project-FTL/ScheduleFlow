@@ -3,6 +3,7 @@ import EventCard from "./EventCard";
 import { createContext, useContext, useState } from "react";
 import { CurrentScheduleContext } from "./ScheduleDisplay";
 import CardModal from "./CardModal";
+import { HeartIcon } from "@heroicons/react/24/outline";
 
 const gridStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0));
 const gridEndTime = new Date(Date.UTC(1970, 0, 1, 22, 0, 0));
@@ -28,28 +29,38 @@ const numOfIterations = Math.ceil(
   (gridEndTime - gridStartTime) / (3600 * 1000 * cellDuration)
 ); // 0.5 means 30 minutes per divider
 
-
-export const ModalContext = createContext()
+export const ModalContext = createContext();
 export default function ScheduleContentGrid() {
-  const {currScheduleId, setCurrScheduleId} = useContext(CurrentScheduleContext)
+  const { currScheduleId, setCurrScheduleId } = useContext(
+    CurrentScheduleContext
+  );
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
-  const {appState, setAppState} = useContext(AppStateContext)
-  const [isOpen, setIsOpen] = useState(false) // for modal view
-  const [currentNode, setCurrentNode] = useState(null)
+  const { appState, setAppState } = useContext(AppStateContext);
+  const [isOpen, setIsOpen] = useState(false); // for modal view
+  const [currentNode, setCurrentNode] = useState(null);
 
-
-  if(!(appState.courses && appState.schedules)) setAppState({...appState, courses:JSON.parse(localStorage.getItem("courses")), schedules: JSON.parse(localStorage.getItem("schedules"))})
+  if (!(appState.courses && appState.schedules))
+    setAppState({
+      ...appState,
+      courses: JSON.parse(localStorage.getItem("courses")),
+      schedules: JSON.parse(localStorage.getItem("schedules")),
+    });
+    
   // if async setSappState has not finished setting the state
-  const schedules = appState.schedules? appState.schedules : JSON.parse(localStorage.getItem("courses"))
-  const currentSchedule = schedules[currScheduleId]
-  const timeSlotDays = getTimeSlots(currentSchedule?.schedule)
+  const schedules = appState.schedules
+    ? appState.schedules
+    : JSON.parse(localStorage.getItem("courses"));
+  const currentSchedule = schedules[currScheduleId];
+  const timeSlotDays = getTimeSlots(currentSchedule?.schedule);
   return (
-    <div className="schedule-content-grid relative grid auto-cols-fr xl:grid-cols-[repeat(16, minmax(0, 1fr))] grid-flow-col-dense divide-x-2 divide-gray-300 text-xl text-black xl:w-full w-max ">
+    <div className="fixed top-0 left-0 h-full w-full overflow-scroll">
+      <div className="schedule-content-grid flex flex-nowrap divide-x-2 divide-gray-300 text-xl text-black min-w-full w-max ">
       <div
-        className={`time-span sticky left-0 grid divide-y-2 divide-gray-300 text-base bg-indigo-100 z-40 col-span-1`}>
+        className={`time-span sticky left-0 grid divide-y-2 divide-gray-300 text-base bg-indigo-100 z-40 w-24 overflow-clip h-full`}>
         <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-end z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">
           <header className="header-cell text-black font-semibold px-2"></header>
         </div>
+
         {Array(numOfIterations)
           .fill(0)
           .map((_, i) => {
@@ -66,33 +77,47 @@ export default function ScheduleContentGrid() {
             );
           })}
       </div>
-      {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, idx) => (
-        <div
-          className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 overflow-clip text-base col-span-4 md:col-span-3 xl:col-span-2 bg-indigo-50`}
-          id={`${idx}`}>
-          <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-start z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">
-            <header className="header-cell text-black font-semibold px-4">
-              {day}
-            </header>
+      <div className="w-full h-full flex divide-x-2 relative">
+        {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day, idx) => (
+          <div
+            className={`time-span grid grid-flow-row relative divide-y-2 divide-gray-300 text-base min-w-[14rem] md:min-w-[10rem] w-full bg-indigo-50`}
+            id={`${idx}`}>
+            <div className="schedule-view-header sticky top-0 left-0 flex  items-center justify-start z-30 bg-indigo-200 w-full grid-flow-col divide-x-2 divide-zinc-600 h-16 text-xl">
+              <header className="header-cell text-black font-semibold px-4">
+                {day}
+              </header>
+            </div>
+
+            {Array(numOfIterations)
+              .fill(0)
+              .map((_, i) => (
+                <div className="h-16">
+                  {timeSlotDays[day].map((scheduleNode) => (
+                    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
+                      <EventCard
+                        gridStartTime={gridStartTime}
+                        scheduleNode={scheduleNode}
+                        setCurrentNode={setCurrentNode}
+                      />
+                    </ModalContext.Provider>
+                  ))}
+                </div>
+              ))}
           </div>
-          {Array(numOfIterations)
-            .fill(0)
-            .map((_, i) => (
-              <div className="h-16">
-                {timeSlotDays[day].map((scheduleNode) => (
-                  <ModalContext.Provider value={{isOpen, setIsOpen}}>
-                    <EventCard
-                    gridStartTime={gridStartTime}
-                    scheduleNode={scheduleNode}
-                    setCurrentNode={setCurrentNode}
-                  />
-                  </ModalContext.Provider>
-                ))}
-              </div>
-            ))}
+        ))}
+        
+      </div>
+      {isOpen ? (
+        <ModalContext.Provider value={{ isOpen, setIsOpen }}>
+          <CardModal currentNode={currentNode} />
+        </ModalContext.Provider>
+      ) : undefined}
+      <div className="schedule-view-header fixed bottom-5 right-5 flex items-center justify-start z-50 grid-flow-col divide-x-2 divide-zinc-600 bg-transparent rounded-full shadow-lg">
+          <button className="flex items-center justify-center h-16 w-16 bg-indigo-500 rounded-full sticky z-50 right-5 bottom-5 active:bg-indigo-400">
+            <HeartIcon className="w-8 h-8 text-white" />
+          </button>
         </div>
-      ))}
-      {isOpen ? (<ModalContext.Provider value={{isOpen, setIsOpen}}><CardModal currentNode={currentNode}/></ModalContext.Provider>) : undefined}
+    </div>
     </div>
   );
 }

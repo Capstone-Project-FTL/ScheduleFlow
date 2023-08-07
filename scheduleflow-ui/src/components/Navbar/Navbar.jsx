@@ -19,7 +19,7 @@ export default function NavBar() {
   const {appState, setAppState} = useContext(AppStateContext)
   const location=useLocation();
   const handleLogOut = (event) => {
-    localStorage.clear();
+    localStorage.removeItem("token");
     setAppState({...appState, token: null})
     navigate("/");
   };
