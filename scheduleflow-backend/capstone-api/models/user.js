@@ -6,10 +6,11 @@ require("colors");
 
 const UserSchema = {
   id: Number,
-  first_name: String,
-  last_name: String,
+  firstName: String,
+  lastName: String,
   email: String,
   password: String,
+  confirmPassword: String,
   school: String,
 };
 
@@ -29,6 +30,11 @@ class User {
   }
 
   static async register(user) {
+    // if any required field is missing
+    if(!user.firstName || !user.lastName || !user.email || !user.password || !user.confirmPassword){
+      throw new BadRequestError("missing fields")
+    }
+
     // if passwords do not match
     if (user.password !== user.confirmPassword) {
       throw new BadRequestError("passwords do not match");
@@ -57,6 +63,11 @@ class User {
   }
 
   static async login(user){
+    // if any required field is missing
+    if(!user.email || !user.password){
+      throw new BadRequestError("missing fields")
+    }
+
     const result = await this.fetchUserByEmail(user.email);
     // if we were unable to fetch from the database
     if (!result) {
@@ -64,11 +75,14 @@ class User {
     }
     // if there is no matching email
     if (result.rowCount === 0) {
-      throw new UnauthorizedError("email does not exist");
+      throw new BadRequestError("email does not exist");
     }
+
     const foundUser = result.rows[0]
     // if the password does match
     if (await bcrypt.compare(user.password, foundUser.password)) {
+      delete foundUser.password
+      delete foundUser.created_at
       return foundUser
     } else {
       throw new BadRequestError("email and password does not match");

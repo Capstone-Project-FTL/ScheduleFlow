@@ -1,41 +1,46 @@
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import loginImg from "../../assets/login_img.svg"
+import loginImg from "../../assets/login_img.svg";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
-export default function Login({ setAppState }) {
+export default function Login({ appState, setAppState }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState(""); // handles input validation message
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
   const handleOnInputChange = (event) => {
-    if (event.target.name === "email") {
-      if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
-      } else {
-        setErrors((e) => ({ ...e, email: null }));
-      }
-    }
-
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrors((e) => ({ ...e, form: null }));
+    try {
+      const result = await axios.post("http://localhost:3001/auth/login", form);
+      setErrorMessage("");
+      setForm({ email: "", password: "" });
+      setAppState((appState) => ({ ...appState, ...result.data }));
+      localStorage.setItem("token", result.data.token);
+      navigate("/home");
+    } catch (error) {
+      if (error.code === "ERR_BAD_REQUEST") localStorage.clear();
 
-    // Your axios login code here...
-
-    // Just a mock response here for demonstration purposes
-    setTimeout(() => {
+      console.log(error)
+      setErrorMessage(error.response.data.message);
+      setAppState({
+        user: null,
+        token: null,
+        courses: null,
+        schedules: null,
+      });
+    } finally {
       setIsLoading(false);
-      navigate("/portal");
-    }, 2000);
+    }
   };
 
   return (
@@ -50,13 +55,13 @@ export default function Login({ setAppState }) {
               {/* Use Link to navigate to the home page */}
               <CalendarDaysIcon className="mx-auto h-10 w-auto text-indigo-600" />
               <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600">
-                 Welcome Back!
+                Welcome Back!
               </h2>
             </Link>
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-10" onSubmit={handleOnSubmit}>
+            <form className="space-y-10 relative" onSubmit={handleOnSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -76,11 +81,6 @@ export default function Login({ setAppState }) {
                     onChange={handleOnInputChange}
                   />
                 </div>
-                {errors.email && (
-                  <span className="block absolute  text-red-600 mt-1">
-                    {errors.email}
-                  </span>
-                )}
               </div>
 
               <div>
@@ -104,16 +104,18 @@ export default function Login({ setAppState }) {
                     onChange={handleOnInputChange}
                   />
                 </div>
-                {errors.password && (
-                  <span className="block absolute text-base text-red-600 mt-1">
-                    {errors.password}
-                  </span>
-                )}
               </div>
+
+              {errorMessage ? (
+                <p className="absolute text-red-600 w-full -py-4">
+                  {errorMessage}
+                </p>
+              ) : null}
 
               <div>
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 text-base font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-10 items-center">
                   {isLoading ? "Loading..." : "Sign in"}
                 </button>

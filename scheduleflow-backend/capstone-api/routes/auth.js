@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt")
 const { generateToken } = require("../utils/tokens")
 
 authRoute.post("/register", async (req, res) => {
-  console.log(req.body)
   try{
     const user = await User.register(req.body)
     const token = generateToken(user)

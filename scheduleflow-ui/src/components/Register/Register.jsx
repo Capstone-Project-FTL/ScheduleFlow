@@ -28,7 +28,8 @@ export default function Register({ appState, setAppState }) {
     setErrorMessage(null);
   };
 
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
 
     if (form.confirmPassword !== form.password) {
@@ -36,14 +37,16 @@ export default function Register({ appState, setAppState }) {
       setIsLoading(false);
       return;
     }
+
     try {
       const result = await axios.post(
         "http://localhost:3001/auth/register",
         form
       );
-      setAppState({...appState, ...result.data})
-      setIsLoading(false);
-      const [form, setForm] = useState({
+      setErrorMessage("");
+      setAppState((appState) => ({ ...appState, ...result.data }));
+      localStorage.setItem("token", result.data.token);
+      setForm({
         firstName: "",
         lastName: "",
         email: "",
@@ -53,9 +56,18 @@ export default function Register({ appState, setAppState }) {
         photo: null,
         // agreeToTerms: false,
       });
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
+      if (error.code === "ERR_BAD_REQUEST") localStorage.clear();
       setErrorMessage(error.response.data.message);
+      setAppState({
+        user: null,
+        token: null,
+        courses: null,
+        schedules: null,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,7 +89,7 @@ export default function Register({ appState, setAppState }) {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-3 relative">
+            <form className="space-y-3 relative" onSubmit={handleOnSubmit}>
               <div className="split-inputs flex gap-2">
                 <div className="input-field w-full">
                   <label
@@ -93,6 +105,7 @@ export default function Register({ appState, setAppState }) {
                       value={form.firstName}
                       onChange={handleOnInputChange}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                      required
                     />
                   </div>
                 </div>
@@ -110,6 +123,7 @@ export default function Register({ appState, setAppState }) {
                       value={form.lastName}
                       onChange={handleOnInputChange}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                      required
                     />
                   </div>
                 </div>
@@ -129,6 +143,7 @@ export default function Register({ appState, setAppState }) {
                     value={form.email}
                     onChange={handleOnInputChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                    required
                   />
                 </div>
               </div>
@@ -148,6 +163,7 @@ export default function Register({ appState, setAppState }) {
                     value={form.school}
                     onChange={handleOnInputChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                    required
                   />
                 </div>
                 {/* Add error handling for school if needed */}
@@ -167,6 +183,7 @@ export default function Register({ appState, setAppState }) {
                     value={form.password}
                     onChange={handleOnInputChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                    required
                   />
                 </div>
               </div>
@@ -185,6 +202,7 @@ export default function Register({ appState, setAppState }) {
                     value={form.confirmPassword}
                     onChange={handleOnInputChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm: sm:leading-6 h-10"
+                    required
                   />
                 </div>
               </div>
@@ -209,6 +227,7 @@ export default function Register({ appState, setAppState }) {
                     Choose file
                   </label>
                   <input
+                    required
                     type="file"
                     id="photo"
                     name="photo"
@@ -224,7 +243,7 @@ export default function Register({ appState, setAppState }) {
                 <button
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 mt-10 font-semibold leading-6 text-white  hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-10"
                   disabled={isLoading}
-                  onClick={handleOnSubmit}>
+                  type="submit">
                   {isLoading ? "Loading..." : "Create Account"}
                 </button>
               </div>

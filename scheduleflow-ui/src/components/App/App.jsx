@@ -16,6 +16,7 @@ export default function App() {
 
   const [appState, setAppState] = useState({
     user: null,
+    token: null,
     courses: null,
     schedules: null,
   });
@@ -26,10 +27,10 @@ export default function App() {
           <AppStateContext.Provider value={{appState, setAppState}}>
             <Routes>
               <Route path="/" element={<Landingpage />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
+              <Route path="/login" element={<Login appState={appState} setAppState={setAppState}/>} />
               <Route path="/schedule" element={<ScheduleDisplay />} />
               <Route path="/home" element={<HomePage />} />
-              <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
               <Route path="/shoppingcart" element={<ShoppingCart />} />
             </Routes>
           </AppStateContext.Provider>
