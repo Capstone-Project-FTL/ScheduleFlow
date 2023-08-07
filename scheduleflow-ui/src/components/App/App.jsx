@@ -29,7 +29,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/schedule" element={<ScheduleDisplay />} />
               <Route path="/home" element={<HomePage />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
               <Route path="/shoppingcart" element={<ShoppingCart />} />
             </Routes>
           </AppStateContext.Provider>
