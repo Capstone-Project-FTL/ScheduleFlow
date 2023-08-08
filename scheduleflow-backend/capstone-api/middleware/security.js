@@ -8,8 +8,10 @@ function authenticateToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
   try{
     res.locals.payload = verifyToken(token)
+    res.locals.error = null
   }catch(error){
     res.locals.payload = {}
+    res.locals.error = {message: "Invalid token. Please sign up or log in"}
   }finally{
     next()
   }

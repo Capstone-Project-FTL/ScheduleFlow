@@ -3,12 +3,14 @@ const app = express();
 const cors = require("cors");
 const {PORT} = require("./config")
 const morgan = require("morgan")
-const scheduleRoute = require("./routes/schedules")
-const authRoute = require("./routes/auth")
+const scheduleRoute = require("./routes/scheduleRoute")
+const authRoute = require("./routes/auth");
+const { authenticateToken } = require("./middleware/security");
 
 //middleware
 app.use(cors());
 app.use(express.json());
+app.use(authenticateToken)
 app.use(morgan("tiny"))
 app.use("/", scheduleRoute)
 app.use("/auth", authRoute)

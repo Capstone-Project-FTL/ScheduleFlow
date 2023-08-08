@@ -6,4 +6,5 @@
 \connect capstone;
 
 -- \i capstone-schema.sql
-\i user-schema.sql
+-- \i user-schema.sql
+\i favorites-schema.sql

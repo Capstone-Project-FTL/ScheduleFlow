@@ -24,8 +24,8 @@ export default function ShoppingCart() {
   useEffect(() => {
     const fetchCoursesData = async () => {
       try {
-        // const response = await axios.get("http://localhost:3001/courses");
-        const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses", 
+        const response = await axios.get("http://localhost:3001/courses",
+        // const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses", 
         {
           headers: {
             "Content-Type": "application/json",
