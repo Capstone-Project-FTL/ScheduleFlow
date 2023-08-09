@@ -8,6 +8,7 @@ import { AppStateContext } from '../App/App';
 const navigation = [
   { name: 'Home', href: '/home', current: false }, // Update the href for navigation links
   { name: 'Start Scheduling', href: '/shoppingcart', current: false }, // Update the href for navigation links
+  { name: 'Schedules', href: '/schedules', current: false }, 
   { name: 'Favorites', href: '/favorites', current: false }, 
 ];
 
@@ -25,7 +26,7 @@ export default function NavBar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 sticky top-0 w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

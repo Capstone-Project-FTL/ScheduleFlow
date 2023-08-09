@@ -4,6 +4,7 @@ import ScheduleList from "../ScheduleDisplay/ScheduleList";
 import ScheduleView from "../ScheduleDisplay/ScheduleView";
 import { AppStateContext, FavoriteViewContext } from "../App/App";
 import axios from "axios";
+import NavBar from "../Navbar/Navbar";
 
 export default function Favorites() {
   const { appState, setAppState } = useContext(AppStateContext);
@@ -36,9 +37,12 @@ export default function Favorites() {
   }, []);
 
   return (
-    <div className="schedule-display px-8 flex w-full h-screen items-center gap-x-12 bg-indigo-100">
+    <div style={{height: "calc(100vh - 4rem)"}}>
+      <NavBar />
+      <div className="schedule-display px-8 flex w-full h-full items-center gap-x-12 bg-indigo-100">
       <ScheduleList />
       <ScheduleView />
+    </div>
     </div>
   );
 }

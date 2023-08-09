@@ -1,7 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landingpage from "../LandingPage/LandingPage";
-import NavBar from "../Navbar/Navbar";
 import Login from "../Login/Login";
 import HomePage from "../HomePage/HomePage";
 import Register from "../Register/Register";
@@ -37,7 +36,7 @@ export default function App() {
               <Route path="/" element={<Landingpage appState={appState} setAppState={setAppState}/>} />
               <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
               <Route path="/login" element={<Login appState={appState} setAppState={setAppState}/>} />
-              <Route path="/schedule" element={<ScheduleDisplay />} />
+              <Route path="/schedules" element={<ScheduleDisplay />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/favorites" element={<Favorites />} />

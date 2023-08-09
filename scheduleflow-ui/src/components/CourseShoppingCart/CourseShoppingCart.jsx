@@ -149,7 +149,7 @@ export default function ShoppingCart() {
         JSON.stringify(response.data.schedules)
       );
       // Navigate to the schedule page using the navigate function
-      navigate("/schedule");
+      navigate("/schedules");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -159,7 +159,7 @@ export default function ShoppingCart() {
       <NavBar />
       <div
         className="text-white flex flex-col justify-center items-center mb-8"
-        style={{ minHeight: "calc(100vh - 4rem)" }}>
+        style={{ height: "calc(100vh - 4rem)" }}>
         {/* Set h-full and flex properties */}
         <div className="relative isolate px-6 pt-14 lg:px-8 h-full flex flex-col justify-center items-center w-4/5">
           {/* Set h-full to fill available vertical space */}
