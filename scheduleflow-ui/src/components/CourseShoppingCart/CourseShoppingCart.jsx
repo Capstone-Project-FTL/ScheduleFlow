@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
 import axios from "axios";
-import { AppStateContext } from "../App/App";
+import { AppStateContext, ScheduleListContext } from "../App/App";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -24,8 +24,13 @@ export default function ShoppingCart() {
   useEffect(() => {
     const fetchCoursesData = async () => {
       try {
-        // const response = await axios.get("http://localhost:3001/courses");
-        const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses");
+        const response = await axios.get("http://localhost:3001/courses",
+        // const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses", 
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         setCourseTableInfo([...coursesTableInfo, ...response.data]);
         return response.data; // The response.data is already an array
       } catch (error) {
@@ -120,6 +125,7 @@ export default function ShoppingCart() {
     const requestBody = {
       courses: JSON.parse(localStorage.getItem("course_keys")),
     };
+    console.log(requestBody)
     try {
       const response = await axios.post(
         "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
@@ -137,6 +143,7 @@ export default function ShoppingCart() {
         courses: response.data.courses,
         schedules: response.data.schedules,
       });
+      // setCurrScheduleList(response.data.schedules)
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",
