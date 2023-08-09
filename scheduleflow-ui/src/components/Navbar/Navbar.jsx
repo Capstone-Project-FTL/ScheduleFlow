@@ -1,12 +1,14 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { CalendarDaysIcon } from '@heroicons/react/20/solid';
-import { Link, useLocation } from 'react-router-dom'; // Import the Link component from react-router-dom
+import { Link, useLocation, useNavigate} from 'react-router-dom'; // Import the Link component from react-router-dom
+import { AppStateContext } from '../App/App';
 
 const navigation = [
   { name: 'Home', href: '/home', current: false }, // Update the href for navigation links
   { name: 'Start Scheduling', href: '/shoppingcart', current: false }, // Update the href for navigation links
+  { name: 'Favorites', href: '/favorites', current: false }, 
 ];
 
 function classNames(...classes) {
@@ -14,7 +16,14 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  const {appState, setAppState} = useContext(AppStateContext)
   const location=useLocation();
+  const handleLogOut = (event) => {
+    localStorage.removeItem("token");
+    setAppState({...appState, token: null, favorites: []})
+    navigate("/");
+  };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -51,7 +60,8 @@ export default function NavBar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                {localStorage.getItem("token") ? (
+                  <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
@@ -94,17 +104,31 @@ export default function NavBar() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <button
+                          onClick={handleLogOut}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700' + " w-full text-left")}
                           >
                             Sign out
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                ) : (
+                  <div className='flex text-white gap-8'>
+                <Link
+                  to="/login"
+                  className=" font-semibold leading-6 bg-indigo-500 w-28 h-10 flex items-center justify-center rounded-lg">
+                  Log In <span aria-hidden="true"></span>
+                </Link>
+                <Link
+                  to="/register"
+                  className="ml-4  font-semibold leading-6 w-28 h-10 flex items-center justify-center rounded-lg border-2 border-indigo-500">
+                  Sign Up <span aria-hidden="true"></span>
+                </Link>
+              </div>
+                )}
               </div>
             </div>
           </div>

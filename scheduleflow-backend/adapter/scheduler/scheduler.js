@@ -272,7 +272,7 @@ async function generateScheduleFlows(courses){
     let count = 0
     for(let node of schedule){
       for(let instructor of node.instructors){
-        instructor.rating = professorRatingMap[instructor.name]
+        instructor.rating = professorRatingMap[instructor.name] || null
         if(instructor.rating){
           totalRating += instructor.rating
           count += 1
