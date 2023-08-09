@@ -57,7 +57,7 @@ export default function ScheduleCard({ scheduleFlow, index }) {
   const { earliestTime, latestTime } = getEarliestAndLatestTime(
     scheduleFlow.schedule
   );
-  const {appState, setAppState} = useContext(AppStateContext)
+  const { appState, setAppState } = useContext(AppStateContext);
   const focusClass = index === appState.currScheduleId ? " bg-indigo-200" : "";
   return (
     <div
@@ -65,7 +65,9 @@ export default function ScheduleCard({ scheduleFlow, index }) {
         "card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200 cursor-pointer" +
         focusClass
       }
-      onClick={() => setAppState(appState => ({...appState, currScheduleId: index}))}>
+      onClick={() =>
+        setAppState((appState) => ({ ...appState, currScheduleId: index }))
+      }>
       <div className="flex flex-col h-full justify-center">
         <div
           className={

@@ -10,7 +10,7 @@ import ScheduleDisplay from "../ScheduleDisplay/ScheduleDisplay";
 import Favorites from "../Favorites/Favorites";
 
 export const AppStateContext = createContext();
-export const ScheduleListContext = createContext()
+export const FavoriteViewContext = createContext()
 export default function App() {
   useEffect(() => {
     document.title = "Course Flow";
@@ -25,14 +25,14 @@ export default function App() {
     schedules: [],
     currScheduleId: 0,
   });
-  const [currScheduleList, setCurrScheduleList] = useState([])
+  const [showingFavorites, setShowingFavorites] = useState(false)
 
   return (
     <>
       <div className="App text-base">
         <BrowserRouter>
           <AppStateContext.Provider value={{appState, setAppState}}>
-            <ScheduleListContext.Provider value={{currScheduleList, setCurrScheduleList}}>
+            <FavoriteViewContext.Provider value={{showingFavorites, setShowingFavorites}}>
             <Routes>
               <Route path="/" element={<Landingpage appState={appState} setAppState={setAppState}/>} />
               <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />
@@ -42,7 +42,7 @@ export default function App() {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/favorites" element={<Favorites />} />
             </Routes>
-            </ScheduleListContext.Provider>
+            </FavoriteViewContext.Provider>
           </AppStateContext.Provider>
         </BrowserRouter>
       </div>

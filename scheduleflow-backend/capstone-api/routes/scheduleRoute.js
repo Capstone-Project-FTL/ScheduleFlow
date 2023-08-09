@@ -4,6 +4,7 @@ const fetchCoursesData = require("../utils/fetchCoursesData");
 const { generateScheduleFlows } = require("../../adapter/scheduler/scheduler");
 const { authenticateToken } = require("../middleware/security");
 const Favorites = require("../models/favorites");
+const { BadRequestError } = require("../utils/errors");
 
 scheduleRoute.post("/schedules", async (req, res) => {
   try {
@@ -63,8 +64,10 @@ scheduleRoute.post(
       } catch (error) {
         if (error.code === "23505") {
           res.status(200).send({ message: "Schedule Already in Favorites" });
+        } else if (error instanceof BadRequestError) {
+          res.status(200).send({ message: "Cannot Add Schedule to Favorites" });
         } else {
-          res.status(400).send({message: error.message})
+          res.status(400).send({ message: error.message });
         }
       }
     }

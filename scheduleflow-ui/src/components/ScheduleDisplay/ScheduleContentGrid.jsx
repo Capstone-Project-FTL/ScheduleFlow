@@ -1,4 +1,4 @@
-import { AppStateContext, ScheduleListContext } from "../App/App";
+import { AppStateContext, FavoriteViewContext } from "../App/App";
 import EventCard from "./EventCard";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const numOfIterations = Math.ceil(
 
 export const ModalContext = createContext();
 export default function ScheduleContentGrid() {
-  const {currScheduleList, setCurrScheduleList} = useContext(ScheduleListContext)
+  const {showingFavorites, setShowingFavorites} = useContext(FavoriteViewContext)
   const tempStartTime = new Date(Date.UTC(1970, 0, 1, 6, 0, 0)); // used to fill the time slots
   const { appState, setAppState } = useContext(AppStateContext);
   const [isOpen, setIsOpen] = useState(false); // for modal view
@@ -46,9 +46,10 @@ export default function ScheduleContentGrid() {
       courses: JSON.parse(localStorage.getItem("courses")),
       schedules: JSON.parse(localStorage.getItem("schedules")),
     });
+  const schedules = showingFavorites ? appState.favorites : appState.schedules
 
   // if async setSappState has not finished setting the state
-  const currentSchedule = currScheduleList[appState.currScheduleId];
+  const currentSchedule = schedules[appState.currScheduleId];
   const timeSlotDays = getTimeSlots(currentSchedule?.schedule);
 
   const handleAddFavorites = async (event) => {
@@ -90,7 +91,6 @@ export default function ScheduleContentGrid() {
     }
   };
 
-  setCurrScheduleList(appState.schedules)
   return (
     <div className="fixed top-0 left-0 h-full w-full overflow-scroll">
       <div className="schedule-content-grid flex flex-nowrap divide-x-2 divide-gray-300 text-xl text-black min-w-full w-max ">
