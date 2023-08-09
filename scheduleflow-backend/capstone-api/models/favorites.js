@@ -95,7 +95,7 @@ class Favorites {
   }
 
   static async getAllFavorites(userId){
-    const query = "SELECT * FROM favorites WHERE userid = ($1);"
+    const query = "SELECT * FROM favorites WHERE userid = ($1) ORDER BY added_at DESC;"
     const result = await db.query(query, [userId])
     return result.rows.map(schedule => ({...schedule, favorite_schedule: {... JSON.parse(schedule.favorite_schedule), name: schedule.favorite_name}}))
   }
