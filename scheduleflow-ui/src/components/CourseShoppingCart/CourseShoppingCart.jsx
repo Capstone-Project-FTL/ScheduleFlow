@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
 import axios from "axios";
-import { AppStateContext } from "../App/App";
+import { AppStateContext, ScheduleListContext } from "../App/App";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -143,6 +143,7 @@ export default function ShoppingCart() {
         courses: response.data.courses,
         schedules: response.data.schedules,
       });
+      // setCurrScheduleList(response.data.schedules)
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",

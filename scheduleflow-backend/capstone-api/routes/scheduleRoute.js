@@ -38,7 +38,7 @@ scheduleRoute.get("/courses", async (req, res) => {
 
 // Add new Favorites
 scheduleRoute.post(
-  "/schedule/favorite",
+  "/schedules/favorite",
   authenticateToken,
   async (req, res) => {
     if (res.locals.error !== null)
@@ -59,10 +59,12 @@ scheduleRoute.post(
         const newFav = await Favorites.add(req.body, res.locals.payload.id);
         res
           .status(200)
-          .send({ added: newFav, message: "Schedule Added to Favorites" });
+          .send({ newFav: newFav, message: "Schedule Added to Favorites" });
       } catch (error) {
         if (error.code === "23505") {
           res.status(200).send({ message: "Schedule Already in Favorites" });
+        } else {
+          res.status(400).send({message: error.message})
         }
       }
     }

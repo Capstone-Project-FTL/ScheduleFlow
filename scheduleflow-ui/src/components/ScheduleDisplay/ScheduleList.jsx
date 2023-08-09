@@ -18,7 +18,7 @@ export default function ScheduleList() {
             appState.schedules.map((schedule, i) => {
               return (
                 <>
-                  <ScheduleCard scheduleFlow={schedule} index={i + 1}/>
+                  <ScheduleCard scheduleFlow={schedule} index={i}/>
                   {i < appState.schedules.length - 1? <div className="divider my-1"></div> : undefined}
                 </>
               );

@@ -3,7 +3,7 @@ const { verifyToken } = require("../utils/tokens");
 function authenticateToken(req, res, next) {
   /*
       this extracts the token from the request header
-      Note: we directly set the headder to include the specific field "authorization"
+      Note: we directly set the headder to include the specific field "Authorization"
   */
   const token = req.headers.authorization?.split(" ")[1];
   try{

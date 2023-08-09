@@ -71,7 +71,7 @@ class Favorites {
         if (
           !Array.isArray(node.instructors) ||
           !node.instructors.every(
-            (instructor) => instructor.name && instructor.rating
+            (instructor) => instructor.name && instructor.rating || instructor.rating === null
           )
         )
           return false;
@@ -88,6 +88,7 @@ class Favorites {
     await this.#isValid(scheduleFlow);
     const query = "INSERT INTO favorites (userid, favorite_schedule) VALUES ($1, $2) RETURNING *;"
     const result = await db.query(query, [userId, JSON.stringify(scheduleFlow)])
+    result.rows[0].favorite_schedule = JSON.parse(result.rows[0].favorite_schedule)
     return result.rows[0]
   }
 }

@@ -44,6 +44,7 @@ export default function Landingpage({ appState, setAppState }) {
   const navigate = useNavigate();
   const handleLogOut = (event) => {
     localStorage.removeItem("token");
+    setAppState(appState => ({...appState, favorites: []}))
     navigate("/");
   };
 

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CurrentScheduleContext } from "./ScheduleDisplay";
+import { AppStateContext } from "../App/App";
 
 const getRatingColor = (rating) => {
   if (rating === "N/A") return "text-indigo-500 group-active:text-indigo-600 ";
@@ -57,17 +57,15 @@ export default function ScheduleCard({ scheduleFlow, index }) {
   const { earliestTime, latestTime } = getEarliestAndLatestTime(
     scheduleFlow.schedule
   );
-  const { currScheduleId, setCurrScheduleId } = useContext(
-    CurrentScheduleContext
-  );
-  const focusClass = index - 1 === currScheduleId ? " bg-indigo-200" : "";
+  const {appState, setAppState} = useContext(AppStateContext)
+  const focusClass = index === appState.currScheduleId ? " bg-indigo-200" : "";
   return (
     <div
       className={
         "card group rounded-md bg-indigo-100 h-[7rem] w-full my-1 p-2 shadow-md flex flex-row gap-x-2 active:bg-indigo-200 cursor-pointer" +
         focusClass
       }
-      onClick={() => setCurrScheduleId(index - 1)}>
+      onClick={() => setAppState(appState => ({...appState, currScheduleId: index}))}>
       <div className="flex flex-col h-full justify-center">
         <div
           className={
@@ -84,7 +82,7 @@ export default function ScheduleCard({ scheduleFlow, index }) {
       </div>
       <div className="flex flex-col w-full h-full justify-center">
         <h1 className="font-bold text-neutral-600 text-xl group-active:text-neutral-800">
-          Schedule #{index}
+          Schedule #{index + 1}
         </h1>
         <div className=" flex flex-row">
           <div className="flex flex-col text-black">

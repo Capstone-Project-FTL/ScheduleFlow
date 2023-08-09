@@ -64,7 +64,9 @@ export default function Register({ appState, setAppState }) {
         user: null,
         token: null,
         courses: null,
-        schedules: null,
+        schedules: [],
+        favorites: [],
+        currScheduleId: 0,
       });
     } finally {
       setIsLoading(false);

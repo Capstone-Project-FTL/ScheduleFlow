@@ -35,8 +35,10 @@ export default function Login({ appState, setAppState }) {
       setAppState({
         user: null,
         token: null,
+        favorites: [],
         courses: null,
-        schedules: null,
+        schedules: [],
+        currScheduleId: 0,
       });
     } finally {
       setIsLoading(false);

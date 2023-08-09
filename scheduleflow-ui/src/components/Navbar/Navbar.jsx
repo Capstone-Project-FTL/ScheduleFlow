@@ -20,7 +20,7 @@ export default function NavBar() {
   const location=useLocation();
   const handleLogOut = (event) => {
     localStorage.removeItem("token");
-    setAppState({...appState, token: null})
+    setAppState({...appState, token: null, favorites: []})
     navigate("/");
   };
 
