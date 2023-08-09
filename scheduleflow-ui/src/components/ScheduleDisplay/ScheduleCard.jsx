@@ -52,7 +52,7 @@ const getClassDays = (schedule) => {
   return dayString;
 };
 
-export default function ScheduleCard({ scheduleFlow, index }) {
+export default function ScheduleCard({ scheduleFlow, index, name=null }) {
   const currRating = scheduleFlow.scheduleRating;
   const { earliestTime, latestTime } = getEarliestAndLatestTime(
     scheduleFlow.schedule
@@ -83,10 +83,10 @@ export default function ScheduleCard({ scheduleFlow, index }) {
         </div>
       </div>
       <div className="flex flex-col w-full h-full justify-center">
-        <h1 className="font-bold text-neutral-600 text-xl group-active:text-neutral-800">
-          Schedule #{index + 1}
+        <h1 className="font-bold text-neutral-600 text-xl group-active:text-neutral-800 truncate w-56">
+          {name ?? `Schedule #${index + 1}`}
         </h1>
-        <div className=" flex flex-row">
+        <div className=" flex flex-row w-full">
           <div className="flex flex-col text-black">
             <p className="inline">Class Days: &nbsp;</p>
             <p className="inline">Earliest Start Time: &nbsp;</p>

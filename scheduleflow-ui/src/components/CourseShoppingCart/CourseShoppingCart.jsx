@@ -125,11 +125,10 @@ export default function ShoppingCart() {
     const requestBody = {
       courses: JSON.parse(localStorage.getItem("course_keys")),
     };
-    console.log(requestBody)
     try {
       const response = await axios.post(
-        "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
-        // "http://localhost:3001/schedules",
+        // "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
+        "http://localhost:3001/schedules",
         requestBody,
         {
           headers: {

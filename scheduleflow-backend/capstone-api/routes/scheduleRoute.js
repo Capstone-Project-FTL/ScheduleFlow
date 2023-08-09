@@ -37,6 +37,22 @@ scheduleRoute.get("/courses", async (req, res) => {
   }
 });
 
+// get all favorite schedules
+scheduleRoute.get("/schedules/favorite", async (req, res) => {
+  if (res.locals.error !== null)
+    res.status(401).send({ message: res.locals.error.message });
+  else {
+    try {
+      const favorites = await Favorites.getAllFavorites(res.locals.payload.id);
+      res
+        .status(200)
+        .send({ favorites: favorites, message: "All Users Faborites Successfully Retrieved" });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+  }
+});
+
 // Add new Favorites
 scheduleRoute.post(
   "/schedules/favorite",
@@ -45,17 +61,18 @@ scheduleRoute.post(
     if (res.locals.error !== null)
       res.status(401).send({ message: res.locals.error.message });
     /* sample res.locals
-  {
-  payload: {
-    id: 1,
-    email: '',
-    school: '',
-    iat: 1691522156,
-    exp: 1691525756
-  },
-  error: null
-}
-*/ else {
+      {
+        payload: {
+          id: 1,
+          email: '',
+          school: '',
+          iat: 1691522156,
+          exp: 1691525756
+        },
+        error: null
+      }
+    */ 
+else {
       try {
         const newFav = await Favorites.add(req.body, res.locals.payload.id);
         res
