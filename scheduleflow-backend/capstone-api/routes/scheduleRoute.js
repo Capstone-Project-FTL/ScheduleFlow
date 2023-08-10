@@ -94,7 +94,8 @@ scheduleRoute.post(
 
 scheduleRoute.delete("/schedules/favorite/:name", authenticateToken, async (req, res) => {
   if (res.locals.error !== null)
-      {res.status(401).send({ message: res.locals.error.message });}
+      {{res.status(401).send({ message: res.locals.error.message });}
+    return}
   try{
     const deletedSchedule = await Favorites.deleteFavorite(req.params.name, res.locals.payload.id)
     if(Object.keys(deletedSchedule).length > 0){
