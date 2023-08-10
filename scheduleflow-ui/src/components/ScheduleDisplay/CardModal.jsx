@@ -69,7 +69,52 @@ export default function CardModal({ currentNode }) {
         </div>
       </div>
     ) : (
-      ""
+      <div className="text-neutral-800 font-semibold">
+        <p>
+          Course Prefix: &nbsp;
+          <span className="font-normal">{currentNode.coursePrefix}</span>
+        </p>
+        <p>
+          Course Code: &nbsp;
+          <span className="font-normal">{currentNode.courseCode}</span>
+        </p>
+        <p>
+          Course Title: &nbsp;
+          <span className="font-normal">{currentNode.courseTitle}</span>
+        </p>
+        <p>
+          Class Type: &nbsp;
+          <span className="font-normal">
+            {currentNode.isLab ? "Lab/Discussion" : "Section"}
+          </span>
+        </p>
+        <p>
+          Days: &nbsp;
+          <span className="font-normal">{node.days.join(", ")}</span>
+        </p>
+        <p>
+          Start Time: &nbsp;
+          <span className="font-normal">{getMinHourTime(node.startTime)}</span>
+        </p>
+        <p>
+          End Time: &nbsp;
+          <span className="font-normal">{getMinHourTime(node.endTime)}</span>
+        </p>
+        <div className="flex">
+          <p>{!currentNode.isLab ? "Instructor(s):": ""} &nbsp;&nbsp;</p>
+          <div>
+
+          {currentNode.instructors.map((instructorObj) => (
+          <p className="font-medium">
+            {instructorObj.name} {">> "}
+            <span className="font-normal">
+              Rating ({instructorObj.rating ?? "Not Found"})
+            </span>
+          </p>
+        ))}
+          </div>
+        </div>
+      </div>
     );
   };
 

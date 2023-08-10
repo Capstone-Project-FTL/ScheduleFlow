@@ -2,6 +2,7 @@ class BadRequestError extends Error{
   constructor(message = "Bad Request", statusCode = 400){
     super(message)
     this.statusCode = statusCode
+    Object.setPrototypeOf(this, BadRequestError.prototype)
   }
 }
 

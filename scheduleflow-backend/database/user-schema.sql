@@ -1,5 +1,3 @@
-DROP TABLE users;
-
 CREATE TABLE users(
     id SERIAL NOT NULL,
     email varchar(255) NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
