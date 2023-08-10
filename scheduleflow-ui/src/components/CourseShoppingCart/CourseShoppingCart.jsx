@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
 import axios from "axios";
-import { AppStateContext } from "../App/App";
+import { AppStateContext, FavoriteViewContext } from "../App/App";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -24,8 +24,13 @@ export default function ShoppingCart() {
   useEffect(() => {
     const fetchCoursesData = async () => {
       try {
-        // const response = await axios.get("http://localhost:3001/courses");
-        const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses");
+        const response = await axios.get("http://localhost:3001/courses",
+        // const response = await axios.get("https://my-capstone-backend-02def2333679.herokuapp.com/courses", 
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         setCourseTableInfo([...coursesTableInfo, ...response.data]);
         return response.data; // The response.data is already an array
       } catch (error) {
@@ -67,6 +72,7 @@ export default function ShoppingCart() {
       },
     ]);
     setSearchText({ prefix: "", code: "" });
+    setShowError(false)
   };
 
   function handleSearchChange(event) {
@@ -77,12 +83,14 @@ export default function ShoppingCart() {
     const updatedInputs = [...courseInputs];
     updatedInputs.splice(index, 1);
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   const handleChange = (index, field, value) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index][field] = value;
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   const handlePrefixChange = (index, prefix) => {
@@ -90,13 +98,15 @@ export default function ShoppingCart() {
     updatedInputs[index].course_prefix = prefix;
     updatedInputs[index].course_code = "Select Course Code"; // Reset the selected code
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   // Use the useNavigate hook to get the navigate function
   const navigate = useNavigate();
   const uniqueCoursePrefixes = getUniqueCoursePrefixes(coursesTableInfo);
 
-  const handleGenerate = async () => {
+  const handleGenerate = async (event) => {
+    event.preventDefault()
     // Check if all course inputs have both fields filled out
     const hasIncompleteCourses = courseInputs.some(
       (input) =>
@@ -122,8 +132,8 @@ export default function ShoppingCart() {
     };
     try {
       const response = await axios.post(
-        "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
-        // "http://localhost:3001/schedules",
+        // "https://my-capstone-backend-02def2333679.herokuapp.com/schedules",
+        "http://localhost:3001/schedules",
         requestBody,
         {
           headers: {
@@ -136,6 +146,7 @@ export default function ShoppingCart() {
         ...appState,
         courses: response.data.courses,
         schedules: response.data.schedules,
+        currScheduleId: 0,
       });
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
@@ -143,7 +154,7 @@ export default function ShoppingCart() {
         JSON.stringify(response.data.schedules)
       );
       // Navigate to the schedule page using the navigate function
-      navigate("/schedule");
+      navigate("/schedules");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -153,7 +164,7 @@ export default function ShoppingCart() {
       <NavBar />
       <div
         className="text-white flex flex-col justify-center items-center mb-8"
-        style={{ minHeight: "calc(100vh - 4rem)" }}>
+        style={{ height: "calc(100vh - 4rem)" }}>
         {/* Set h-full and flex properties */}
         <div className="relative isolate px-6 pt-14 lg:px-8 h-full flex flex-col justify-center items-center w-4/5">
           {/* Set h-full to fill available vertical space */}
