@@ -86,10 +86,25 @@ class Favorites {
   static async add(scheduleFlow, userId) {
     // would throw an error if not valid
     await this.#isValid(scheduleFlow);
-    const query = "INSERT INTO favorites (userid, favorite_schedule) VALUES ($1, $2) RETURNING *;"
-    const result = await db.query(query, [userId, JSON.stringify(scheduleFlow)])
+    const name = scheduleFlow.name
+    delete scheduleFlow.name // ensures uniqueness of the stringified json
+    const query = "INSERT INTO favorites (userid, favorite_name, favorite_schedule) VALUES ($1, $2, $3) RETURNING *;"
+    const result = await db.query(query, [userId, name, JSON.stringify(scheduleFlow)])
     result.rows[0].favorite_schedule = JSON.parse(result.rows[0].favorite_schedule)
-    return result.rows[0]
+    return {...result.rows[0], name}
+  }
+
+  static async getAllFavorites(userId){
+    const query = "SELECT * FROM favorites WHERE userid = ($1) ORDER BY added_at DESC;"
+    const result = await db.query(query, [userId])
+    return result.rows.map(schedule => ({...schedule, favorite_schedule: {... JSON.parse(schedule.favorite_schedule), name: schedule.favorite_name}}))
+  }
+
+  static async deleteFavorite(name, userId){
+    const query = "DELETE FROM favorites WHERE userid = $1 AND favorite_name = $2 RETURNING *;"
+    const result = await db.query(query, [userId, name])
+    const schedule = result.rows[0]
+    return schedule ? ({...schedule, favorite_schedule: {... JSON.parse(schedule.favorite_schedule), name: schedule.favorite_name}}) : {}
   }
 }
 
