@@ -44,35 +44,36 @@ scheduleRoute.get("/schedules/favorite", async (req, res) => {
   else {
     try {
       const favorites = await Favorites.getAllFavorites(res.locals.payload.id);
-      res
-        .status(200)
-        .send({ favorites: favorites, message: "All Users Faborites Successfully Retrieved" });
+      res.status(200).send({
+        favorites: favorites,
+        message: "All Users Faborites Successfully Retrieved",
+      });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+      res.status(400).send({ message: error.message });
     }
   }
 });
 
 // Add new Favorites
+/* sample res.locals
+  {
+    payload: {
+      id: 1,
+      email: '',
+      school: '',
+      iat: 1691522156,
+      exp: 1691525756
+    },
+    error: null
+  }
+*/
 scheduleRoute.post(
   "/schedules/favorite",
   authenticateToken,
   async (req, res) => {
     if (res.locals.error !== null)
-      res.status(401).send({ message: res.locals.error.message });
-    /* sample res.locals
-      {
-        payload: {
-          id: 1,
-          email: '',
-          school: '',
-          iat: 1691522156,
-          exp: 1691525756
-        },
-        error: null
-      }
-    */ 
-else {
+      {res.status(401).send({ message: res.locals.error.message });}
+    else {
       try {
         const newFav = await Favorites.add(req.body, res.locals.payload.id);
         res
@@ -90,5 +91,22 @@ else {
     }
   }
 );
+
+scheduleRoute.delete("/schedules/favorite/:name", authenticateToken, async (req, res) => {
+  if (res.locals.error !== null)
+      {res.status(401).send({ message: res.locals.error.message });}
+  try{
+    const deletedSchedule = await Favorites.deleteFavorite(req.params.name, res.locals.payload.id)
+    if(Object.keys(deletedSchedule).length > 0){
+      res.status(200).send({message: "Successfully deleted " + req.params.name, deletedSchedule: deletedSchedule})
+    }
+    else{
+      res.status(200).send({message: req.params.name + " not found"})
+    }
+  }catch(error){
+    console.error(error.message)
+    res.status(400).send({message: "Could not delete schedule"})
+  }
+})
 
 module.exports = scheduleRoute;

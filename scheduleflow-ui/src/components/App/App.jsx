@@ -24,14 +24,14 @@ export default function App() {
     schedules: [],
     currScheduleId: 0,
   });
-  const [showingFavorites, setShowingFavorites] = useState(false)
+  const [favState, setFavState] = useState({showingFavorites: false, refetchFav : false})
 
   return (
     <>
       <div className="App text-base">
         <BrowserRouter>
           <AppStateContext.Provider value={{appState, setAppState}}>
-            <FavoriteViewContext.Provider value={{showingFavorites, setShowingFavorites}}>
+            <FavoriteViewContext.Provider value={{favState, setFavState}}>
             <Routes>
               <Route path="/" element={<Landingpage appState={appState} setAppState={setAppState}/>} />
               <Route path="/register" element={<Register appState={appState} setAppState={setAppState}/>} />

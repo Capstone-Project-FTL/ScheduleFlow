@@ -72,6 +72,7 @@ export default function ShoppingCart() {
       },
     ]);
     setSearchText({ prefix: "", code: "" });
+    setShowError(false)
   };
 
   function handleSearchChange(event) {
@@ -82,12 +83,14 @@ export default function ShoppingCart() {
     const updatedInputs = [...courseInputs];
     updatedInputs.splice(index, 1);
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   const handleChange = (index, field, value) => {
     const updatedInputs = [...courseInputs];
     updatedInputs[index][field] = value;
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   const handlePrefixChange = (index, prefix) => {
@@ -95,13 +98,15 @@ export default function ShoppingCart() {
     updatedInputs[index].course_prefix = prefix;
     updatedInputs[index].course_code = "Select Course Code"; // Reset the selected code
     setCourseInputs(updatedInputs);
+    setShowError(false)
   };
 
   // Use the useNavigate hook to get the navigate function
   const navigate = useNavigate();
   const uniqueCoursePrefixes = getUniqueCoursePrefixes(coursesTableInfo);
 
-  const handleGenerate = async () => {
+  const handleGenerate = async (event) => {
+    event.preventDefault()
     // Check if all course inputs have both fields filled out
     const hasIncompleteCourses = courseInputs.some(
       (input) =>
@@ -141,8 +146,8 @@ export default function ShoppingCart() {
         ...appState,
         courses: response.data.courses,
         schedules: response.data.schedules,
+        currScheduleId: 0,
       });
-      // setShowingFavorites(response.data.schedules)
       localStorage.setItem("courses", JSON.stringify(response.data.courses));
       localStorage.setItem(
         "schedules",

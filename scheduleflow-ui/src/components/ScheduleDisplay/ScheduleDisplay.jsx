@@ -1,13 +1,15 @@
 import ScheduleList from "./ScheduleList";
 import ScheduleView from "./ScheduleView";
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import { FavoriteViewContext } from "../App/App";
 import NavBar from "../Navbar/Navbar";
 
 
 export default function ScheduleDisplay() {
-  const {showingFavorites, setShowingFavorites} = useContext(FavoriteViewContext)
-  setShowingFavorites(false)
+  const {favState, setFavState} = useContext(FavoriteViewContext)
+  useEffect(() => {
+  setFavState(favState => ({...favState, showingFavorites: false}))
+  }, [])
   // 4 rem is the hieght of the nav bar
   return (
     <div style={{height: "calc(100vh - 4rem)"}}> 

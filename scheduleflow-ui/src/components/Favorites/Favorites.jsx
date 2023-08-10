@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ScheduleList from "../ScheduleDisplay/ScheduleList";
 import ScheduleView from "../ScheduleDisplay/ScheduleView";
@@ -8,10 +8,13 @@ import NavBar from "../Navbar/Navbar";
 
 export default function Favorites() {
   const { appState, setAppState } = useContext(AppStateContext);
-  const { showingFavorites, setShowingFavorites } =
+  const { favState, setFavState } =
     useContext(FavoriteViewContext);
   const navigate = useNavigate();
-  setShowingFavorites(true);
+  useEffect(() => {
+    setFavState(favState => ({...favState, showingFavorites: true}));
+  }, [])
+
   useEffect(() => {
     const changeSchedulesToFavorite = async() => {
         const response = await axios.get(
@@ -21,6 +24,7 @@ export default function Favorites() {
         setAppState((appState) => ({
           ...appState,
           favorites: response.data.favorites.map(schedule => schedule.favorite_schedule),
+          currScheduleId: 0
         }));
        
       }
@@ -34,7 +38,7 @@ export default function Favorites() {
       schedules: [],
       currScheduleId: 0,
     }); navigate("/login")})
-  }, []);
+  }, [favState]);
 
   return (
     <div style={{height: "calc(100vh - 4rem)"}}>

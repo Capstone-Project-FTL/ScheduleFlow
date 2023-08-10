@@ -99,6 +99,13 @@ class Favorites {
     const result = await db.query(query, [userId])
     return result.rows.map(schedule => ({...schedule, favorite_schedule: {... JSON.parse(schedule.favorite_schedule), name: schedule.favorite_name}}))
   }
+
+  static async deleteFavorite(name, userId){
+    const query = "DELETE FROM favorites WHERE userid = $1 AND favorite_name = $2 RETURNING *;"
+    const result = await db.query(query, [userId, name])
+    const schedule = result.rows[0]
+    return schedule ? ({...schedule, favorite_schedule: {... JSON.parse(schedule.favorite_schedule), name: schedule.favorite_name}}) : {}
+  }
 }
 
 module.exports = Favorites;
