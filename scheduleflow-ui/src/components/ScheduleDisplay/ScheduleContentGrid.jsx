@@ -1,6 +1,6 @@
 import { AppStateContext, FavoriteViewContext } from "../App/App";
 import EventCard from "./EventCard";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CardModal from "./CardModal";
 import { HeartIcon, PlusSmallIcon, TrashIcon} from "@heroicons/react/24/outline";
@@ -49,6 +49,9 @@ export default function ScheduleContentGrid() {
       schedules: JSON.parse(localStorage.getItem("schedules")),
     });
   const schedules = favState.showingFavorites ? appState.favorites : appState.schedules;
+  useEffect(() => {
+    setAppState(appState => ({...appState, currScheduleId: appState.currScheduleId >= schedules.length - 1 ? 0 : appState.currScheduleId}))
+  }, [])
   // if async setSappState has not finished setting the state
   const currentSchedule = schedules[appState.currScheduleId];
   const timeSlotDays = getTimeSlots(currentSchedule?.schedule);

@@ -4,6 +4,7 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { ModalContext } from "./ScheduleContentGrid";
 
 export default function CardModal({ currentNode }) {
+  console.log(currentNode)
   const { isOpen, setIsOpen } = useContext(ModalContext);
   const cancelButtonRef = useRef(null);
   const courses = JSON.parse(localStorage.getItem("courses"));
