@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const {PORT} = require("./config")
 const morgan = require("morgan")
 const scheduleRoute = require("./routes/scheduleRoute")
 const authRoute = require("./routes/auth");
