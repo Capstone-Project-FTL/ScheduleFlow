@@ -6,26 +6,26 @@ const allCourses = require("../adapter/scraper/umd.static.db.json");
 // Sample JSON data
 const jsonData = allCourses;
 
-pool.query(`CREATE TABLE favorites(
-  userid BIGINT REFERENCES users(id) NOT NULL,
-  favorite_name TEXT NOT NULL CONSTRAINT name_check_length CHECK (char_length(favorite_name) > 0),
-  favorite_schedule TEXT NOT NULL,
-  added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  CONSTRAINT unique_combo UNIQUE (userid, favorite_schedule),
-  PRIMARY KEY (userid, favorite_name, favorite_schedule)
-);`)
+// pool.query(`CREATE TABLE favorites(
+//   userid BIGINT REFERENCES users(id) NOT NULL,
+//   favorite_name TEXT NOT NULL CONSTRAINT name_check_length CHECK (char_length(favorite_name) > 0),
+//   favorite_schedule TEXT NOT NULL,
+//   added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+//   CONSTRAINT unique_combo UNIQUE (userid, favorite_schedule),
+//   PRIMARY KEY (userid, favorite_name, favorite_schedule)
+// );`)
 
 
-pool.query(`CREATE TABLE users(
-  id SERIAL NOT NULL,
-  email varchar(255) NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
-  password varchar(255) NOT NULL,
-  first_name varchar(255) NOT NULL,
-  last_name varchar(255) NOT NULL,
-  school varchar(255) NOT NULL,
-  created_at TIMESTAMP DEFAULT current_timestamp,
-  PRIMARY KEY(id) 
-);`)
+// pool.query(`CREATE TABLE users(
+//   id SERIAL NOT NULL,
+//   email varchar(255) NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
+//   password varchar(255) NOT NULL,
+//   first_name varchar(255) NOT NULL,
+//   last_name varchar(255) NOT NULL,
+//   school varchar(255) NOT NULL,
+//   created_at TIMESTAMP DEFAULT current_timestamp,
+//   PRIMARY KEY(id) 
+// );`)
 
 
 // Function to check if a course already exists
